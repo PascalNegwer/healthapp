@@ -1,5 +1,5 @@
 const config = {
-  entry: './src/index.js',
+  entry: './src/main.js',
   output: {
     filename: 'main.js',
     path: __dirname + '/docs'

@@ -1,15 +1,21 @@
 <template>
-    <transition name="fade">
     <div>
         <h1>login</h1>
-        <form v-on:submit.prevent="onSubmit">
-            <input v-model="username" placeholder="E-Mail-Adresse">
-            <input v-model="password" placeholder="Passwort">
-            <button type="submit">Einloggen</button>
-        </form>
-        <router-link to="/signup">Noch kein Account?</router-link>
+        <div v-if="loading">
+            <h1>Loading</h1>
+        </div>
+        <div v-else>
+            <div v-if="error">
+                {{ error.statusCode }}: {{ error.message }}
+            </div>
+            <form v-on:submit.prevent="login">
+                <input v-model="user.data.userName" placeholder="E-Mail-Adresse">
+                <input v-model="user.data.password" placeholder="Passwort">
+                <button type="submit">Einloggen</button>
+            </form>
+            Noch kein Account? <router-link to="/signup">Hier registrieren!</router-link>
+        </div>
     </div>
-    </transition>
 </template>
 
 <script>
@@ -18,50 +24,17 @@
         props: ['user'],
         data() {
             return {
-              username: '',
-              password: '',
+              loading: false,
+              error: undefined,
             }
         },
         methods: {
-          onSubmit() {
-            /* track sessions automatically */
-            Countly.track_sessions();
-            /* track pageviews automatically */
-            Countly.track_pageview();
+          login() {
 
-            let user = new Apiomat.FrontendUser();
-            user.setUserName(this.username);
-            user.setPassword(this.password);
-            Apiomat.Datastore.configureWithCredentials(user);
-
-            user.save({
-              onOk: function () {
-                console.log("Saved succesfully FrontendUser");
-                /* track the event at analytics */
-                Countly.q.push(['add_event', {key: "create FrontendUser"}]);
-                /* Now you can create objects of your class with this new user.*/
-              },
-              onError: function (error) {
-                this.error = true;
-                console.log("Some error occured: (" + error.statusCode + ")" + error.message);
-              }.bind(this)
-            });
-
-            user.requestSessionToken();
-
-            console.log(user);
-
-            this.user = user;
           }
         }
     }
 </script>
 
 <style>
-    .fade-enter-active, .fade-leave-active {
-        transition: opacity .5s;
-    }
-    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-        opacity: 0;
-    }
 </style>
