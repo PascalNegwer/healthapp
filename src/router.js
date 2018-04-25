@@ -27,7 +27,8 @@ const router = new Router({
         require(['./components/Home.vue'], resolve)
       },
       beforeEnter: guardRoute
-    }
+    },
+    { path: '*', redirect: '/' }
   ]
 });
 
