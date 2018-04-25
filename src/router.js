@@ -33,9 +33,16 @@ const router = new Router({
 });
 
 function guardRoute(to, from, next) {
+  let sessionToken = CookieHelper.getCookie('sessionToken');
+
+  if (!sessionToken) {
+    redirectToLogin(to, next);
+    return
+  }
+
   let user = new Apiomat.FrontendUser();
-  user.setSessionToken(CookieHelper.getCookie('sessionToken'));
-  Apiomat.Datastore.configureWithCredentials(user);
+  user.setSessionToken(sessionToken);
+  Apiomat.Datastore.configureWithUserSessionToken(user);
   user.loadMe({
     onOk: next(),
     onError: redirectToLogin(to, next)
