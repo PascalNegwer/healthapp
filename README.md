@@ -9,6 +9,8 @@ Ein sehr gutes [Tutorial](https://www.youtube.com/watch?v=gcx-3qi7t7c&t=182s) um
 
 Damit auf Chrome fetch requests auf localhost funkioniert muss eine [Extension](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi/related) hinzugefügt werden (nur zu testzwecken)
 
+[Chrome Webserver Extension](https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb)
+
 [Webpack mit Vue-Guide](https://vuejs.org/v2/guide/installation.html#Direct-lt-script-gt-Include)
 
 [Vue Youtube-Video](https://www.youtube.com/watch?v=78tNYZUS-ps)
@@ -16,7 +18,7 @@ Damit auf Chrome fetch requests auf localhost funkioniert muss eine [Extension](
 [Vue Example Project](https://github.com/prograhammer/vue-example-project)
 
 ```
-npm install dev?
+npm install
 npm run build
 npm run watch
 ```
