@@ -1,4 +1,5 @@
 <template>
+    <transition name="fade">
     <div>
         <h1>login</h1>
         <form v-on:submit.prevent="onSubmit">
@@ -6,7 +7,9 @@
             <input v-model="password" placeholder="Passwort">
             <button type="submit">Einloggen</button>
         </form>
+        <router-link to="/signup">Noch kein Account?</router-link>
     </div>
+    </transition>
 </template>
 
 <script>
@@ -55,5 +58,10 @@
 </script>
 
 <style>
-
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
+    }
 </style>
