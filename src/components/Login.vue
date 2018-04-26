@@ -5,7 +5,7 @@
             <h1>Loading</h1>
         </div>
         <div v-else>
-            <div v-if="error">
+            <div v-if="error.message">
                 {{ error.statusCode }}: {{ error.message }}
             </div>
             <form v-on:submit.prevent="login">
@@ -19,17 +19,41 @@
 </template>
 
 <script>
-    export default {
+  import router from '../router'
+  import validate from '../utils/validate.js'
+
+  export default {
         name: 'login',
         props: ['user'],
         data() {
             return {
               loading: false,
-              error: undefined,
+              error: new Error(),
             }
         },
         methods: {
           login() {
+            this.loading = true;
+
+            if (!validate.email(this.user.getUserName())) {
+              this.error.code = 0;
+              this.error.message = 'Keine Valide Email-Adresse';
+              this.loading = false;
+              return;
+            }
+
+            Apiomat.Datastore.configureWithCredentials(this.user);
+
+            this.user.loadMe({
+              onOk: result => {
+                this.error = new Error();
+                router.push('/');
+              },
+              onError: error => {
+                this.error = error;
+                this.loading = false;
+              }
+            });
 
           }
         }

@@ -5,7 +5,7 @@
             <h1>Loading</h1>
         </div>
         <div v-else>
-            <div v-if="error">
+            <div v-if="error.message">
                 {{ error.statusCode }}: {{ error.message }}
             </div>
             <form v-on:submit.prevent="save">
@@ -56,8 +56,8 @@
 
         this.user.save({
           onOk: result => {
+            this.error = new Error();
             router.push('/');
-            this.loading = false;
           },
           onError: error => {
             this.error = error;
