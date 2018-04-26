@@ -1,0 +1,53 @@
+.inp {
+  --primary-color: var(--grey);
+  --secondary-color: var(--white);
+}
+
+.inp {
+  font-family: 'Comfortaa', sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  padding: 1.5rem 2rem;
+  background: var(--white-50);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--secondary-color);
+  color: var(--primary-color);
+  transition: background .15s ease-in-out, border .15s ease-in-out;
+}
+.inp:focus {
+  background-color: var(--secondary-color);
+  border-color: var(--primary-color);
+}
+
+.inp--18 {
+  font-size: 1.8rem;
+}
+
+/* Placeholder Styles */
+::placeholder {
+  color: var(--secondary-color);
+  font-weight: 300;
+}
+::-webkit-input-placeholder { /* Chrome/Safari/Opera */
+  color: var(--secondary-color);
+  font-weight: 300;
+}
+:-ms-input-placeholder { /* IE */
+  color: var(--secondary-color);
+  font-weight: 300;
+}
+::-ms-input-placeholder { /* Edge */
+  color: var(--secondary-color);
+  font-weight: 300;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: var(--secondary-color);
+  font-weight: 300;
+  opacity: 1;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: var(--secondary-color);
+  font-weight: 300;
+  opacity: 1;
+}
