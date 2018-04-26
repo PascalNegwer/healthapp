@@ -1,0 +1,259 @@
+/* ########################################### */
+/* #                                         # */
+/* #                RESET.CSS                # */
+/* # _______________________________________ # */
+/* #                                         # */
+/* #          © Philipp Kuhn - 2017          # */
+/* #                  v 1.4                  # */
+/* #                                         # */
+/* ########################################### */
+
+/* =========================================== */
+/*       >>> RESETS & STANDARD STYLES <<<      */
+/* =========================================== */
+
+/* ================= Document ================ */
+/*
+** 1. Set 10px font-size for sizing with rem
+** 2. Set standard line-height
+** 3. Prevent font-size adjustment after
+**    orientation change on mobile platforms
+**    while still allowing user zoom
+*/
+html {
+  font-size: 10px;                        /* 1 */
+  /* font-size: 62.5%; */
+  line-height: 1;                         /* 2 */
+  -ms-text-size-adjust: 100%;             /* 3 */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ================= Sections ================ */
+/*
+** Remove default margin
+*/
+body {
+  margin: 0;
+}
+/*
+** Set correct display
+*/
+article, aside, footer, header, nav, section {
+  display: block;
+}
+
+/* ================= Grouping ================ */
+/*
+** Set correct display
+*/
+figure, figcaption, main {
+  display: block;
+}
+/*
+** Remove default margin
+*/
+figure, hr {
+  margin: 0;
+}
+
+/* =========== Text-level Semantics ========== */
+/*
+** Remove default margin
+*/
+p, blockquote {
+  margin: 0;
+}
+/*
+** 1. Remove gray background on active links (IE)
+** 2. Set color inheritance
+** 3. Set cursor pointer as standard
+** 4. Remove text-decoration
+*/
+a {
+  background-color: transparent;          /* 1 */
+  color: inherit;                         /* 2 */
+  cursor: pointer;                        /* 3 */
+  text-decoration: none;                  /* 4 */
+}
+/*
+** 1. Remove border bottom
+** 2. Set correct text decoration
+*/
+abbr {
+  border-bottom: none;                    /* 1 */
+  text-decoration: underline;             /* 2 */
+}
+/*
+** Set correct font weight
+*/
+b, strong {
+  font-weight: bolder;
+}
+/*
+** 1. Remove background
+** 2. Set color inheritance
+*/
+mark {
+  background-color: transparent;          /* 1 */
+  color: inherit;                         /* 2 */
+}
+
+/* ================= Headings ================ */
+/*
+** 1. Remove default margin
+** 2. Reset font size
+** 3. Reset font weight
+*/
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;                              /* 1 */
+  font-size: 100%;                        /* 2 */
+  font-weight: normal;                    /* 3 */
+}
+
+/* ============= Embedded Content ============ */
+/*
+** 1. Remove border from images inside links (IE)
+** 2. Set correct display
+*/
+img {
+  border-style: none;                     /* 1 */
+  display: block;                         /* 2 */
+}
+/*
+** Remove border
+*/
+iframe {
+  border: none;
+}
+
+/* ============== Form Elements ============== */
+/* 
+** Remove default margin
+*/
+button, input, select, textarea, fieldset {
+  margin: 0;
+}
+/* 
+** Remove default padding
+*/
+fieldset {
+  padding: 0;
+}
+/*
+** 1. Set font inheritance
+** 2. Reset font size
+*/
+button, input, select, textarea {
+  font-family: inherit;                   /* 1 */
+  font-weight: normal;                    /* 2 */
+}
+/*
+** 1. Remove default vertical scrollbar (IE)
+** 2. Only resize vertical
+*/
+textarea {
+  overflow: auto;                         /* 1 */
+  resize: vertical;                       /* 2 */
+}
+
+/* ============== List Elements ============== */
+/* 
+** 1. Remove default margin
+** 2. Remove default padding
+*/
+ol, ul {
+  margin: 0;                              /* 1 */
+  padding: 0;                             /* 2 */
+}
+/*
+** Remove list style on list inside nav elements
+*/
+nav ul {
+  list-style: none;
+}
+/* 
+** Set correct display
+*/
+li {
+  display: block;
+}
+/*
+** 1. Remove default border
+** 2. Remove default padding
+*/
+legend {
+  border: none;                           /* 1 */
+  padding: 0;                             /* 2 */
+}
+
+/* =============== Interactive =============== */
+/*
+** Set correct display
+*/
+details, menu {
+  display: block;
+}
+/* 
+** 1. Remove default margin
+** 2. Remove default padding
+** 3. Remove list style
+*/
+menu {
+  margin: 0;                              /* 1 */
+  padding: 0;                             /* 2 */
+  list-style: none;                       /* 3 */
+}
+
+/* =========================================== */
+/*           >>> INITIAL SETTINGS <<<          */
+/* =========================================== */
+
+/* =============== Interactive =============== */
+/* 
+** Remember to define focus/active styles! 
+*/
+:focus, :active {
+  outline: none;
+}
+
+/* ================ Selection ================ */
+/*
+** Remove text shadow on selected text
+*/
+::selection {
+  text-shadow: none;
+}
+
+/* ================ Box Model ================ */
+/* 
+** Set border box as the default box model
+*/
+html {
+  box-sizing: border-box;
+}
+/* 
+** Set inheritance for box model on every element
+*/
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* ================= Viewport ================ */
+/*
+** Define viewport
+*/
+@viewport {
+  width: device-width;
+  user-zoom: zoom;
+  min-zoom: 1;
+  zoom: 1;
+}
+/* 
+** Define viewport (IE)
+*/
+@-ms-viewport {
+  width: device-width;
+  user-zoom: zoom;
+  min-zoom: 1;
+  zoom: 1;
+}

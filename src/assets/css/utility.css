@@ -1,0 +1,228 @@
+/* ########################################### */
+/* #                                         # */
+/* #               UTILITY.CSS               # */
+/* # _______________________________________ # */
+/* #                                         # */
+/* #          © Philipp Kuhn - 2017          # */
+/* #                  v 1.0                  # */
+/* #                                         # */
+/* ########################################### */
+
+/* =========================================== */
+/*               >>> CLASSES <<<               */
+/* =========================================== */
+
+/* ------------------------------------------- */
+/*              > TEXT SELECTION <             */
+/* ------------------------------------------- */
+
+/* Disable text selection */
+.u_noselect {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* Select everything on focus */
+.u_allselect {
+  -webkit-user-select: all;
+  -moz-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+}
+
+/* ------------------------------------------- */
+/*              > TEXT SETTINGS <              */
+/* ------------------------------------------- */
+
+/* Add text hyphenation */
+.u_hyphenate {
+  -moz-hyphens: auto;
+  -o-hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+/* 
+** Apply font smoothing 
+** (only for iOS)
+*/
+.u_fontsmoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ------------------------------------------- */
+/*                  > FIXES <                  */
+/* ------------------------------------------- */
+
+/* 
+** Clearfix for elements with floated content
+** (applied to the parent element)
+**
+** <div class="u_clearfix">
+**   <div class="floated"></div>
+**   <div class="floated"></div>
+** </div>
+*/
+.u_clearfix::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+/* 
+** Fix for inline-block whitespace
+** (applied to the parent element)
+**
+** <div class="u_inlinefix">
+**   <div class="inline-block"></div>
+**   <div class="inline-block"></div>
+** </div>
+*/
+.u_inlinefix {
+  font-size: 0;
+}
+
+/* ------------------------------------------- */
+/*             > UTILITY CLASSES <             */
+/* ------------------------------------------- */
+
+/* ================= Display ================= */
+.u_inline {
+  display: inline;
+}
+.u_block {
+  display: block;
+}
+.u_inlineblock {
+  display: inline-block;
+}
+._rest_inline {
+  display: inline;
+}
+
+/* ================ Alignment ================ */
+.u_left {
+  float: left;
+}
+.u_right {
+  float: right;
+}
+.u_center {
+  margin-left: auto;
+  margin-right: auto;
+}
+.u_centerblock {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============= Text Alignment ============== */
+.u_lefttext {
+  text-align: left;
+}
+.u_righttext {
+  text-align: right;
+}
+.u_centertext {
+  text-align: center;
+}
+.u_justifytext {
+  text-align: justify;
+}
+
+/* =============== Visibility ================ */
+.u_hidden {
+  display: none;
+}
+.u_invisible {
+  visibility: hidden;
+}
+.u_hideempty:empty {
+  display: none;
+}
+
+/* ================= Spacing ================= */
+.u_removemargin{
+  margin: 0;
+}
+.u_removemargintop {
+  margin-top: 0;
+}
+.u_removemarginbottom {
+  margin-bottom: 0;
+}
+.u_removemarginvertical {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.u_removemarginleft {
+  margin-left: 0;
+}
+.u_removemarginright {
+  margin-right: 0;
+}
+.u_removemarginhorizontal {
+  margin-left: 0;
+  margin-right: 0;
+}
+.u_removepadding{
+  padding: 0;
+}
+.u_removepaddingtop {
+  padding-top: 0;
+}
+.u_removepaddingbottom {
+  padding-bottom: 0;
+}
+.u_removepaddingvertical {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.u_removepaddingleft {
+  padding-left: 0;
+}
+.u_removepaddingright {
+  padding-right: 0;
+}
+.u_removepaddinghorizontal {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* ================= Borders ================= */
+.u_removeborder {
+  border: none;
+}
+.u_removebordertop {
+  border-top: none;
+}
+.u_removeborderbottom {
+  border-bottom: none;
+}
+.u_removebordervertical {
+  border-top: none;
+  border-bottom: none;
+}
+.u_removeborderleft {
+  border-left: none;
+}
+.u_removeborderright {
+  border-right: none;
+}
+.u_removeborderhorizontal {
+  border-left: none;
+  border-right: none;
+}
+
+/* ================ Rotation ================= */
+.u_rotate90 {
+  transform: rotate(90deg);
+}
+.u_rotate180 {
+  transform: rotate(180deg);
+}
+.u_rotate270 {
+  transform: rotate(270deg);
+}

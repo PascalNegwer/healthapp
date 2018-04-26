@@ -1,0 +1,18 @@
+::root {
+  --white: #fff;
+  --darkgrey: #2f2f2f;
+}
+
+.u_color--white {
+  color: #fff;
+}
+.u_bg--white {
+  background: #fff;
+}
+
+.u_color--darkgrey {
+  color: #2f2f2f;
+}
+.u_bg--darkgrey {
+  background: #2f2f2f;
+}
