@@ -22,11 +22,19 @@ const router = new Router({
     },
     {
       path: '/',
-      name: 'home',
       component: function (resolve) {
-        require(['../components/Home.vue'], resolve)
+        require(['../components/MainWrapper.vue'], resolve)
       },
-      beforeEnter: guardRoute
+      beforeEnter: guardRoute,
+      children: [
+        {
+          path: '/',
+          name: 'home',
+          component: function (resolve) {
+            require(['../components/main/Home.vue'], resolve)
+          },
+        },
+      ]
     },
     { path: '*', redirect: '/' }
   ]

@@ -28,9 +28,9 @@ let filesToCache = [
   },
 ];
 
-// workbox.setConfig({
-//   debug: true
-// });
-// workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
+workbox.setConfig({
+  debug: true
+});
+workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
 
 workbox.precaching.precacheAndRoute(filesToCache);

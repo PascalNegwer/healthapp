@@ -1,14 +1,18 @@
 <template>
-    <router-view :user="user"></router-view>
+    <div>
+        <h1>home</h1>
+    </div>
 </template>
 
 <script>
   export default {
-    name: 'App',
+    name: 'home',
+    props: [],
     data() {
       return {
-        user: new Apiomat.FrontendUser()
       }
+    },
+    methods: {
     }
   }
 </script>
