@@ -19,6 +19,10 @@ let filesToCache = [
     'revision': revision,
   },
   {
+    'url': '/2.main.js',
+    'revision': revision,
+  },
+  {
     'url': '/styles/main.css',
     'revision': revision,
   },
