@@ -16,7 +16,7 @@ body {
   background: #ccc;
 }
 
-.dual-gradient-background {
+.gradient-background {
   --top-color: blue;
   --center-color: green;
   --bottom-color: red;
