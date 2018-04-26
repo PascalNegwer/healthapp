@@ -16,7 +16,7 @@ new Vue({
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-      .register('./sw.js')
+      .register('./serviceworker.js')
       .then(
         function () {
           console.log('Service Worker Registered');
