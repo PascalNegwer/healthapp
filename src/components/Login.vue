@@ -1,5 +1,5 @@
 <template>
-  <div class="l_flex l_container l_wrapper">
+  <div class="l_flex l_wrapper">
     <img src="assets/img/logo.svg" class="logo u_center">
     <div v-if="loading">
       <h1>Loading</h1>
@@ -63,12 +63,12 @@
 <style>
   .logo {
     width: 40%;
-    margin-bottom: 20vw;
+    margin-bottom: 16vw;
   }
   .btn {
     width: 65%;
-    margin-top: 20vw;
-    margin-bottom: 20vw;
+    margin-top: 16vw;
+    margin-bottom: 16vw;
   }
   .inp {
     margin: 1rem 0;
