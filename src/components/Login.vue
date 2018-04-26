@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1>login</h1>
+    <div class="l_flex l_flex--vertical l_container l_wrapper">
+        <img src="assets/img/logo.svg" class="logo u_center">
         <div v-if="loading">
             <h1>Loading</h1>
         </div>
@@ -8,10 +8,10 @@
             <div v-if="error.message">
                 {{ error.statusCode }}: {{ error.message }}
             </div>
-            <form v-on:submit.prevent="login">
-                <input v-model="user.data.userName" placeholder="E-Mail-Adresse">
-                <input v-model="user.data.password" placeholder="Passwort">
-                <button type="submit">Einloggen</button>
+            <form class="l_flex l_flex--vertical" v-on:submit.prevent="login">
+                <input class="inp inp--18" v-model="user.data.userName" type="email" placeholder="E-Mail-Adresse" required>
+                <input class="inp inp--18" v-model="user.data.password" type="password" placeholder="Passwort" required>
+                <button class="btn btn--18 u_center" type="submit">Login</button>
             </form>
             Noch kein Account? <router-link to="/signup">Hier registrieren!</router-link>
         </div>
@@ -61,4 +61,13 @@
 </script>
 
 <style>
+  .logo {
+    width: 40%;
+  }
+  .btn {
+    width: 65%;
+  }
+  .inp {
+    margin: 2rem 0;
+  }
 </style>

@@ -1,23 +1,44 @@
 .btn {
   --primary-color: var(--lightgrey);
-  --secondary-color: transparent;
+  --secondary-color: var(--grey);
 }
 
 .btn {
   font-family: 'Comfortaa', sans-serif;
   font-weight: 400;
   font-size: 1.6rem;
-  line-height: 2.5;
+  line-height: 2.75;
   text-decoration: none;
   text-align: center;
-  border-width: 2px;
+  text-transform: uppercase;
+  border-width: .2rem;
   border-style: solid;
-  border-radius: .4rem;
+  border-radius: .8rem;
   transition: color .15s ease-in-out, background .15s ease-in-out;
   color: var(--primary-color);
   border-color: var(--primary-color);
-  background: var(--secondary-color);
+  background: transparent;
 }
 .btn:focus {
   outline: none;
+}
+.btn:active {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.btn--10 {
+  font-size: 1rem;
+}
+.btn--12 {
+  font-size: 1.2rem;
+}
+.btn--14 {
+  font-size: 1.4rem;
+}
+.btn--18 {
+  font-size: 1.8rem;
+}
+.btn--20 {
+  font-size: 2rem;
 }

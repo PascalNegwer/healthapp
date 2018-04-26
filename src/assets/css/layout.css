@@ -1,4 +1,21 @@
 .l_main {
-  padding-left: 4rem;
-  padding-right: 4rem;
+  padding: 4rem;
+}
+
+.l_container {
+  height: 100%;
+}
+
+.l_wrapper {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.l_flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.l_flex--vertical {
+  flex-direction: column;
 }
