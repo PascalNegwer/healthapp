@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "vee-validate": "^2.0.6",
     "vue": "^2.5.16",
