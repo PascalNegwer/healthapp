@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import cookie from '../utils/cookie.js'
+import cookie from './cookie.js'
 
 Vue.use(Router);
 

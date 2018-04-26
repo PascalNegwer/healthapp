@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import router from '../router'
+  import router from '../utils/router.js'
   import validate from '../utils/validate.js'
 
   export default {
