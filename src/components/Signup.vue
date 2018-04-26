@@ -10,8 +10,8 @@
             </div>
             <form v-on:submit.prevent="save">
                 <input v-model="user.data.userName" placeholder="E-Mail-Adresse">
-                <input v-model="user.data.password" placeholder="Passwort">
-                <input v-model="confirmPassword" placeholder="Passwort wiederholen">
+                <input v-model="user.data.password" type="password" placeholder="Passwort">
+                <input v-model="confirmPassword" type="password" placeholder="Passwort wiederholen">
                 <button type="submit">Registrieren</button>
             </form>
             Schon registriert? <router-link to="/login">Hier einloggen!</router-link>
@@ -21,6 +21,7 @@
 
 <script>
   import router from '../router'
+  import validate from '../utils/validate.js'
 
   export default {
     name: 'signup',
@@ -35,6 +36,22 @@
     methods: {
       save() {
         this.loading = true;
+        let errorMessage = '';
+
+        if (!validate.email(this.user.getUserName())) {
+          errorMessage = 'Keine Valide Email-Adresse';
+        }
+
+        if (this.confirmPassword !== this.user.getPassword()) {
+          errorMessage = 'Passwörter stimmen nicht überein';
+        }
+
+        if (errorMessage) {
+          this.error = new Error();
+          this.error.message = errorMessage;
+          this.loading = false;
+          return;
+        }
 
         Apiomat.Datastore.configureWithCredentials(this.user);
 
