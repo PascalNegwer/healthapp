@@ -1,0 +1,23 @@
+.btn {
+  --primary-color: var(--lightgrey);
+  --secondary-color: transparent;
+}
+
+.btn {
+  font-family: 'Comfortaa', sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.5;
+  text-decoration: none;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: .4rem;
+  transition: color .15s ease-in-out, background .15s ease-in-out;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  background: var(--secondary-color);
+}
+.btn:focus {
+  outline: none;
+}
