@@ -29,7 +29,7 @@
     data() {
       return {
         confirmPassword: '',
-        error: undefined,
+        error: new Error(),
         loading: false
       }
     },
@@ -47,7 +47,6 @@
         }
 
         if (errorMessage) {
-          this.error = new Error();
           this.error.message = errorMessage;
           this.loading = false;
           return;
