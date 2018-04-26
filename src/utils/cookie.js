@@ -1,6 +1,6 @@
 export default (function () {
   function getCookie(cname) {
-    let name = cname + "=";
+    let name = cname + '=';
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
     for (let i = 0; i < ca.length; i++) {
@@ -15,13 +15,13 @@ export default (function () {
     return false;
   }
 
-  function setCookie(cname, cvalue, exdays) {
-    let d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    let expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  function setCookie(name, value, expires) {
+    let date = new Date();
+    date.setTime(date.getTime() + expires);
+    document.cookie = name + '=' + value + ';'
+      + 'expires='+ date.toUTCString() + ';'
+      + 'path=/;';
   }
-
 
   return {
     getCookie: getCookie,
