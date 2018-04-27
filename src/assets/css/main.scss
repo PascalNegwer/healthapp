@@ -38,6 +38,7 @@ body {
   display: block;
   background-position: top center;
   background-size: cover;
+  background-image: url('../img/bg_1.png');
   height: 100vh;
   width: 100vw;
   top: 0;
@@ -59,4 +60,10 @@ body {
 }
 .u_gradient-background--orange:before {
   background-image: url('../img/bg_1.png');
+}
+
+/* Background Image Preloading */
+[class*='u_gradient-background']:after{
+  position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
+  content:url(../img/bg_0.png) url(../img/bg_1.png);
 }
