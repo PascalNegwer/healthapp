@@ -1,29 +1,31 @@
 <template>
 
-  <div class="l_flex l_wrapper">
+  <main class="l_main">
+    <div class="l_flex l_wrapper">
 
-    <div class="loader" v-bind:class="{'loader--active': loading}">
-      <svg class="circular" viewBox="25 25 50 50">
-        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
-      </svg>
-    </div>
-
-    <img src="assets/img/logo.svg" class="logo u_center">
-
-    <div class="l_flex content" v-bind:class="{'content--hidden': loading}">
-      <div v-if="error.message">
-          {{ error.statusCode }}: {{ error.message }}
+      <div class="loader" v-bind:class="{'loader--active': loading}">
+        <svg class="circular" viewBox="25 25 50 50">
+          <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+        </svg>
       </div>
-      <form class="l_flex" v-on:submit.prevent="save">
-        <input class="inp inp--18" v-model="user.data.userName" type="email" placeholder="E-Mail-Adresse" required>
-        <input class="inp inp--18" v-model="user.data.password" type="password" placeholder="Passwort" required>
-        <input class="inp inp--18" v-model="confirmPassword" type="password" placeholder="Passwort wiederholen">
-        <button class="btn btn--18 u_center" type="submit">Registrieren</button>
-      </form>
-      
-      <router-link to="/login" class="link u_center">Schon registriert?</router-link>
+
+      <img src="assets/img/logo.svg" class="logo u_center">
+
+      <div class="l_flex content" v-bind:class="{'content--hidden': loading}">
+        <div v-if="error.message">
+            {{ error.statusCode }}: {{ error.message }}
+        </div>
+        <form class="l_flex" v-on:submit.prevent="save">
+          <input class="inp inp--18" v-model="user.data.userName" type="email" placeholder="E-Mail-Adresse" required>
+          <input class="inp inp--18" v-model="user.data.password" type="password" placeholder="Passwort" required>
+          <input class="inp inp--18" v-model="confirmPassword" type="password" placeholder="Passwort wiederholen">
+          <button class="btn btn--18 u_center" type="submit">Registrieren</button>
+        </form>
+        
+        <router-link to="/login" class="link u_center">Schon registriert?</router-link>
+      </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -85,7 +87,7 @@
     margin-bottom: 8vh;
   }
   .btn {
-    width: 65%;
+    min-width: 65%;
     margin-top: 8vh;
     margin-bottom: 8vh;
   }

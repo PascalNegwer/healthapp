@@ -5,6 +5,13 @@
   flex-direction: column;
   justify-content: center;
 }
+.l_main--scroll {
+  min-height: auto;
+  height: calc(100% - 5rem);
+  margin-bottom: 5rem;
+  overflow-y: scroll;
+  justify-content: flex-start;
+}
 
 .l_wrapper {
   padding-left: 4rem;

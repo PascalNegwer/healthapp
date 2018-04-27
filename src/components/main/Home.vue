@@ -6,6 +6,9 @@
 
 <script>
   export default {
+    beforeCreate: function() {
+      document.documentElement.className = 'u_gradient-background--blue';
+    },
     name: 'home',
     props: [],
     data() {
