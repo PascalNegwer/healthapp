@@ -21,7 +21,7 @@
         <button class="btn btn--18 u_center" type="submit">Login</button>
       </form>
 
-      <router-link to="/signup" class="link u_center">Noch kein Account?dddddd</router-link>
+      <router-link to="/signup" class="link u_center">Noch kein Account?</router-link>
     </div>
   </div>
 </template>
@@ -71,12 +71,12 @@
 <style>
   .logo {
     width: 40%;
-    margin-bottom: 16vw;
+    margin-bottom: 8vh;
   }
   .btn {
     width: 65%;
-    margin-top: 16vw;
-    margin-bottom: 16vw;
+    margin-top: 8vh;
+    margin-bottom: 8vh;
   }
   .inp {
     margin: 1rem 0;
