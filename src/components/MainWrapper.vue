@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <main class="l_main">
         <router-view v-bind:user="user"></router-view>
         <main-nav></main-nav>
         <logout v-bind:user="user"></logout>
-    </div>
+    </main>
 </template>
 
 <script>
