@@ -87,7 +87,7 @@
     margin-bottom: 8vh;
   }
   .btn {
-    width: 65%;
+    min-width: 65%;
     margin-top: 8vh;
     margin-bottom: 8vh;
   }
