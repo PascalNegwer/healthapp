@@ -67,3 +67,7 @@ body {
   position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
   content: url(../img/bg_default.png) url(../img/bg_mixed.png) url(../img/bg_orange.png) url(../img/bg_purple.png) url(../img/bg_blue.png);
 }
+
+.logo {
+  opacity: .5;
+}
