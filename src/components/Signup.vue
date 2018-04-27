@@ -120,4 +120,7 @@
     visibility: visible;
     opacity: 1;
   }
+  .u_gradient-background {
+    background-image: url('../img/bg_1.png');
+  }
 </style>
