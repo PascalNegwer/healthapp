@@ -1,13 +1,14 @@
 <template>
+
   <div class="l_flex l_wrapper">
 
-    <img src="assets/img/logo.svg" class="logo u_center">
-
-    <div class="loader" v-bind:class="{'loader--loading': loading}">
+    <div class="loader" v-bind:class="{'loader--active': loading}">
       <svg class="circular" viewBox="25 25 50 50">
         <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
       </svg>
     </div>
+
+    <img src="assets/img/logo.svg" class="logo u_center">
 
     <div class="l_flex content" v-bind:class="{'content--hidden': loading}">
       <div v-if="error.message">
@@ -20,7 +21,7 @@
         <button class="btn btn--18 u_center" type="submit">Login</button>
       </form>
 
-      <router-link to="/signup" class="link u_center">Noch kein Account?</router-link>
+      <router-link to="/signup" class="link u_center">Noch kein Account?dddddd</router-link>
     </div>
   </div>
 </template>

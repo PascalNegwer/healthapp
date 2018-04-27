@@ -17,7 +17,7 @@
 }
 
 html {
-  height: 100%;
+  height: 100vh;
   color: var(--lightgrey);
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
@@ -26,7 +26,6 @@ html {
 body {
   width: 100%;
   height: 100%;
-  background-attachment: fixed;
   overflow-x: hidden;
 }
 
@@ -36,4 +35,5 @@ body {
 
 .u_gradient-background {
   background-image: radial-gradient(circle at bottom, #118899 0%, #8d126c 50%, #dd5f12);
+  background-attachment: fixed;
 }
