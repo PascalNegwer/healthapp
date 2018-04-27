@@ -33,10 +33,30 @@ body {
   background: #ccc;
 }
 
-.u_gradient-background {
-  background-image: url('../img/bg_0.png');
-  background-attachment: fixed;
+[class*='u_gradient-background']:before {
+  content: ' ';
+  display: block;
+  background-position: top center;
   background-size: cover;
-  background-position: center top;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: -10;
   transition: background .15s ease-in-out;
+}
+.u_gradient-background--mixed:before {
+  background-image: url('../img/bg_1.png');
+}
+.u_gradient-background--blue:before {
+  background-image: url('../img/bg_0.png');
+}
+.u_gradient-background--purple:before {
+  background-image: url('../img/bg_1.png');
+}
+.u_gradient-background--orange:before {
+  background-image: url('../img/bg_1.png');
 }

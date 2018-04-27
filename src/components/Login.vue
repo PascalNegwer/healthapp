@@ -31,6 +31,9 @@
   import validate from '../utils/validate.js'
 
   export default {
+    beforeCreate: function() {
+      document.documentElement.className = 'u_gradient-background--mixed';
+    },
         name: 'login',
         props: ['user'],
         data() {
@@ -68,7 +71,7 @@
     }
 </script>
 
-<style>
+<style scoped>
   .logo {
     width: 40%;
     margin-bottom: 8vh;
