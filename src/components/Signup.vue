@@ -32,7 +32,7 @@
 
   export default {
     beforeCreate: function() {
-      document.documentElement.className = 'u_gradient-background--blue';
+      document.documentElement.className = 'u_gradient-background--mixed';
     },
     name: 'signup',
     props: ['user'],
