@@ -1,5 +1,5 @@
 export default (function () {
-  function getCookie(cname) {
+  function get(cname) {
     let name = cname + '=';
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
@@ -15,7 +15,7 @@ export default (function () {
     return false;
   }
 
-  function setCookie(name, value, expires) {
+  function set(name, value, expires) {
     let date = new Date();
     date.setTime(date.getTime() + expires);
     document.cookie = name + '=' + value + ';'
@@ -23,8 +23,13 @@ export default (function () {
       + 'path=/;';
   }
 
+  function expireNow(name) {
+    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }
+
   return {
-    getCookie: getCookie,
-    setCookie: setCookie
+    get: get,
+    set: set,
+    expireNow: expireNow
   }
 })()
