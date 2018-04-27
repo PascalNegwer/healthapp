@@ -6,7 +6,7 @@ const
   cleanCss = require('gulp-clean-css'),
 
   src = './src',
-  dest = './docs'
+  dest = './docs/test'
 ;
 
 gulp.task('default', ['build:webpack', 'build:move', 'build:css', 'move:images']);

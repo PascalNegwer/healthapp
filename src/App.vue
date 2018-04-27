@@ -5,7 +5,6 @@
 <script>
   import cookie from './utils/cookie.js'
   import router from './utils/router.js'
-  import { EventBus } from './utils/eventBus.js';
 
   export default {
     name: 'App',

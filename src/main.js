@@ -6,10 +6,13 @@ import router from './utils/router.js'
 Vue.use(VeeValidate);
 //Vue.config.productionTip = false;
 
+window.EventBus = new Vue();
+
 new Vue({
   router,
   render: h => h(App),
 }).$mount('#app');
+
 
 (function () {
   'use strict';

@@ -3,8 +3,6 @@
 </template>
 
 <script>
-  import { EventBus } from '../../utils/eventBus.js';
-
   export default {
     name: "logout",
     props: ['user'],

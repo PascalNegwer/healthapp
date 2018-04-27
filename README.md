@@ -18,6 +18,7 @@ Damit auf Chrome fetch requests auf localhost funkioniert muss eine [Extension](
 [Vue Example Project](https://github.com/prograhammer/vue-example-project)
 
 ```
+npm install -g gulp
 npm install
 npm run build
 npm run watch
