@@ -54,7 +54,7 @@ gulp.task('build:webpack', ['clean:webpack'], function() {
 });
 
 gulp.task('clean:webpack', function () {
-  return gulp.src(dest + 'assets/js/*main.js', {read: false})
+  return gulp.src(dest + '/*main.js', {read: false})
     .pipe(clean());
 });
 

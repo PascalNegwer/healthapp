@@ -21,6 +21,7 @@
 <script>
   import router from '../utils/router.js'
   import validate from '../utils/validate.js'
+  import cookie from '../utils/cookie.js'
 
   export default {
         name: 'login',
@@ -42,6 +43,7 @@
               return;
             }
 
+            cookie.expireNow('sessionToken');
             Apiomat.Datastore.configureWithCredentials(this.user);
 
             this.user.loadMe({

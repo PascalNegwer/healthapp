@@ -3,11 +3,31 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.1.0/workbox
 let revision = (new Date()).toTimeString();
 let filesToCache = [
   {
-    'url': 'assets/css/main.css',
+    'url': '/assets/css/main.css',
     'revision': revision,
   },
   {
     'url': '/0.main.js',
+    'revision': revision,
+  },
+  {
+    'url': '/1.main.js',
+    'revision': revision,
+  },
+  {
+    'url': '/2.main.js',
+    'revision': revision,
+  },
+  {
+    'url': '/3.main.js',
+    'revision': revision,
+  },
+  {
+    'url': '/4.main.js',
+    'revision': revision,
+  },
+  {
+    'url': '/5.main.js',
     'revision': revision,
   },
   {
