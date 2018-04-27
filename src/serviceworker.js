@@ -7,17 +7,27 @@ let filesToCache = [
     'revision': revision,
   },
   {
+    'url': '/test/assets/img/bg_blue.png',
+    'revision': revision,
+  },
+  {
+    'url': '/test/assets/img/bg_default.png',
+    'revision': revision,
+  },
+  {
+    'url': '/test/assets/img/bg_mixed.png',
+    'revision': revision,
+  },
+  {
+    'url': '/test/assets/img/bg_orange.png',
+    'revision': revision,
+  },
+  {
+    'url': '/test/assets/img/bg_purple.png',
+    'revision': revision,
+  },
+  {
     'url': '/test/assets/img/logo.svg',
-    'revision': revision,
-  },
-
-  {
-    'url': '/test/assets/img/bg_0.png',
-    'revision': revision,
-  },
-
-  {
-    'url': '/test/assets/img/bg_1.png',
     'revision': revision,
   },
   {
