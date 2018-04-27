@@ -7,6 +7,20 @@ let filesToCache = [
     'revision': revision,
   },
   {
+    'url': '/assets/img/logo.svg',
+    'revision': revision,
+  },
+
+  {
+    'url': '/assets/img/bg_0.png',
+    'revision': revision,
+  },
+
+  {
+    'url': '/assets/img/bg_1.png',
+    'revision': revision,
+  },
+  {
     'url': '/0.main.js',
     'revision': revision,
   },
@@ -54,3 +68,8 @@ workbox.setConfig({
 workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
 
 workbox.precaching.precacheAndRoute(filesToCache);
+
+workbox.routing(
+  new RegExp('https://storage.googleapis.com/*'),
+  workbox.strategies.staleWhileRevalidate()
+);

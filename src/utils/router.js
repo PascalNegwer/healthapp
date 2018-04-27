@@ -37,14 +37,6 @@ const router = new Router({
           },
           beforeEnter: loggedInOnly,
         },
-        {
-          path: '/fitness',
-          name: 'fitness',
-          component: function (resolve) {
-            require(['../components/main/Fitness.vue'], resolve)
-          },
-          beforeEnter: loggedInOnly,
-        },
       ]
     },
     {path: '*', redirect: '/'}
