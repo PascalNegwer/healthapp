@@ -1,18 +1,25 @@
 <template>
   <div class="l_flex l_wrapper">
+
     <img src="assets/img/logo.svg" class="logo u_center">
-    <div v-if="loading">
-      <h1>Loading</h1>
+
+    <div class="loader" v-bind:class="{'loader--loading': loading}">
+      <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+      </svg>
     </div>
-    <div class="l_flex" v-else>
+
+    <div class="l_flex content" v-bind:class="{'content--hidden': loading}">
       <div v-if="error.message">
         {{ error.statusCode }}: {{ error.message }}
       </div>
+
       <form class="l_flex" v-on:submit.prevent="login">
         <input class="inp inp--18" v-model="user.data.userName" type="email" placeholder="E-Mail-Adresse" required>
         <input class="inp inp--18" v-model="user.data.password" type="password" placeholder="Passwort" required>
         <button class="btn btn--18 u_center" type="submit">Login</button>
       </form>
+
       <router-link to="/signup" class="link u_center">Noch kein Account?</router-link>
     </div>
   </div>
@@ -83,5 +90,25 @@
   }
   .link:active {
     opacity: .5;
+  }
+  .content {
+    opacity: 1;
+    transition: opacity .15s ease-in-out, visibility .15s ease-in-out .15s;
+  }
+  .content--hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .loader {
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .15s ease-in-out;
+  }
+  .loader--active {
+    visibility: visible;
+    opacity: 1;
   }
 </style>
