@@ -18,12 +18,12 @@
         <p class="nav__text">Funktionen</p>
       </router-link>
     </span>
-    <span class="nav__item nav__item--active">
-      <div class="nav__link">
+    <span class="nav__item" v-bind:class="{'nav__item--active': open}">
+      <div class="nav__link" v-on:click="toggleDropdown(open)">
         <img class="nav__icon" src="assets/img/settings.svg">
         <p class="nav__text">Settings</p>
       </div>
-      <nav class="nav nav--dropdown l_flex">
+      <nav class="nav nav--dropdown l_flex" v-bind:class="{'nav--visible': open}">
         <span class="nav__item nav__item--dropdown">
           <router-link class="nav__link" to="/">
             <img class="nav__icon" src="assets/img/home.svg">
@@ -48,9 +48,23 @@
 </template>
 
 <script>
-    export default {
-        name: "mainNav"
+  export default {
+    name: "mainNav",
+    data() {
+      return {
+        open: false,
+      }
+    },
+    methods: {
+      toggleDropdown(state) {
+        if(state) {
+          this.open = false;
+        } else {
+          this.open = true;
+        }
+      }
     }
+  }
 </script>
 
 <style scoped>
@@ -69,17 +83,17 @@
     justify-content: center;
     visibility: hidden;
     opacity: 0;
-    transition: opacity .15s ease-in-out;
+    transition: opacity .15s ease-in-out, visibility .15s .15s;
   }
   .nav--visible {
     visibility: visible;
     opacity: 1;
+    transition: opacity .15s ease-in-out, visibility;
   }
   .nav__item {
     width: 25%;
     display: block;
     text-align: center;
-    padding-bottom: 2rem;
     transition: background .15s ease-in-out;
     position: relative;
   }
@@ -105,5 +119,6 @@
     font-weight: 400;
     text-transform: uppercase;
     text-align: center;
+    padding-bottom: 2rem;
   }
 </style>
