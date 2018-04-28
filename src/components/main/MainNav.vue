@@ -18,11 +18,31 @@
         <p class="nav__text">Funktionen</p>
       </router-link>
     </span>
-    <span class="nav__item nav__item--dropdown">
+    <span class="nav__item nav__item--active">
       <div class="nav__link">
         <img class="nav__icon" src="assets/img/settings.svg">
         <p class="nav__text">Settings</p>
       </div>
+      <nav class="nav nav--dropdown l_flex">
+        <span class="nav__item nav__item--dropdown">
+          <router-link class="nav__link" to="/">
+            <img class="nav__icon" src="assets/img/home.svg">
+            <p class="nav__text">Home</p>
+          </router-link>
+        </span>
+        <span class="nav__item nav__item--dropdown">
+          <router-link class="nav__link" to="#">
+            <img class="nav__icon" src="assets/img/dashboard.svg">
+            <p class="nav__text">Dashboard</p>
+          </router-link>
+        </span>
+        <span class="nav__item nav__item--dropdown">
+          <router-link class="nav__link" to="#">
+            <img class="nav__icon" src="assets/img/list.svg">
+            <p class="nav__text">Funktionen</p>
+          </router-link>
+        </span>
+      </nav>
     </span>
   </nav>
 </template>
@@ -43,20 +63,42 @@
     justify-content: space-between;
     flex-wrap: nowrap;
   }
+  .nav--dropdown {
+    position: absolute;
+    bottom: 100%;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .15s ease-in-out;
+  }
+  .nav--visible {
+    visibility: visible;
+    opacity: 1;
+  }
   .nav__item {
     width: 25%;
     display: block;
     text-align: center;
     padding-bottom: 2rem;
     transition: background .15s ease-in-out;
+    position: relative;
   }
-  .nav__item:active {
+  .nav__item:active, .nav__item--active {
     background: var(--white-50);
+  }
+  .nav__item--dropdown {
+    width: 100%;
+    background: var(--white-50);
+    margin-bottom: .2rem;
+  }
+  .nav__item--dropdown:active {
+    background: var(--white);
   }
   .nav__icon {
     padding: 2rem 3rem 1rem 3rem;
     width: 100%;
     height: auto;
+    flex-shrink: 0;
   }
   .nav__text {
     font-size: 1.2rem;
