@@ -1,19 +1,19 @@
 <template>
   <nav class="nav l_flex l_flex--horizontal">
     <span class="nav__item">
-      <router-link class="nav__link" to="/">
+      <router-link class="nav__link" to="/" v-on:click.native="toggleDropdown(true)">
         <img class="nav__icon" src="assets/img/home.svg">
         <p class="nav__text">Home</p>
       </router-link>
     </span>
     <span class="nav__item">
-      <router-link class="nav__link" to="#">
+      <router-link class="nav__link" to="#" v-on:click.native="toggleDropdown(true)">
         <img class="nav__icon" src="assets/img/dashboard.svg">
         <p class="nav__text">Dashboard</p>
       </router-link>
     </span>
     <span class="nav__item">
-      <router-link class="nav__link" to="#">
+      <router-link class="nav__link" to="#" v-on:click.native="toggleDropdown(true)">
         <img class="nav__icon" src="assets/img/list.svg">
         <p class="nav__text">Funktionen</p>
       </router-link>
