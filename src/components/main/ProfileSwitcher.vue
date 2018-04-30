@@ -107,7 +107,7 @@
     text-align: right;
     font-weight: 400;
     background: var(--white-50);
-    margin: .2rem 0 0 0;
+    margin: .4rem 0 0 0;
     text-transform: uppercase;
     padding: .2rem 1.3rem 0 1.3rem;
     line-height: 3;
