@@ -23,7 +23,7 @@
         <img class="nav__icon" src="assets/img/settings.svg">
         <p class="nav__text">Settings</p>
       </div>
-      <nav class="nav nav--dropdown l_flex" v-bind:class="{'nav--visible': open}">
+      <nav class="nav nav--dropdown l_flex" v-bind:class="[{'nav--visible': open}, bg]">
         <span class="nav__item nav__item--dropdown">
           <router-link class="nav__link" to="/">
             <img class="nav__icon" src="assets/img/home.svg">
@@ -49,10 +49,15 @@
 
 <script>
   export default {
+    mounted: function() {
+      this.bg = document.documentElement.className;
+      console.log(this.bg);
+    },
     name: "mainNav",
     data() {
       return {
         open: false,
+        bg: '',
       }
     },
     methods: {
@@ -84,6 +89,7 @@
     visibility: hidden;
     opacity: 0;
     transition: opacity .15s ease-in-out, visibility .15s .15s;
+    clip: rect(0, auto, auto, 0);
   }
   .nav--visible {
     visibility: visible;
@@ -101,9 +107,11 @@
     background: var(--white-50);
   }
   .nav__item--dropdown {
+    display: block;
     width: 100%;
     background: var(--white-50);
     margin-bottom: .2rem;
+    position: relative;
   }
   .nav__item--dropdown:active {
     background: var(--white);
