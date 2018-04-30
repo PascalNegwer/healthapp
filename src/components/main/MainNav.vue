@@ -27,20 +27,26 @@
       <nav class="nav nav--dropdown l_flex" v-bind:class="[{'nav--visible': open}, bg]">
         <span class="nav__item nav__item--dropdown">
           <router-link class="nav__link" to="/">
-            <img class="nav__icon" src="assets/img/home.svg">
-            <p class="nav__text">Home</p>
+            <img class="nav__icon" src="assets/img/text.svg">
+            <p class="nav__text">Rechtliches</p>
+          </router-link>
+        </span>
+        <span class="nav__item nav__item--dropdown">
+          <router-link class="nav__link" to="/">
+            <img class="nav__icon" src="assets/img/info.svg">
+            <p class="nav__text">Hilfe</p>
           </router-link>
         </span>
         <span class="nav__item nav__item--dropdown">
           <router-link class="nav__link" to="#">
-            <img class="nav__icon" src="assets/img/dashboard.svg">
-            <p class="nav__text">Dashboard</p>
+            <img class="nav__icon" src="assets/img/user.svg">
+            <p class="nav__text">Account</p>
           </router-link>
         </span>
         <span class="nav__item nav__item--dropdown">
           <router-link class="nav__link" to="#">
-            <img class="nav__icon" src="assets/img/list.svg">
-            <p class="nav__text">Funktionen</p>
+            <img class="nav__icon" src="assets/img/logout.svg">
+            <p class="nav__text">Logout</p>
           </router-link>
         </span>
       </nav>
@@ -117,19 +123,27 @@
   .nav__item--dropdown:active {
     background: var(--white);
   }
+  .nav__link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
   .nav__icon {
-    padding: 2rem 3rem 1rem 3rem;
-    width: 100%;
-    height: auto;
+    padding: 2rem 0 1rem 0;
+    width: auto;
+    height: 6.2rem;
     flex-shrink: 0;
     position: relative;
     transition: opacity .15s ease-in-out;
     opacity: 1;
+    flex-shrink: 0;
   }
   .nav__icon--hidden {
     opacity: 0;
     position: absolute;
     top: 0;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .nav__text {
     font-size: 1.2rem;
