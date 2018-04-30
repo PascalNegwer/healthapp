@@ -18,6 +18,15 @@
   padding-left: 4rem;
   padding-right: 4rem;
 }
+.l_wrapper--medium {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.l_wrapper--small {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 
 .l_flex {
   display: flex;
