@@ -68,7 +68,7 @@
     width: 100%;
     text-align: center;
     background: var(--white-50);
-    margin: 0 .2rem;
+    margin: 0 .1rem;
     text-transform: uppercase;
     padding: 2rem 1.3rem;
     -ms-word-break: break-all;
@@ -81,8 +81,8 @@
     color: var(--grey);
   }
   .tiles__tile--dropdown {
-    width: calc(25% - .4rem);
-    min-width: calc(25% - .4rem);
+    width: calc(25% - .2rem);
+    min-width: calc(25% - .2rem);
     font-size: 1.8rem;
     position: relative;
   }
@@ -91,7 +91,7 @@
     top: 100%;
     right: 0;
     font-size: 1.4rem;
-    width: calc(200% + .4rem);
+    width: calc(200% + .2rem);
     visibility: hidden;
     opacity: 0;
     transition: opacity .15s ease-in-out, visibility .15s .15s;
@@ -107,7 +107,7 @@
     text-align: right;
     font-weight: 400;
     background: var(--white-50);
-    margin: .4rem 0 0 0;
+    margin: .2rem 0 0 0;
     text-transform: uppercase;
     padding: .2rem 1.3rem 0 1.3rem;
     line-height: 3;
