@@ -1,14 +1,14 @@
 @font-face {
   font-family: 'wrkFit';
   src:
-    url('../fonts/wrkFit.ttf?l097qc') format('truetype'),
-    url('../fonts/wrkFit.woff?l097qc') format('woff'),
-    url('../fonts/wrkFit.svg?l097qc#wrkFit') format('svg');
+    url('../fonts/wrkFit.ttf?u5ubav') format('truetype'),
+    url('../fonts/wrkFit.woff?u5ubav') format('woff'),
+    url('../fonts/wrkFit.svg?u5ubav#wrkFit') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-[class^="u_icon--"], [class*=" u_icon--"] {
+[class^="u_icon--"]:before, [class*=" u_icon--"]:before {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'wrkFit' !important;
   speak: none;
@@ -23,36 +23,51 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.u_icon--close:before {
+.u_icon--add:before {
   content: "\e900";
 }
-.u_icon--dashboard:before {
+.u_icon--close:before {
   content: "\e901";
 }
-.u_icon--home:before {
+.u_icon--dashboard:before {
   content: "\e902";
 }
-.u_icon--info:before {
+.u_icon--down:before {
   content: "\e903";
 }
-.u_icon--list:before {
+.u_icon--edit:before {
   content: "\e904";
 }
-.u_icon--logo:before {
+.u_icon--home:before {
   content: "\e905";
 }
-.u_icon--logout:before {
+.u_icon--info:before {
   content: "\e906";
 }
-.u_icon--menu:before {
+.u_icon--list:before {
   content: "\e907";
 }
-.u_icon--settings:before {
+.u_icon--logo:before {
   content: "\e908";
 }
-.u_icon--text:before {
+.u_icon--logout:before {
   content: "\e909";
 }
-.u_icon--user:before {
+.u_icon--menu:before {
   content: "\e90a";
+}
+.u_icon--settings:before {
+  content: "\e90b";
+}
+.u_icon--text:before {
+  content: "\e90c";
+}
+.u_icon--up:before {
+  content: "\e90d";
+}
+.u_icon--user:before {
+  content: "\e90e";
+}
+.u_icon--warning:before {
+  content: "\e90f";
 }
