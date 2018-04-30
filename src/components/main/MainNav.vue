@@ -3,29 +3,28 @@
 
     <span class="nav__item">
       <router-link class="nav__link" to="/" v-on:click.native="toggleDropdown(true)">
-        <img class="nav__icon" src="assets/img/home.svg">
+        <div class="nav__icon u_icon--home"></div>
         <p class="nav__text">Home</p>
       </router-link>
     </span>
 
     <span class="nav__item">
       <router-link class="nav__link" to="/dashboard" v-on:click.native="toggleDropdown(true)">
-        <img class="nav__icon" src="assets/img/dashboard.svg">
+        <div class="nav__icon u_icon--dashboard"></div>
         <p class="nav__text">Dashboard</p>
       </router-link>
     </span>
 
     <span class="nav__item">
       <router-link class="nav__link" to="/functions" v-on:click.native="toggleDropdown(true)">
-        <img class="nav__icon" src="assets/img/list.svg">
+        <div class="nav__icon u_icon--list"></div>
         <p class="nav__text">Funktionen</p>
       </router-link>
     </span>
 
     <span class="nav__item" v-bind:class="{'nav__item--active': open}">
       <div class="nav__link" v-on:click="toggleDropdown(open)">
-        <img class="nav__icon" v-bind:class="[open ? '' : 'nav__icon--hidden']" src="assets/img/close.svg">
-        <img class="nav__icon" v-bind:class="[open ? 'nav__icon--hidden' : '']" src="assets/img/menu.svg">
+        <div class="nav__icon" v-bind:class="[open ? 'u_icon--close' : 'u_icon--menu']"></div>
         <p class="nav__text">Settings</p>
       </div>
 
@@ -33,21 +32,21 @@
 
         <span class="nav__item nav__item--dropdown">
           <router-link class="nav__link" to="/lawstuff" v-on:click.native="toggleDropdown(open)">
-            <img class="nav__icon" src="assets/img/text.svg">
+            <div class="nav__icon u_icon--text"></div>
             <p class="nav__text">Rechtliches</p>
           </router-link>
         </span>
 
         <span class="nav__item nav__item--dropdown">
           <router-link class="nav__link" to="/help" v-on:click.native="toggleDropdown(open)">
-            <img class="nav__icon" src="assets/img/info.svg">
+            <div class="nav__icon u_icon--info"></div>
             <p class="nav__text">Hilfe</p>
           </router-link>
         </span>
 
         <span class="nav__item nav__item--dropdown">
           <router-link class="nav__link" to="/account" v-on:click.native="toggleDropdown(open)">
-            <img class="nav__icon" src="assets/img/user.svg">
+            <div class="nav__icon u_icon--user"></div>
             <p class="nav__text">Account</p>
           </router-link>
         </span>
@@ -143,20 +142,11 @@
   }
   .nav__icon {
     padding: 2rem 0 1rem 0;
-    width: auto;
-    height: 6.2rem;
-    flex-shrink: 0;
-    position: relative;
-    transition: opacity .15s ease-in-out;
-    opacity: 1;
-    flex-shrink: 0;
+    font-size: 3.2rem;
+    color: #5f5f5f;
   }
-  .nav__icon--hidden {
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+  .nav__icon:before {
+    transition: color .15s ease-in-out;
   }
   .nav__text {
     font-size: 1.2rem;
@@ -164,5 +154,13 @@
     text-transform: uppercase;
     text-align: center;
     padding-bottom: 2rem;
+    transition: color .15s ease-in-out;
+  }
+
+  .u_gradient-background--default .nav__icon, .u_gradient-background--mixed .nav__icon {
+    color: var(--lightgrey);
+  }
+  .u_gradient-background--default .nav__text, .u_gradient-background--mixed .nav__text {
+    color: var(--lightgrey);
   }
 </style>

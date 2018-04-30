@@ -1,6 +1,6 @@
 <template>
   <span class="nav__link" v-on:click="logout">
-    <img class="nav__icon" src="assets/img/logout.svg">
+    <div class="nav__icon u_icon--logout"></div>
     <p class="nav__text">Logout</p>
   </span>
 </template>
