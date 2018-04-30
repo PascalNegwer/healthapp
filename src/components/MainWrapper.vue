@@ -1,19 +1,17 @@
 <template>
     <main class="l_main l_main--scroll">
-        <router-view v-bind:user="user"></router-view>
-        <main-nav></main-nav>
-        <logout v-bind:user="user"></logout>
+      <router-view v-bind:user="user"></router-view>
+      <main-nav></main-nav>
     </main>
 </template>
 
 <script>
-  import MainNav from './main/MainNav.vue'
-  import Home from './main/Home.vue'
-  import Logout from './main/Logout.vue';
+  import MainNav from './main/MainNav.vue';
+  import Home from './main/Home.vue';
 
   export default {
     name: 'mainWrapper',
-    components: {Logout, MainNav, Home},
+    components: {MainNav, Home},
     props: ['user'],
     data() {
       return {}

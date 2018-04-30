@@ -37,42 +37,42 @@
     beforeCreate: function() {
       document.documentElement.className = 'u_gradient-background--mixed';
     },
-        name: 'login',
-        props: ['user'],
-        data() {
-            return {
-              loading: false,
-              error: new Error(),
-            }
-        },
-        methods: {
-          login() {
-            this.loading = true;
+    name: 'login',
+    props: ['user'],
+    data() {
+      return {
+        loading: false,
+        error: new Error(),
+      }
+    },
+    methods: {
+      login() {
+        this.loading = true;
 
-            if (!validate.email(this.user.getUserName())) {
-              this.error.code = 0;
-              this.error.message = 'Keine Valide Email-Adresse';
-              this.loading = false;
-              return;
-            }
-
-            cookie.expireNow('sessionToken');
-            Apiomat.Datastore.configureWithCredentials(this.user);
-
-            this.user.loadMe({
-              onOk: result => {
-                this.error = new Error();
-                router.push('/');
-              },
-              onError: error => {
-                this.error = error;
-                this.loading = false;
-              }
-            });
-
-          }
+        if (!validate.email(this.user.getUserName())) {
+          this.error.code = 0;
+          this.error.message = 'Keine Valide Email-Adresse';
+          this.loading = false;
+          return;
         }
+
+        cookie.expireNow('sessionToken');
+        Apiomat.Datastore.configureWithCredentials(this.user);
+
+        this.user.loadMe({
+          onOk: result => {
+            this.error = new Error();
+            router.push('/');
+          },
+          onError: error => {
+            this.error = error;
+            this.loading = false;
+          }
+        });
+
+      }
     }
+  }
 </script>
 
 <style scoped>
