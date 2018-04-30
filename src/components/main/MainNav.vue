@@ -20,7 +20,8 @@
     </span>
     <span class="nav__item" v-bind:class="{'nav__item--active': open}">
       <div class="nav__link" v-on:click="toggleDropdown(open)">
-        <img class="nav__icon" src="assets/img/settings.svg">
+        <img class="nav__icon" v-bind:class="[open ? '' : 'nav__icon--hidden']" src="assets/img/close.svg">
+        <img class="nav__icon" v-bind:class="[open ? 'nav__icon--hidden' : '']" src="assets/img/menu.svg">
         <p class="nav__text">Settings</p>
       </div>
       <nav class="nav nav--dropdown l_flex" v-bind:class="[{'nav--visible': open}, bg]">
@@ -121,6 +122,14 @@
     width: 100%;
     height: auto;
     flex-shrink: 0;
+    position: relative;
+    transition: opacity .15s ease-in-out;
+    opacity: 1;
+  }
+  .nav__icon--hidden {
+    opacity: 0;
+    position: absolute;
+    top: 0;
   }
   .nav__text {
     font-size: 1.2rem;
