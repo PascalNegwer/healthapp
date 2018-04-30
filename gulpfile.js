@@ -9,12 +9,14 @@ const
   dest = './docs/test'
 ;
 
-gulp.task('default', ['build:webpack', 'build:move', 'build:css', 'move:images']);
+gulp.task('default', ['build:webpack', 'build:move', 'build:css', 'move:images', 'move:fonts']);
 
-gulp.task('watch', ['build:webpack', 'build:move', 'build:css', 'move:images'], function () {
+gulp.task('watch', ['build:webpack', 'build:move', 'build:css', 'move:images', 'move:fonts'], function () {
   gulp.watch(src + '/assets/css/**/*css', ['build:css']);
 
   gulp.watch(src + '/assets/img/**/*', ['move:images']);
+
+  gulp.watch(src + '/assets/fonts/**/*', ['move:fonts']);
 
   let filesToMove = [
     src + '/index.html',
@@ -89,6 +91,16 @@ gulp.task('move:images', ['clean:images'], function() {
 
 gulp.task('clean:images', function () {
   return gulp.src(dest + '/assets/img', {read: false})
+    .pipe(clean());
+});
+
+gulp.task('move:fonts', ['clean:fonts'], function() {
+  return gulp.src(src + '/assets/fonts/**/*')
+    .pipe(gulp.dest(dest + '/assets/fonts'));
+});
+
+gulp.task('clean:fonts', function () {
+  return gulp.src(dest + '/assets/fonts', {read: false})
     .pipe(clean());
 });
 

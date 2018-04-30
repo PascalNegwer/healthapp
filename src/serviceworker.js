@@ -31,6 +31,18 @@ let filesToCache = [
     'revision': revision,
   },
   {
+    'url': '/test/assets/fonts/wrkFit.svg',
+    'revision': revision,
+  },
+  {
+    'url': '/test/assets/fonts/wrkFit.ttf',
+    'revision': revision,
+  },
+  {
+    'url': '/test/assets/fonts/wrkFit.woff',
+    'revision': revision,
+  },
+  {
     'url': '/test/0.main.js',
     'revision': revision,
   },
@@ -52,6 +64,22 @@ let filesToCache = [
   },
   {
     'url': '/test/5.main.js',
+    'revision': revision,
+  },
+  {
+    'url': '/test/6.main.js',
+    'revision': revision,
+  },
+  {
+    'url': '/test/7.main.js',
+    'revision': revision,
+  },
+  {
+    'url': '/test/8.main.js',
+    'revision': revision,
+  },
+  {
+    'url': '/test/9.main.js',
     'revision': revision,
   },
   {
