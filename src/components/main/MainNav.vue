@@ -1,51 +1,61 @@
 <template>
   <nav class="nav l_flex l_flex--horizontal">
+
     <span class="nav__item">
       <router-link class="nav__link" to="/" v-on:click.native="toggleDropdown(true)">
         <img class="nav__icon" src="assets/img/home.svg">
         <p class="nav__text">Home</p>
       </router-link>
     </span>
+
     <span class="nav__item">
-      <router-link class="nav__link" to="#" v-on:click.native="toggleDropdown(true)">
+      <router-link class="nav__link" to="/dashboard" v-on:click.native="toggleDropdown(true)">
         <img class="nav__icon" src="assets/img/dashboard.svg">
         <p class="nav__text">Dashboard</p>
       </router-link>
     </span>
+
     <span class="nav__item">
-      <router-link class="nav__link" to="#" v-on:click.native="toggleDropdown(true)">
+      <router-link class="nav__link" to="/functions" v-on:click.native="toggleDropdown(true)">
         <img class="nav__icon" src="assets/img/list.svg">
         <p class="nav__text">Funktionen</p>
       </router-link>
     </span>
+
     <span class="nav__item" v-bind:class="{'nav__item--active': open}">
       <div class="nav__link" v-on:click="toggleDropdown(open)">
         <img class="nav__icon" v-bind:class="[open ? '' : 'nav__icon--hidden']" src="assets/img/close.svg">
         <img class="nav__icon" v-bind:class="[open ? 'nav__icon--hidden' : '']" src="assets/img/menu.svg">
         <p class="nav__text">Settings</p>
       </div>
+
       <nav class="nav nav--dropdown l_flex" v-bind:class="[{'nav--visible': open}, bg]">
+
         <span class="nav__item nav__item--dropdown">
-          <router-link class="nav__link" to="/">
+          <router-link class="nav__link" to="/lawstuff" v-on:click.native="toggleDropdown(open)">
             <img class="nav__icon" src="assets/img/text.svg">
             <p class="nav__text">Rechtliches</p>
           </router-link>
         </span>
+
         <span class="nav__item nav__item--dropdown">
-          <router-link class="nav__link" to="/">
+          <router-link class="nav__link" to="/help" v-on:click.native="toggleDropdown(open)">
             <img class="nav__icon" src="assets/img/info.svg">
             <p class="nav__text">Hilfe</p>
           </router-link>
         </span>
+
         <span class="nav__item nav__item--dropdown">
-          <router-link class="nav__link" to="#">
+          <router-link class="nav__link" to="/account" v-on:click.native="toggleDropdown(open)">
             <img class="nav__icon" src="assets/img/user.svg">
             <p class="nav__text">Account</p>
           </router-link>
         </span>
+
         <span class="nav__item nav__item--dropdown">
           <logout v-bind:user="user"></logout>
         </span>
+
       </nav>
     </span>
   </nav>
@@ -55,7 +65,7 @@
   import Logout from './Logout.vue';
 
   export default {
-    mounted: function() {
+    updated: function() {
       this.bg = document.documentElement.className;
       console.log(this.bg);
     },

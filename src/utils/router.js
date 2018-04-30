@@ -37,6 +37,46 @@ const router = new Router({
           },
           beforeEnter: loggedInOnly,
         },
+        {
+          path: '/dashboard',
+          name: 'dashboard',
+          component: function (resolve) {
+            require(['../components/main/Dashboard.vue'], resolve)
+          },
+          beforeEnter: loggedInOnly,
+        },
+        {
+          path: '/functions',
+          name: 'functions',
+          component: function (resolve) {
+            require(['../components/main/Functions.vue'], resolve)
+          },
+          beforeEnter: loggedInOnly,
+        },
+        {
+          path: '/account',
+          name: 'account',
+          component: function (resolve) {
+            require(['../components/main/Account.vue'], resolve)
+          },
+          beforeEnter: loggedInOnly,
+        },
+        {
+          path: '/help',
+          name: 'help',
+          component: function (resolve) {
+            require(['../components/main/Help.vue'], resolve)
+          },
+          beforeEnter: loggedInOnly,
+        },
+        {
+          path: '/lawstuff',
+          name: 'lawstuff',
+          component: function (resolve) {
+            require(['../components/main/Lawstuff.vue'], resolve)
+          },
+          beforeEnter: loggedInOnly,
+        },
       ]
     },
     {path: '*', redirect: '/'}
