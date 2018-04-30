@@ -44,10 +44,7 @@
           </router-link>
         </span>
         <span class="nav__item nav__item--dropdown">
-          <router-link class="nav__link" to="#">
-            <img class="nav__icon" src="assets/img/logout.svg">
-            <p class="nav__text">Logout</p>
-          </router-link>
+          <logout v-bind:user="user"></logout>
         </span>
       </nav>
     </span>
@@ -55,12 +52,18 @@
 </template>
 
 <script>
+  import Logout from './Logout.vue';
+
   export default {
     mounted: function() {
       this.bg = document.documentElement.className;
       console.log(this.bg);
     },
     name: "mainNav",
+    components: {
+      Logout,
+    },
+    props: ['user'],
     data() {
       return {
         open: false,
@@ -79,7 +82,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   .nav {
     width: 100%;
     color: var(--grey);
