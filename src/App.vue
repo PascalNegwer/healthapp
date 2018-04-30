@@ -1,5 +1,16 @@
 <template>
+  <div id="app">
+    <div class="flash-messages-container">
+      <transition name="slide-fade">
+        <div v-for="(flashMessage, index) in flashMessages" class="flash-message"
+             v-bind:class="flashMessage.type" v-on:click="unset(index)">
+          <div class="u_icon--home flash-message__icon"></div>
+          <b class="flash-message__text">{{ flashMessage.message }}</b>
+        </div>
+      </transition>
+    </div>
     <router-view v-bind:user="user"></router-view>
+  </div>
 </template>
 
 <script>
@@ -10,7 +21,13 @@
     name: 'App',
     data() {
       return {
-        user: new Apiomat.FrontendUser()
+        user: new Apiomat.FrontendUser(),
+        flashMessages: []
+      }
+    },
+    methods: {
+      unset(index) {
+        this.flashMessages.splice(index, 1);
       }
     },
     mounted: function () {
@@ -23,9 +40,74 @@
         router.push('/login');
         self.user = new Apiomat.FrontendUser();
       });
+
+      EventBus.$on('error', function (error) {
+        self.flashMessages.push(error);
+      });
+
+      EventBus.$on('clearFlashMessages', function () {
+        self.flashMessages = [];
+      });
     }
   }
 </script>
 
-<style>
+<style scoped>
+  .flash-messages-container {
+    z-index: 100;
+    padding: 2rem 6rem;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .flash-message {
+    align-items: center;
+    display: flex;
+    #flex-direction: row;
+    font-family: 'Comfortaa', sans-serif;
+    background: var(--white);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    border: var(--white) 1px solid;
+    padding: 2rem 1.5rem;
+  }
+
+  .flash-message__text {
+    padding-left: 10px;
+    flex-shrink: 1;
+  }
+
+  .flash-message__icon {
+    font-weight: 800;
+    font-size: 4rem;
+  }
+
+  .flash-message--warning {
+    border-color: var(--warning);
+    color: var(--warning);
+  }
+
+  .flash-message--success {
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .flash-message--error {
+    border-color: var(--error);
+    color: var(--error);
+  }
+
+  .slide-fade-enter-active {
+    transition: all .5s ease;
+  }
+
+  .slide-fade-leave-active {
+    transition: all .6s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+
+  .slide-fade-enter, .slide-fade-leave-to {
+    transform: translateY(40px);
+    opacity: 0;
+  }
 </style>

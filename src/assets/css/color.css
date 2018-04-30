@@ -13,6 +13,9 @@
   /* Transparent */
   --white-50: rgba(255,255,255,.5);
   --white-25: rgba(255,255,255,.25);
+  --success: #1aa41f;
+  --warning: #a48f00;
+  --error: #a4180d;
 }
 
 .u_color--blue {

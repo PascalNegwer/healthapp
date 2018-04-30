@@ -84,7 +84,8 @@ const router = new Router({
 });
 
 function exceptLoggedIn(to, from, next) {
-  let sessionToken = cookie.get('sessionToken');//
+  EventBus.$emit('clearFlashMessages');
+  let sessionToken = cookie.get('sessionToken');
 
   if (sessionToken) {
     let user = new Apiomat.FrontendUser();
@@ -105,6 +106,7 @@ function exceptLoggedIn(to, from, next) {
 }
 
 function loggedInOnly(to, from, next) {
+  EventBus.$emit('clearFlashMessages');
   let sessionToken = cookie.get('sessionToken');
   let user = new Apiomat.FrontendUser();
 
