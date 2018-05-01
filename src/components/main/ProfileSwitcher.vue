@@ -1,7 +1,7 @@
 <template>
     <div class="tiles l_flex l_flex--horizontal">
 
-      <span v-for="profile in profiles" class="tiles__tile" v-bind:class="{'tiles__tile--active' : profile.active}">
+      <span v-for="profile in profiles" class="tiles__tile" v-bind:class="{'tiles__tile--active' : profile.active}" v-on:click="functionHandler(true, profile)">
         {{ profile.name }}
       </span>
 
@@ -35,8 +35,14 @@
             name: 'Standard',
             active: true,
           },
-          { name: 'Nebenjob' },
-          { name: 'Zuhause' }
+          { 
+            name: 'Nebenjob',
+            active: false
+          },
+          { 
+            name: 'Zuhause',
+            active: false,
+          }
         ]
       }
     },
@@ -47,6 +53,18 @@
         } else {
           this.open = true;
         }
+      },
+      toggleActive(profile) {
+        for(let i = 0; i < this.profiles.length; i++) {
+          if(this.profiles[i].active) {
+            this.profiles[i].active = false;
+          }
+        }
+        profile.active = true;
+      },
+      functionHandler(state, profile) {
+        this.toggleDropdown(state);
+        this.toggleActive(profile);
       }
     }
   }
@@ -68,7 +86,7 @@
     width: 100%;
     text-align: center;
     background: var(--white-50);
-    margin: 0 .2rem;
+    margin: 0 .1rem;
     text-transform: uppercase;
     padding: 2rem 1.3rem;
     -ms-word-break: break-all;
@@ -81,8 +99,8 @@
     color: var(--grey);
   }
   .tiles__tile--dropdown {
-    width: calc(25% - .4rem);
-    min-width: calc(25% - .4rem);
+    width: calc(25% - .2rem);
+    min-width: calc(25% - .2rem);
     font-size: 1.8rem;
     position: relative;
   }
@@ -91,7 +109,7 @@
     top: 100%;
     right: 0;
     font-size: 1.4rem;
-    width: calc(200% + .4rem);
+    width: calc(200% + .2rem);
     visibility: hidden;
     opacity: 0;
     transition: opacity .15s ease-in-out, visibility .15s .15s;
