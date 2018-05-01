@@ -1,7 +1,7 @@
 <template>
     <div class="tiles l_flex l_flex--horizontal">
 
-      <span v-for="profile in profiles" class="tiles__tile" v-bind:class="{'tiles__tile--active' : profile.active}">
+      <span v-for="profile in profiles" class="tiles__tile" v-bind:class="{'tiles__tile--active' : profile.active}" v-on:click="functionHandler(true, profile)">
         {{ profile.name }}
       </span>
 
@@ -35,8 +35,14 @@
             name: 'Standard',
             active: true,
           },
-          { name: 'Nebenjob' },
-          { name: 'Zuhause' }
+          { 
+            name: 'Nebenjob',
+            active: false
+          },
+          { 
+            name: 'Zuhause',
+            active: false,
+          }
         ]
       }
     },
@@ -47,6 +53,18 @@
         } else {
           this.open = true;
         }
+      },
+      toggleActive(profile) {
+        for(let i = 0; i < this.profiles.length; i++) {
+          if(this.profiles[i].active) {
+            this.profiles[i].active = false;
+          }
+        }
+        profile.active = true;
+      },
+      functionHandler(state, profile) {
+        this.toggleDropdown(state);
+        this.toggleActive(profile);
       }
     }
   }
