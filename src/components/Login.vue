@@ -39,9 +39,6 @@
         error: new Error(),
       }
     },
-    beforeUpdate: function () {
-      this.loading = false;
-    },
     methods: {
       login() {
         this.loading = true;
@@ -51,6 +48,7 @@
           this.error.message = 'Bitte gib eine gültige E-Mail-Adresse ein.';
           this.error.type = errorTypes.WARNING;
           EventBus.$emit('error', this.error);
+          this.loading = false;
           return;
         }
 
@@ -77,6 +75,7 @@
             EventBus.$emit('error', this.error);
           }
         });
+        this.loading = false;
       }
     }
   }
