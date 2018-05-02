@@ -1,0 +1,13 @@
+.no-mode-translate-enter-active, .no-mode-translate-leave-active {
+  position: absolute;
+  left: 2rem;
+  width: calc(100% - 4rem);
+  backface-visibility: hidden;
+  transition: transform .3s ease-in-out;
+}
+.no-mode-translate-enter {
+  transform: translateX(120%);
+}
+.no-mode-translate-leave-active {
+  transform: translateX(-120%);
+}

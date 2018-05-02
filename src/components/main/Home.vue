@@ -1,7 +1,7 @@
 <template>
     <div class="l_wrapper l_wrapper--small">
-        <h1 class="test">homescreen</h1>
-        <profile-switcher></profile-switcher>
+      <h1>homescreen</h1>
+      <profile-switcher></profile-switcher>
     </div>
 </template>
 
@@ -27,7 +27,5 @@
 </script>
 
 <style scoped>
-  .test {
-    height: 2000px;
-  }
+
 </style>

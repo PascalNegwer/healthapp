@@ -1,5 +1,7 @@
 <template>
-  <router-view v-bind:user="user"></router-view>
+  <transition name="no-mode-translate">
+    <router-view v-bind:user="user"></router-view>
+  </transition>
 </template>
 
 <script>
@@ -23,5 +25,4 @@
 
 <style scoped>
 
-  
 </style>
