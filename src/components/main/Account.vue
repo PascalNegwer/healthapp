@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="l_wrapper l_wrapper--small">
         <h1>account</h1>
     </div>
 </template>
