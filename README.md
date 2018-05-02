@@ -23,3 +23,8 @@ npm install
 npm run build
 npm run watch
 ```
+
+[Apiomat Login](https://epdemo.apiomat.enterprises/site/login)
+
+[Apiomat Doku](https://epdemo.apiomat.enterprises/docs/)
+[Apiomat Video](https://www.youtube.com/channel/UCJk_PHy7ZruxXTM718gDf7Q)
