@@ -11,7 +11,7 @@
 
     <div class="l_flex content" v-bind:class="{'content--hidden': loading}">
       <form class="l_flex" v-on:submit.prevent="save">
-        <input class="inp inp--18" v-model="user.data.userName" placeholder="E-Mail-Adresse" required>
+        <input class="inp inp--18" v-model="user.data.userName" type="email" placeholder="E-Mail-Adresse" required>
         <input class="inp inp--18" v-model="user.data.password" type="password" placeholder="Passwort" required>
         <input class="inp inp--18" v-model="confirmPassword" type="password" placeholder="Passwort wiederholen"
                required>
@@ -41,7 +41,7 @@
         loading: false
       }
     },
-    beforeUpdate: function () {
+    beforeMount: function () {
       this.loading = false;
     },
     methods: {
@@ -53,6 +53,7 @@
           this.error.message = 'Bitte gib eine gültige E-Mail-Adresse ein.';
           this.error.type = errorTypes.WARNING;
           EventBus.$emit('error', this.error);
+          this.loading = false;
           return;
         }
 
@@ -60,6 +61,7 @@
           this.error.message = 'Die eingegebenen Passwörter stimmen nicht überein.';
           this.error.type = errorTypes.WARNING;
           EventBus.$emit('error', this.error);
+          this.loading = false;
           return;
         }
 
@@ -75,7 +77,6 @@
               error.type = errorTypes.SUCCESS;
               EventBus.$emit('error', error);
             }, 1000);
-
           },
           onError: error => {
             switch (error.statusCode) {
@@ -92,6 +93,7 @@
                 console.log(error);
             }
             EventBus.$emit('error', this.error);
+            this.loading = false;
           }
         });
       }

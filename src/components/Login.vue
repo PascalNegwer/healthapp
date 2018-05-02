@@ -11,7 +11,7 @@
 
     <div class="l_flex content" v-bind:class="{'content--hidden': loading}">
       <form class="l_flex" v-on:submit.prevent="login">
-        <input class="inp inp--18" v-model="user.data.userName" placeholder="E-Mail-Adresse" required>
+        <input class="inp inp--18" v-model="user.data.userName" type="email" placeholder="E-Mail-Adresse" required>
         <input class="inp inp--18" v-model="user.data.password" type="password" placeholder="Passwort" required>
         <button class="btn btn--18 u_center" type="submit">Login</button>
       </form>
@@ -38,6 +38,9 @@
         loading: false,
         error: new Error(),
       }
+    },
+    beforeMount: function () {
+      this.loading = false;
     },
     methods: {
       login() {
@@ -73,9 +76,9 @@
                 console.log(error);
             }
             EventBus.$emit('error', this.error);
+            this.loading = false;
           }
         });
-        this.loading = false;
       }
     }
   }
