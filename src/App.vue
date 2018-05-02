@@ -3,8 +3,8 @@
     <div class="flash-messages-container">
       <transition name="slide-fade">
         <div v-for="(flashMessage, index) in flashMessages" class="flash-message"
-             v-bind:class="flashMessage.type" v-on:click="unset(index)">
-          <div class="u_icon--home flash-message__icon"></div>
+             v-bind:class="['flash-message--' + flashMessage.type,  'u_icon--' + flashMessage.type]"
+             v-on:click="unset(index)">
           <b class="flash-message__text">{{ flashMessage.message }}</b>
         </div>
       </transition>
@@ -27,6 +27,7 @@
     },
     methods: {
       unset(index) {
+        console.log(index);
         this.flashMessages.splice(index, 1);
       }
     },
@@ -42,7 +43,11 @@
       });
 
       EventBus.$on('error', function (error) {
-        self.flashMessages.push(error);
+        let index = self.flashMessages.push(error);
+        console.log(index);
+        setTimeout(function () {
+          self.unset(index)
+        }.bind(self), 2000)
       });
 
       EventBus.$on('clearFlashMessages', function () {
@@ -64,7 +69,6 @@
   .flash-message {
     align-items: center;
     display: flex;
-    #flex-direction: row;
     font-family: 'Comfortaa', sans-serif;
     background: var(--white);
     font-size: 1.8rem;
@@ -78,7 +82,7 @@
     flex-shrink: 1;
   }
 
-  .flash-message__icon {
+  .flash-message:before {
     font-weight: 800;
     font-size: 4rem;
   }

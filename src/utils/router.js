@@ -1,6 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import cookie from './cookie.js'
+import Login from '../components/Login.vue'
+import Signup from '../components/Signup.vue'
+import MainWrapper from '../components/MainWrapper.vue'
+import Home from '../components/main/Home.vue'
+import Dashboard from '../components/main/Dashboard.vue'
+import Functions from '../components/main/Functions.vue'
+import Account from '../components/main/Account.vue'
+import Help from '../components/main/Help.vue'
+import Lawstuff from '../components/main/Lawstuff.vue'
 
 Vue.use(Router);
 
@@ -9,72 +18,54 @@ const router = new Router({
     {
       path: '/login',
       name: 'login',
-      component: function (resolve) {
-        require(['../components/Login.vue'], resolve)
-      },
+      component: Login,
       beforeEnter: exceptLoggedIn,
     },
     {
       path: '/signup',
       name: 'signup',
-      component: function (resolve) {
-        require(['../components/Signup.vue'], resolve)
-      },
+      component: Signup,
       beforeEnter: exceptLoggedIn,
     },
     {
       path: '/',
-      component: function (resolve) {
-        require(['../components/MainWrapper.vue'], resolve)
-      },
+      component: MainWrapper,
       beforeEnter: loggedInOnly,
       children: [
         {
           path: '/',
           name: 'home',
-          component: function (resolve) {
-            require(['../components/main/Home.vue'], resolve)
-          },
+          component: Home,
           beforeEnter: loggedInOnly,
         },
         {
           path: '/dashboard',
           name: 'dashboard',
-          component: function (resolve) {
-            require(['../components/main/Dashboard.vue'], resolve)
-          },
+          component: Dashboard,
           beforeEnter: loggedInOnly,
         },
         {
           path: '/functions',
           name: 'functions',
-          component: function (resolve) {
-            require(['../components/main/Functions.vue'], resolve)
-          },
+          component: Functions,
           beforeEnter: loggedInOnly,
         },
         {
           path: '/account',
           name: 'account',
-          component: function (resolve) {
-            require(['../components/main/Account.vue'], resolve)
-          },
+          component: Account,
           beforeEnter: loggedInOnly,
         },
         {
           path: '/help',
           name: 'help',
-          component: function (resolve) {
-            require(['../components/main/Help.vue'], resolve)
-          },
+          component: Help,
           beforeEnter: loggedInOnly,
         },
         {
           path: '/lawstuff',
           name: 'lawstuff',
-          component: function (resolve) {
-            require(['../components/main/Lawstuff.vue'], resolve)
-          },
+          component: Lawstuff,
           beforeEnter: loggedInOnly,
         },
       ]

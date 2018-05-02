@@ -70,6 +70,14 @@
         this.user.save({
           onOk: result => {
             router.push('/');
+
+            setTimeout(function () {
+              let error = new Error();
+              error.message = 'Dein Account wurde erfolgreich registriert';
+              error.type = errorTypes.SUCCESS;
+              EventBus.$emit('error', error);
+            }, 1000);
+
           },
           onError: error => {
             switch (error.statusCode) {
