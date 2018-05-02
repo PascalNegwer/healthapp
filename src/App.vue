@@ -62,8 +62,12 @@
 
 <style scoped>
   .flash-messages-container {
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 100;
-    padding: 2rem 6rem;
+    width: 100% ;
+    padding: 0 2rem;
     position: fixed;
     display: flex;
     flex-direction: column;
