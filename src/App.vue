@@ -27,7 +27,6 @@
     },
     methods: {
       unset(index) {
-        console.log(index);
         this.flashMessages.splice(index, 1);
       }
     },
@@ -43,10 +42,11 @@
       });
 
       EventBus.$on('error', function (error) {
-        let index = self.flashMessages.push(error);
-        console.log(index);
+        self.flashMessages.push(error);
+
         setTimeout(function () {
-          self.unset(index)
+          let index = self.flashMessages.indexOf(error);
+          self.unset(index);
         }.bind(self), 2000)
       });
 
