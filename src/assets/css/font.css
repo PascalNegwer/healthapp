@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'wrkFit';
   src:
-    url('../fonts/wrkFit.ttf?u5ubav') format('truetype'),
-    url('../fonts/wrkFit.woff?u5ubav') format('woff'),
-    url('../fonts/wrkFit.svg?u5ubav#wrkFit') format('svg');
+    url('../fonts/wrkFit.ttf') format('truetype'),
+    url('../fonts/wrkFit.woff') format('woff'),
+    url('../fonts/wrkFit.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
