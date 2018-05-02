@@ -9,8 +9,10 @@
         </div>
       </transition>
     </div>
-    <router-view v-bind:user="user"></router-view>
-    <main-nav></main-nav>
+    <transition name="no-mode-translate-fade">
+      <router-view v-bind:user="user"></router-view>
+    </transition>
+    <main-nav v-if="isMain()"></main-nav>
   </main>
 </template>
 
@@ -124,5 +126,19 @@
   .slide-fade-enter, .slide-fade-leave-to {
     transform: translateY(-40px);
     opacity: 0;
+  }
+
+  .no-mode-translate-fade-enter-active, .no-mode-translate-fade-leave-active {
+    transition: all .3s;
+    position: absolute;
+    left: 2rem;
+    width: calc(100% - 4rem);
+    backface-visibility: hidden;
+  }
+  .no-mode-translate-fade-enter {
+    transform: translateX(120%);
+  }
+  .no-mode-translate-fade-leave-active {
+    transform: translateX(-120%);
   }
 </style>
