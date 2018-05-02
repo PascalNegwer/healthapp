@@ -38,7 +38,7 @@
 .u_icon--edit:before {
   content: "\e904";
 }
-.u_icon--forbidden:before {
+.u_icon--error:before {
   content: "\e905";
 }
 .u_icon--home:before {
