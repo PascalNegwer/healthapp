@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <main class="l_main" v-bind:class="{'l_main--scroll' :isMain()}">
     <div class="flash-messages-container">
       <transition name="slide-fade">
         <div v-for="(flashMessage, index) in flashMessages" class="flash-message"
@@ -10,7 +10,7 @@
       </transition>
     </div>
     <router-view v-bind:user="user"></router-view>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -28,6 +28,9 @@
     methods: {
       unset(index) {
         this.flashMessages.splice(index, 1);
+      },
+      isMain() {
+        return (this.$route.name !== 'signup' && this.$route.name !== 'login');
       }
     },
     mounted: function () {

@@ -1,8 +1,8 @@
 <template>
-    <main class="l_main l_main--scroll">
-      <router-view v-bind:user="user"></router-view>
-      <main-nav></main-nav>
-    </main>
+  <div>
+    <router-view v-bind:user="user"></router-view>
+    <main-nav></main-nav>
+  </div>
 </template>
 
 <script>
@@ -26,5 +26,5 @@
 </script>
 
 <style scoped>
-  
+
 </style>
