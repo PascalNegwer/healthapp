@@ -12,16 +12,13 @@
       <img src="assets/img/logo.svg" class="logo u_center">
 
       <div class="l_flex content" v-bind:class="{'content--hidden': loading}">
-        <div v-if="error.message">
-            {{ error.statusCode }}: {{ error.message }}
-        </div>
         <form class="l_flex" v-on:submit.prevent="save">
-          <input class="inp inp--18" v-model="user.data.userName" type="email" placeholder="E-Mail-Adresse" required>
+          <input class="inp inp--18" v-model="user.data.userName" placeholder="E-Mail-Adresse" required>
           <input class="inp inp--18" v-model="user.data.password" type="password" placeholder="Passwort" required>
-          <input class="inp inp--18" v-model="confirmPassword" type="password" placeholder="Passwort wiederholen">
+          <input class="inp inp--18" v-model="confirmPassword" type="password" placeholder="Passwort wiederholen" required>
           <button class="btn btn--18 u_center" type="submit">Registrieren</button>
         </form>
-        
+
         <router-link to="/login" class="link u_center">Schon registriert?</router-link>
       </div>
     </div>
@@ -31,9 +28,10 @@
 <script>
   import router from '../utils/router.js'
   import validate from '../utils/validate.js'
+  import * as errorTypes from './../classes/ErrorTypes';
 
   export default {
-    beforeCreate: function() {
+    beforeCreate: function () {
       document.documentElement.className = 'u_gradient-background--mixed';
     },
     name: 'signup',
@@ -45,22 +43,25 @@
         loading: false
       }
     },
+    beforeUpdate: function () {
+      this.loading = false;
+    },
     methods: {
       save() {
         this.loading = true;
-        let errorMessage = '';
+        EventBus.$emit('clearFlashMessages');
 
         if (!validate.email(this.user.getUserName())) {
-          errorMessage = 'Keine Valide Email-Adresse';
+          this.error.message = 'Bitte gib eine gültige E-Mail-Adresse ein.';
+          this.error.type = errorTypes.WARNING;
+          EventBus.$emit('error', this.error);
+          return;
         }
 
         if (this.confirmPassword !== this.user.getPassword()) {
-          errorMessage = 'Passwörter stimmen nicht überein';
-        }
-
-        if (errorMessage) {
-          this.error.message = errorMessage;
-          this.loading = false;
+          this.error.message = 'Die eingegebenen Passwörter stimmen nicht überein.';
+          this.error.type = errorTypes.WARNING;
+          EventBus.$emit('error', this.error);
           return;
         }
 
@@ -68,12 +69,31 @@
 
         this.user.save({
           onOk: result => {
-            this.error = new Error();
             router.push('/');
+
+            setTimeout(function () {
+              let error = new Error();
+              error.message = 'Dein Account wurde erfolgreich registriert';
+              error.type = errorTypes.SUCCESS;
+              EventBus.$emit('error', error);
+            }, 1000);
+
           },
           onError: error => {
-            this.error = error;
-            this.loading = false;
+            switch (error.statusCode) {
+              case 0:
+              case 615:
+                this.error.message = 'Oops! Scheint als hättest du keine Internetverbindung.';
+                this.error.type = errorTypes.WARNING;
+                break;
+              case 830:
+                this.error.message = 'Es existiert schon ein Account mit dieser E-Mail-Adresse.';
+                this.error.type = errorTypes.WARNING;
+                break;
+              default:
+                console.log(error);
+            }
+            EventBus.$emit('error', this.error);
           }
         });
       }
@@ -86,33 +106,41 @@
     width: 40%;
     margin-bottom: 8vh;
   }
+
   .btn {
     min-width: 65%;
     margin-top: 8vh;
     margin-bottom: 8vh;
   }
+
   .inp {
     margin: 1rem 0;
   }
+
   .l_wrapper {
     justify-content: flex-start;
   }
+
   .link {
     font-size: 1.8rem;
     line-height: 2;
     transition: color .15s ease-in-out;
   }
+
   .link:active {
     opacity: .5;
   }
+
   .content {
     opacity: 1;
     transition: opacity .15s ease-in-out, visibility .15s ease-in-out .15s;
   }
+
   .content--hidden {
     opacity: 0;
     visibility: hidden;
   }
+
   .loader {
     top: 50%;
     left: 50%;
@@ -121,6 +149,7 @@
     visibility: hidden;
     transition: opacity .15s ease-in-out;
   }
+
   .loader--active {
     visibility: visible;
     opacity: 1;
