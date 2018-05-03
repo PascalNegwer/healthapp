@@ -7,6 +7,8 @@
           <span class="timer__hours">00</span>
           :
           <span class="timer__minutes">00</span>
+          :
+          <span class="timer__seconds">00</span>
         </p>
       </span>
       <span class="timer__count-wrapper">
@@ -15,6 +17,8 @@
           <span class="timer__hours">00</span>
           :
           <span class="timer__minutes">00</span>
+          :
+          <span class="timer__seconds">00</span>
         </p>
       </span>
       <span class="timer__count-wrapper">
@@ -23,6 +27,8 @@
           <span class="timer__hours">00</span>
           :
           <span class="timer__minutes">00</span>
+          :
+          <span class="timer__seconds">00</span>
         </p>
       </span>
     </section>
