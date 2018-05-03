@@ -11,11 +11,19 @@
       </span>
       <span class="timer__count-wrapper">
         <h2 class="timer__label">Aktuelle Arbeits-/Pausenzeit</h2>
-        <p class="timer__count">00:00</p>
+        <p class="timer__count">
+          <span class="timer__hours">00</span>
+          :
+          <span class="timer__minutes">00</span>
+        </p>
       </span>
       <span class="timer__count-wrapper">
         <h2 class="timer__label">Gesamte Pausenzeit</h2>
-        <p class="timer__count">00:00</p>
+        <p class="timer__count">
+          <span class="timer__hours">00</span>
+          :
+          <span class="timer__minutes">00</span>
+        </p>
       </span>
     </section>
 
