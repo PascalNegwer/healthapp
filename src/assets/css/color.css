@@ -108,10 +108,3 @@
 .u_bg--white-25 {
   background: var(--white-25);
 }
-
-[class*='--lightgrey'] {
-  --primary-color: var(--lightgrey);
-}
-[class*='_lightgrey'] {
-  --secondary-color: var(--lightgrey);
-}
