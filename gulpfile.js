@@ -27,6 +27,7 @@ gulp.task('watch', ['build:webpack', 'build:move', 'build:css', 'move:images', '
   gulp.watch(filesToMove, ['build:move']);
 
   gulp.watch(src + '/App.vue', ['build:webpack']);
+  gulp.watch(src + '/main.js', ['build:webpack']);
   gulp.watch(src + '/components/**/*', ['build:webpack']);
   gulp.watch(src + '/utils/**/*', ['build:webpack']);
 

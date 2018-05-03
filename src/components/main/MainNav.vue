@@ -52,7 +52,7 @@
         </span>
 
         <span class="nav__item nav__item--dropdown">
-          <logout v-bind:user="user"></logout>
+          <logout></logout>
         </span>
 
       </nav>
@@ -72,7 +72,6 @@
     components: {
       Logout,
     },
-    props: ['user'],
     data() {
       return {
         open: false,

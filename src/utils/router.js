@@ -79,11 +79,10 @@ function exceptLoggedIn(to, from, next) {
   let sessionToken = cookie.get('sessionToken');
 
   if (sessionToken) {
-    let user = new Apiomat.FrontendUser();
-    user.setSessionToken(sessionToken);
-    Apiomat.Datastore.configureWithUserSessionToken(user);
+    Vue.prototype.$user.setSessionToken(sessionToken);
+    Apiomat.Datastore.configureWithUserSessionToken(Vue.prototype.$user);
 
-    user.loadMe({
+    Vue.prototype.$user.loadMe({
       onOk: result => {
         next(false);
       },
@@ -99,20 +98,19 @@ function exceptLoggedIn(to, from, next) {
 function loggedInOnly(to, from, next) {
   EventBus.$emit('clearFlashMessages');
   let sessionToken = cookie.get('sessionToken');
-  let user = new Apiomat.FrontendUser();
 
   Apiomat.Datastore.setCachingStrategy(Apiomat.AOMCacheStrategy.CACHE_ELSE_NETWORK);
   Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.FrontendUser, true);
 
   if (!sessionToken) {
     try {
-      user.initDatastoreIfNeeded();
+      Vue.prototype.$user.initDatastoreIfNeeded();
     } catch (error) {
       next(false);
       return;
     }
 
-    user.requestSessionToken(true, {
+    Vue.prototype.$user.requestSessionToken(true, {
       onOk: result => {
         cookie.set('sessionToken', result['sessionToken']);
         next();
@@ -122,9 +120,9 @@ function loggedInOnly(to, from, next) {
       }
     });
   } else {
-    user.setSessionToken(sessionToken);
+    Vue.prototype.$user.setSessionToken(sessionToken);
     Apiomat.Datastore.configureWithSessionToken(sessionToken);
-    user.loadMe({
+    Vue.prototype.$user.loadMe({
       onOk: result => {
         next();
       },

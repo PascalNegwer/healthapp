@@ -12,8 +12,8 @@
 
       <div class="l_flex content" v-bind:class="{'content--hidden': loading}">
         <form class="l_flex" v-on:submit.prevent="login">
-          <input class="inp inp--18" v-model="user.data.userName" type="email" placeholder="E-Mail-Adresse" required>
-          <input class="inp inp--18" v-model="user.data.password" type="password" placeholder="Passwort" required>
+          <input class="inp inp--18" v-model="$user.data.userName" type="email" placeholder="E-Mail-Adresse" required>
+          <input class="inp inp--18" v-model="$user.data.password" type="password" placeholder="Passwort" required>
           <button class="btn btn--18 u_center" type="submit">Login</button>
         </form>
 
@@ -34,7 +34,6 @@
       document.documentElement.className = 'u_gradient-background--mixed';
     },
     name: 'login',
-    props: ['user'],
     data() {
       return {
         loading: false,
@@ -49,7 +48,7 @@
         this.loading = true;
         EventBus.$emit('clearFlashMessages');
 
-        if (!validate.email(this.user.getUserName())) {
+        if (!validate.email(this.$user.getUserName())) {
           this.error.message = 'Bitte gib eine gültige E-Mail-Adresse ein.';
           this.error.type = errorTypes.WARNING;
           EventBus.$emit('error', this.error);
@@ -58,9 +57,9 @@
         }
 
         cookie.expireNow('sessionToken');
-        Apiomat.Datastore.configureWithCredentials(this.user);
+        Apiomat.Datastore.configureWithCredentials(this.$user);
 
-        this.user.loadMe({
+        this.$user.loadMe({
           onOk: result => {
             router.push('/');
           },

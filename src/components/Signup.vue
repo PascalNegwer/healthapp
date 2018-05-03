@@ -12,8 +12,8 @@
 
       <div class="l_flex content" v-bind:class="{'content--hidden': loading}">
         <form class="l_flex" v-on:submit.prevent="save">
-          <input class="inp inp--18" v-model="user.data.userName" type="email" placeholder="E-Mail-Adresse" required>
-          <input class="inp inp--18" v-model="user.data.password" type="password" placeholder="Passwort" required>
+          <input class="inp inp--18" v-model="$user.data.userName" type="email" placeholder="E-Mail-Adresse" required>
+          <input class="inp inp--18" v-model="$user.data.password" type="password" placeholder="Passwort" required>
           <input class="inp inp--18" v-model="confirmPassword" type="password" placeholder="Passwort wiederholen"
                  required>
           <button class="btn btn--18 u_center" type="submit">Registrieren</button>
@@ -35,7 +35,6 @@
       document.documentElement.className = 'u_gradient-background--mixed';
     },
     name: 'signup',
-    props: ['user'],
     data() {
       return {
         confirmPassword: '',
@@ -51,7 +50,7 @@
         this.loading = true;
         EventBus.$emit('clearFlashMessages');
 
-        if (!validate.email(this.user.getUserName())) {
+        if (!validate.email(this.$user.getUserName())) {
           this.error.message = 'Bitte gib eine gültige E-Mail-Adresse ein.';
           this.error.type = errorTypes.WARNING;
           EventBus.$emit('error', this.error);
@@ -59,7 +58,7 @@
           return;
         }
 
-        if (this.confirmPassword !== this.user.getPassword()) {
+        if (this.confirmPassword !== this.$user.getPassword()) {
           this.error.message = 'Die eingegebenen Passwörter stimmen nicht überein.';
           this.error.type = errorTypes.WARNING;
           EventBus.$emit('error', this.error);
@@ -67,9 +66,9 @@
           return;
         }
 
-        Apiomat.Datastore.configureWithCredentials(this.user);
+        Apiomat.Datastore.configureWithCredentials(this.$user);
 
-        this.user.save({
+        this.$user.save({
           onOk: result => {
             router.push('/');
 
