@@ -1,7 +1,7 @@
 .no-mode-translate-enter-active, .no-mode-translate-leave-active {
   position: absolute;
-  left: 2rem;
-  width: calc(100% - 4rem);
+  width: 100%;
+  height: 100%;
   backface-visibility: hidden;
   transition: transform .3s ease-in-out;
 }
@@ -10,4 +10,21 @@
 }
 .no-mode-translate-leave-active {
   transform: translateX(-120%);
+}
+
+.turn-enter-active, .turn-leave-active {
+  backface-visibility: hidden;
+}
+.turn-enter-active {
+  display: none;
+  transition: transform .15s ease-in-out;
+}
+.turn-leave-active {
+  transition: transform .15s ease-in-out;
+}
+.turn-enter {
+  transform: rotate3d(1,0,0,90deg);
+}
+.turn-leave-active {
+  transform: rotate3d(1,0,0,-90deg);
 }

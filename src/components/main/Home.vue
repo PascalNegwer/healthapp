@@ -1,12 +1,13 @@
 <template>
-    <div class="l_wrapper l_wrapper--small">
-      <h1>homescreen</h1>
-      <profile-switcher></profile-switcher>
+    <div class="l_wrapper l_wrapper--small l_flex">
+      <timer></timer>
+      <!--<profile-switcher></profile-switcher>-->
     </div>
 </template>
 
 <script>
   import ProfileSwitcher from './ProfileSwitcher.vue';
+  import Timer from './Timer.vue';
 
   export default {
     beforeCreate: function() {
@@ -15,12 +16,14 @@
     name: 'home',
     components: {
       ProfileSwitcher,
+      Timer,
     },
     data() {
       return {
       }
     },
     methods: {
+      
     }
   }
 </script>
