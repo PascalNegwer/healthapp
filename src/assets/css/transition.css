@@ -16,11 +16,16 @@
   position: absolute;
   width: 100%;
   backface-visibility: hidden;
-  transition: transform .3s ease-in-out;
 }
-.turn-enter {
-  transform: rotateX(90deg);
+.turn-enter-active {
+  transition: transform .15s ease-in-out .15s;
 }
 .turn-leave-active {
-  transform: rotateX(-90deg);
+  transition: transform .15s ease-in-out;
+}
+.turn-enter {
+  transform: rotate3d(1,0,0,90deg);
+}
+.turn-leave-active {
+  transform: rotate3d(1,0,0,-90deg);
 }

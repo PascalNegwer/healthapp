@@ -34,25 +34,28 @@
     </section>
 
     <transition name="turn">
-      <section v-if="toggle" key="single" class="timer__button-container">
-        <div class="timer__button-wrapper">
-          <div class="timer__button btn btn--18 btn--round">
-            <p>Start</p>
-          </div>
-        </div>
-      </section>
-      <section v-else key="double" class="timer__button-container">
+
+      <section v-if="running" key="double" class="timer__button-container">
         <div class="timer__button-wrapper timer__button-wrapper--small">
           <div class="timer__button btn btn--18 btn--round">
             <p>Pause</p>
           </div>
         </div>
         <div class="timer__button-wrapper timer__button-wrapper--small">
-          <div class="timer__button btn btn--18 btn--round">
+          <div class="timer__button btn btn--18 btn--round" v-on:click="stop()">
             <p>Stop</p>
           </div>
         </div>
       </section>
+
+      <section v-else key="single" class="timer__button-container">
+        <div class="timer__button-wrapper" >
+          <div class="timer__button btn btn--18 btn--round" v-on:click="start()">
+            <p>Start</p>
+          </div>
+        </div>
+      </section>
+
     </transition>
   </div>
 </template>
@@ -64,12 +67,15 @@
     props: [],
     data() {
       return {
-        toggle: true,
+        running: false,
       }
     },
     methods: {
       start() {
-
+        this.running = true;
+      },
+      stop() {
+        this.running = false;
       },
       saveData() {
 
