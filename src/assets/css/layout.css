@@ -1,23 +1,24 @@
 .l_main {
-  padding: 4rem 2rem;
-  min-height: 100%;
+  margin: 2rem 2rem;
+  height: calc(100% - 4rem);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  position: relative;
+  position: fixed;
+  width: calc(100% - 4rem);
   overflow-x: hidden;
 }
 .l_main--scroll {
-  min-height: auto;
-  height: calc(100% - 9.4rem);
-  padding-bottom: 0;
-  margin-bottom: 9.4rem;
-  overflow-y: scroll;
+  height: calc(100% - 11.7rem);
+  margin: 2rem 2rem 9.7rem 2rem;
 }
 
 .l_wrapper {
+  flex-grow: 1;
   padding-left: 4rem;
   padding-right: 4rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 .l_wrapper--medium {
   padding-left: 2rem;
@@ -36,4 +37,8 @@
 
 .l_flex--horizontal {
   flex-direction: row;
+}
+
+.l_grow {
+  flex-grow: 1;
 }

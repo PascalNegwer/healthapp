@@ -1,6 +1,5 @@
 <template>
-    <div class="l_wrapper l_wrapper--small">
-      <h1>homescreen</h1>
+    <div class="l_wrapper l_wrapper--small l_flex">
       <timer></timer>
       <!--<profile-switcher></profile-switcher>-->
     </div>
