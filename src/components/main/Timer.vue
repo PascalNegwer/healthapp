@@ -33,13 +33,27 @@
       </span>
     </section>
 
-    <section class="timer__button-container">
-      <div class="timer__button">Start</div>
-      <span class="timer__button-wrapper">
-        <div class="timer__button">Pause</div>
-        <div class="timer__button">Stop</div>
-      </span>
-    </section>
+    <transition name="turn">
+      <section v-if="toggle" key="single" class="timer__button-container">
+        <div class="timer__button-wrapper">
+          <div class="timer__button btn btn--18 btn--round">
+            <p>Start</p>
+          </div>
+        </div>
+      </section>
+      <section v-else key="double" class="timer__button-container">
+        <div class="timer__button-wrapper timer__button-wrapper--small">
+          <div class="timer__button btn btn--18 btn--round">
+            <p>Pause</p>
+          </div>
+        </div>
+        <div class="timer__button-wrapper timer__button-wrapper--small">
+          <div class="timer__button btn btn--18 btn--round">
+            <p>Stop</p>
+          </div>
+        </div>
+      </section>
+    </transition>
   </div>
 </template>
 
@@ -50,7 +64,7 @@
     props: [],
     data() {
       return {
-      
+        toggle: true,
       }
     },
     methods: {
@@ -71,5 +85,28 @@
 </script>
 
 <style scoped>
-
+  .timer {
+    position: relative;
+  }
+  .timer__button-container {
+    display: flex;
+    justify-content: center;
+  }
+  .timer__button-wrapper {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .timer__button-wrapper--small {
+    width: 40%;
+    display: block;
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+  .timer__button {
+    background: var(--white-25);
+  }
+  .timer__button:active {
+    background: var(--primary-color);
+  }
 </style>

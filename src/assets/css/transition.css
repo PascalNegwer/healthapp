@@ -11,3 +11,16 @@
 .no-mode-translate-leave-active {
   transform: translateX(-120%);
 }
+
+.turn-enter-active, .turn-leave-active {
+  position: absolute;
+  width: 100%;
+  backface-visibility: hidden;
+  transition: transform .3s ease-in-out;
+}
+.turn-enter {
+  transform: rotateX(90deg);
+}
+.turn-leave-active {
+  transform: rotateX(-90deg);
+}
