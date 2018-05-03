@@ -24,5 +24,9 @@
     font-size: 1.6rem;
     color: #eee;
     line-height: 1.2;
-
+}
+.description--inputbox {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 1.4rem;
+    color: #eeeeee;
 }
