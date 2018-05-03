@@ -1,5 +1,5 @@
 <template>
-  <main class="l_main" v-bind:class="{'l_main--scroll' :isMain()}">
+  <main class="l_main" v-bind:class="{'l_main--w-nav' :isMain()}">
     <div class="flash-messages-container">
       <transition name="slide-fade">
         <div v-for="(flashMessage, index) in flashMessages" class="flash-message"

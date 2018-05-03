@@ -8,7 +8,7 @@
   width: calc(100% - 4rem);
   overflow-x: hidden;
 }
-.l_main--scroll {
+.l_main--w-nav {
   height: calc(100% - 11.7rem);
   margin: 2rem 2rem 9.7rem 2rem;
 }
