@@ -7,12 +7,12 @@ Vue.use(VeeValidate);
 //Vue.config.productionTip = false;
 
 window.EventBus = new Vue();
+Vue.prototype.$user = new Apiomat.FrontendUser();
 
 new Vue({
   router,
   render: h => h(App),
 }).$mount('#app');
-
 
 (function () {
   'use strict';

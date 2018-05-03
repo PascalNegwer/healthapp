@@ -19,7 +19,6 @@
       ProfileSwitcher,
       Timer,
     },
-    props: [],
     data() {
       return {
       }

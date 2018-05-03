@@ -1,6 +1,6 @@
 <template>
   <transition name="no-mode-translate">
-    <router-view v-bind:user="user"></router-view>
+    <router-view></router-view>
   </transition>
 </template>
 
@@ -15,7 +15,6 @@
   export default {
     name: 'mainWrapper',
     components: {Home, Dashboard, Functions, Account, Help, Lawstuff},
-    props: ['user'],
     data() {
       return {}
     },
