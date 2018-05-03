@@ -2,7 +2,7 @@
     <div class="l_wrapper l_wrapper--small">
       <h1>homescreen</h1>
       <timer></timer>
-      <profile-switcher></profile-switcher>
+      <!--<profile-switcher></profile-switcher>-->
     </div>
 </template>
 
