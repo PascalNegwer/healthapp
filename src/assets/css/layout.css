@@ -3,7 +3,9 @@
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  position: relative;
+  overflow-x: hidden;
 }
 .l_main--scroll {
   min-height: auto;
@@ -11,7 +13,6 @@
   padding-bottom: 0;
   margin-bottom: 9.4rem;
   overflow-y: scroll;
-  justify-content: flex-start;
 }
 
 .l_wrapper {

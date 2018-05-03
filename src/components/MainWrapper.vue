@@ -1,12 +1,10 @@
 <template>
-  <div>
+  <transition name="no-mode-translate">
     <router-view v-bind:user="user"></router-view>
-    <main-nav></main-nav>
-  </div>
+  </transition>
 </template>
 
 <script>
-  import MainNav from './main/MainNav.vue';
   import Home from './main/Home.vue';
   import Dashboard from './main/Dashboard.vue';
   import Functions from './main/Functions.vue';
@@ -16,7 +14,7 @@
 
   export default {
     name: 'mainWrapper',
-    components: {MainNav, Home, Dashboard, Functions, Account, Help, Lawstuff},
+    components: {Home, Dashboard, Functions, Account, Help, Lawstuff},
     props: ['user'],
     data() {
       return {}

@@ -10,15 +10,18 @@
       </transition>
     </div>
     <router-view v-bind:user="user"></router-view>
+    <main-nav v-if="isMain()"></main-nav>
   </main>
 </template>
 
 <script>
+  import MainNav from './components/main/MainNav.vue';
   import cookie from './utils/cookie.js'
   import router from './utils/router.js'
 
   export default {
     name: 'App',
+    components: {MainNav},
     data() {
       return {
         user: new Apiomat.FrontendUser(),
