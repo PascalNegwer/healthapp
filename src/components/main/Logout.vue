@@ -8,7 +8,6 @@
 <script>
   export default {
     name: "logout",
-    props: ['user'],
     methods: {
       logout() {
         EventBus.$emit('loggedOut');

@@ -16,7 +16,6 @@
     components: {
       ProfileSwitcher,
     },
-    props: [],
     data() {
       return {
       }

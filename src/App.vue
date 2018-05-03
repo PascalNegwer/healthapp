@@ -9,7 +9,7 @@
         </div>
       </transition>
     </div>
-    <router-view v-bind:user="user"></router-view>
+    <router-view></router-view>
     <main-nav v-if="isMain()"></main-nav>
   </main>
 </template>
@@ -24,7 +24,6 @@
     components: {MainNav},
     data() {
       return {
-        user: new Apiomat.FrontendUser(),
         flashMessages: []
       }
     },
@@ -44,7 +43,7 @@
         cookie.expireNow('sessionToken');
         localStorage.clear();
         router.push('/login');
-        self.user = new Apiomat.FrontendUser();
+        self.$user = new Apiomat.FrontendUser();
       });
 
       EventBus.$on('error', function (error) {
