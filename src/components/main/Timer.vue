@@ -71,7 +71,7 @@
 
   export default {
     beforeMount: function() {
-      getStatus();
+      
     },
     name: 'timer',
     props: [],
