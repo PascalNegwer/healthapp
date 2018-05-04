@@ -6,9 +6,9 @@
       <form class="l_flex"  v-on:submit.prevent="save">
         <p class="label">Name</p>
         <input class="inp" v-model="$user.data.lastName" placeholder="Name">
-        <p class="description--inputbox">Vorname</p>
+        <p class="label">Vorname</p>
         <input class="inp" v-model="$user.data.firstName" placeholder="Vorname">
-        <p class="description--inputbox">E-Mail</p>
+        <p class="label">E-Mail</p>
         <input class="inp" v-model="$user.data.userName" type="email" placeholder="E-Mail-Adresse" readonly>
         <button class="btn" type="submit">Speichern</button>
       </form>
