@@ -5,12 +5,12 @@
       <h2 class="headline">Accountdaten</h2>
       <form class="l_flex">
         <p class="label">Name</p>
-        <input class="inp inp--18" placeholder="Name" readonly>
+        <input class="inp" placeholder="Name" readonly>
         <p class="label">Vorname</p>
-        <input class="inp inp--18" placeholder="Vorname" readonly>
+        <input class="inp" placeholder="Vorname" readonly>
         <p class="label">E-Mail</p>
-        <input class="inp inp--18" v-model="$user.data.userName" type="email" placeholder="E-Mail-Adresse" readonly>
-        <button class="btn btn--18" type="submit">Speichern</button>
+        <input class="inp" v-model="$user.data.userName" type="email" placeholder="E-Mail-Adresse" readonly>
+        <button class="btn" type="submit">Speichern</button>
       </form>
     </section>
     <span class="l_divider"></span>
@@ -35,7 +35,6 @@
 
 <style scoped>
     .btn {
-        width: 65%;
         margin-top: 2.4rem;
         margin-left: auto;
     }
