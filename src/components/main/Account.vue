@@ -1,18 +1,20 @@
 <template>
-    <div class="l_wrapper l_wrapper--small">
-        <div class="l_flex content">
-            <h1 class="headline headline--h1">Accountdaten</h1>
-            <form class="l_flex" v-on:submit.prevent="save">
-                <p class="description--inputbox">Name</p>
-                <input class="inp inp--18" v-model="$user.data.lastName" placeholder="Name">
-                <p class="description--inputbox">Vorname</p>
-                <input class="inp inp--18" v-model="$user.data.firstName" placeholder="Vorname">
-                <p class="description--inputbox">E-Mail</p>
-                <input class="inp inp--18" v-model="$user.data.userName" type="email" placeholder="E-Mail-Adresse" readonly>
-                <button class="btn btn--18" type="submit">Speichern</button>
-            </form>
-        </div>
-    </div>
+  <div class="l_wrapper l_wrapper--small">
+    <h1 class="headline headline--main">Account</h1>
+    <section class="l_section">
+      <h2 class="headline">Accountdaten</h2>
+      <form class="l_flex">
+        <p class="label">Name</p>
+        <input class="inp" v-model="$user.data.lastName" placeholder="Name">
+        <p class="description--inputbox">Vorname</p>
+        <input class="inp" v-model="$user.data.firstName" placeholder="Vorname">
+        <p class="description--inputbox">E-Mail</p>
+        <input class="inp" v-model="$user.data.userName" type="email" placeholder="E-Mail-Adresse" readonly>
+        <button class="btn" type="submit">Speichern</button>
+      </form>
+    </section>
+    <span class="l_divider"></span>
+  </div>
 </template>
 
 <script>
@@ -61,17 +63,16 @@
 
 <style scoped>
     .btn {
-        width: 65%;
-        margin-top: 4vh;
-        margin-bottom: 4vh;
+        margin-top: 2.4rem;
         margin-left: auto;
     }
 
     .inp {
         margin: 1rem 0 2rem 0;
     }
-
-    .headline {
-        margin-bottom: 2.5rem;
+    .label {
+      font-weight: 300;
+      color: var(--lightgrey);
+      font-size: 1.4rem;
     }
 </style>
