@@ -8,10 +8,10 @@
         </svg>
       </div>
 
-      <img src="assets/img/logo.svg" class="logo u_center">
+      <img src="assets/img/logo.svg" class="logo u_center l_grow">
 
-      <div class="l_flex content" v-bind:class="{'content--hidden': loading}">
-        <form class="l_flex" v-on:submit.prevent="save">
+      <div class="l_flex content l_grow" v-bind:class="{'content--hidden': loading}">
+        <form class="l_flex l_grow" v-on:submit.prevent="save">
           <input class="inp inp--18" v-model="$user.data.userName" type="email" placeholder="E-Mail-Adresse" required>
           <input class="inp inp--18" v-model="$user.data.password" type="password" placeholder="Passwort" required>
           <input class="inp inp--18" v-model="confirmPassword" type="password" placeholder="Passwort wiederholen"
@@ -19,7 +19,7 @@
           <button class="btn btn--18 u_center" type="submit">Registrieren</button>
         </form>
 
-        <router-link to="/login" class="link u_center">Schon registriert?</router-link>
+        <router-link to="/login" class="link u_center l_flex l_grow">Schon registriert?</router-link>
       </div>
     </div>
   </transition>
@@ -95,13 +95,11 @@
 <style scoped>
   .logo {
     width: 40%;
-    margin-bottom: 8vh;
   }
 
   .btn {
     min-width: 65%;
-    margin-top: 8vh;
-    margin-bottom: 8vh;
+    margin-top: auto;
   }
 
   .inp {
@@ -116,6 +114,7 @@
     font-size: 1.8rem;
     line-height: 2;
     transition: color .15s ease-in-out;
+    justify-content: flex-end;
   }
 
   .link:active {
@@ -123,6 +122,7 @@
   }
 
   .content {
+    justify-content: center;
     opacity: 1;
     transition: opacity .15s ease-in-out, visibility .15s ease-in-out .15s;
   }

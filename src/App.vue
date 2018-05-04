@@ -1,17 +1,19 @@
 <template>
-  <main class="l_main" v-bind:class="{'l_main--scroll' :isMain()}">
-    <div class="flash-messages-container">
-      <transition name="slide-fade">
-        <div v-for="(flashMessage, index) in flashMessages" class="flash-message"
-             v-bind:class="['flash-message--' + flashMessage.type,  'u_icon--' + flashMessage.type]"
-             v-on:click="unset(index)">
-          <p class="flash-message__text">{{ flashMessage.message }}</p>
-        </div>
-      </transition>
-    </div>
-    <router-view></router-view>
+  <body>
+    <main class="l_main" v-bind:class="{'l_main--w-nav' :isMain()}">
+      <div class="flash-messages-container">
+        <transition name="slide-fade">
+          <div v-for="(flashMessage, index) in flashMessages" class="flash-message"
+               v-bind:class="['flash-message--' + flashMessage.type,  'u_icon--' + flashMessage.type]"
+               v-on:click="unset(index)">
+            <p class="flash-message__text">{{ flashMessage.message }}</p>
+          </div>
+        </transition>
+      </div>
+      <router-view></router-view>
+    </main>
     <main-nav v-if="isMain()"></main-nav>
-  </main>
+  </body>
 </template>
 
 <script>
