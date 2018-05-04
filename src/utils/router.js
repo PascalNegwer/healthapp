@@ -99,7 +99,7 @@ function loggedInOnly(to, from, next) {
   EventBus.$emit('clearFlashMessages');
   let sessionToken = cookie.get('sessionToken');
 
-  Apiomat.Datastore.setCachingStrategy(Apiomat.AOMCacheStrategy.CACHE_ELSE_NETWORK);
+  Apiomat.Datastore.setCachingStrategy(Apiomat.AOMCacheStrategy.NETWORK_ELSE_CACHE);
   Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.FrontendUser, true);
 
   if (!sessionToken) {
