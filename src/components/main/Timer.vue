@@ -12,7 +12,8 @@
         </p>
       </div>
       <div class="timer__count-wrapper">
-        <h2 class="timer__label">Aktuelle Arbeits-/Pausenzeit</h2>
+        <h2  v-if="paused" class="timer__label">Aktuelle Pausenzeit</h2>
+        <h2  v-else class="timer__label">Aktuelle Arbeitszeit</h2>
         <p class="timer__count timer__count--small">
           <span class="timer__hours">00</span>
           :
@@ -84,6 +85,7 @@
       },
       stop() {
         this.running = false;
+        this.paused = false;
       },
       pause() {
         this.paused = true;
