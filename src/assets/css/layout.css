@@ -6,7 +6,7 @@
   justify-content: flex-start;
   position: fixed;
   width: calc(100% - 4rem);
-  overflow-x: hidden;
+  overflow: hidden;
   z-index: 1;
 }
 .l_main--w-nav {
@@ -19,7 +19,8 @@
   padding-left: 4rem;
   padding-right: 4rem;
   padding-top: 2rem;
-  padding-bottom: 2rem;
+  height: 100%;
+  overflow-y: auto;
 }
 .l_wrapper--medium {
   padding-left: 2rem;
