@@ -36,11 +36,18 @@
     <transition name="turn" mode="out-in">
 
       <section v-if="running" key="double" class="timer__button-container">
-        <div class="timer__button-wrapper timer__button-wrapper--small">
-          <div class="timer__button btn btn--18 btn--round">
-            <p>Pause</p>
+        <transition name="turn" mode="out-in">
+          <div v-if="paused" key="resume" class="timer__button-wrapper timer__button-wrapper--small">
+            <div class="timer__button btn btn--18 btn--round" v-on:click="resume()">
+              <p>Weiter</p>
+            </div>
           </div>
-        </div>
+          <div v-else key="pause" class="timer__button-wrapper timer__button-wrapper--small">
+            <div class="timer__button btn btn--18 btn--round" v-on:click="pause()">
+              <p>Pause</p>
+            </div>
+          </div>
+        </transition>
         <div class="timer__button-wrapper timer__button-wrapper--small">
           <div class="timer__button btn btn--18 btn--round" v-on:click="stop()">
             <p>Stop</p>
@@ -68,6 +75,7 @@
     data() {
       return {
         running: false,
+        paused: false,
       }
     },
     methods: {
@@ -76,6 +84,12 @@
       },
       stop() {
         this.running = false;
+      },
+      pause() {
+        this.paused = true;
+      },
+      resume() {
+        this.paused = false;
       },
       saveData() {
 

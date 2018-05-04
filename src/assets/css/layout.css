@@ -7,6 +7,7 @@
   position: fixed;
   width: calc(100% - 4rem);
   overflow-x: hidden;
+  z-index: 1;
 }
 .l_main--w-nav {
   height: calc(100% - 11.7rem);
