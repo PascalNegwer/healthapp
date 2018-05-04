@@ -70,6 +70,9 @@
 <script>
 
   export default {
+    beforeMount: function() {
+      getStatus();
+    },
     name: 'timer',
     props: [],
     data() {
@@ -79,6 +82,9 @@
       }
     },
     methods: {
+      getStatus() {
+
+      },
       start() {
         this.running = true;
       },
