@@ -1,32 +1,28 @@
 .headline {
-    font-family: 'Comfortaa', sans-serif;
-    color: #eee;
+  font-family: 'Comfortaa', sans-serif;
+  font-weight: 300;
+  color: var(--lightgrey);
+  font-size: 1.8rem;
+  margin-bottom: 1.8rem;
+}
+.headline--main {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  text-align: center;
+}
+.headline--center {
+  text-align: center;
 }
 
-.headline--h1 {
-    font-size: 2.0rem;
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 5px;
-}
-
-.headline--h3 {
-    font-size: 1.8rem;
-    margin-top: 10px;
-}
-
-.paragraph--strong {
-    font-weight: bolder;
-    margin-bottom: 5px;
-}
 .paragraph {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.6rem;
-    color: #eee;
-    line-height: 1.2;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--lightgrey);
+  line-height: 1.2;
+  margin-bottom: 1.2rem;
 }
-.description--inputbox {
-    font-family: 'Comfortaa', sans-serif;
-    font-size: 1.6rem;
-    color: #eeeeee;
+.paragraph--strong {
+  margin-top: 1.8rem;
+  font-weight: 400;
 }
