@@ -46,8 +46,8 @@
         self.$user = new Apiomat.FrontendUser();
       });
 
-      EventBus.$on('error', function (error) {
-        self.flashMessages.push(error);
+      EventBus.$on('newMessage', function (message) {
+        self.flashMessages.push(message);
 
         setTimeout(function () {
           let index = self.flashMessages.indexOf(error);
