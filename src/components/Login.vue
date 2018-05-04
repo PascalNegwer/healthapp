@@ -27,7 +27,7 @@
   import router from '../utils/router.js'
   import validate from '../utils/validate.js'
   import cookie from '../utils/cookie.js'
-  import * as errorTypes from './../classes/ErrorTypes';
+  import * as messageTypes from './../classes/MessageTypes';
 
   export default {
     beforeCreate: function () {
@@ -37,7 +37,6 @@
     data() {
       return {
         loading: false,
-        error: new Error(),
       }
     },
     beforeMount: function () {
@@ -49,9 +48,7 @@
         EventBus.$emit('clearFlashMessages');
 
         if (!validate.email(this.$user.getUserName())) {
-          this.error.message = 'Bitte gib eine gültige E-Mail-Adresse ein.';
-          this.error.type = errorTypes.WARNING;
-          EventBus.$emit('error', this.error);
+          EventBus.$emit('newMessage', {message: 'Bitte gib eine gültige E-Mail-Adresse ein.', type: messageTypes.WARNING});
           this.loading = false;
           return;
         }
@@ -66,17 +63,14 @@
           onError: error => {
             switch (error.statusCode) {
               case 615:
-                this.error.message = 'Oops! Scheint als hättest du keine Internetverbindung.';
-                this.error.type = errorTypes.WARNING;
+                EventBus.$emit('newMessage', {message: 'Oops! Scheint als hättest du keine Internetverbindung.', type: messageTypes.WARNING});
                 break;
               case 840:
-                this.error.message = 'Die eingegebene E-Mail-Adresse oder das Kennwort ist inkorrekt.';
-                this.error.type = errorTypes.WARNING;
+                EventBus.$emit('newMessage', {message: 'Die eingegebene E-Mail-Adresse oder das Kennwort ist inkorrekt.', type: messageTypes.WARNING});
                 break;
               default:
                 console.log(error);
             }
-            EventBus.$emit('error', this.error);
             this.loading = false;
           }
         });
