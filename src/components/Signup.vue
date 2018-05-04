@@ -28,7 +28,7 @@
 <script>
   import router from '../utils/router.js'
   import validate from '../utils/validate.js'
-  import * as errorTypes from './../classes/ErrorTypes';
+  import * as messageTypes from './../classes/MessageTypes'
 
   export default {
     beforeCreate: function () {
@@ -38,7 +38,6 @@
     data() {
       return {
         confirmPassword: '',
-        error: new Error(),
         loading: false
       }
     },
@@ -51,17 +50,13 @@
         EventBus.$emit('clearFlashMessages');
 
         if (!validate.email(this.$user.getUserName())) {
-          this.error.message = 'Bitte gib eine gültige E-Mail-Adresse ein.';
-          this.error.type = errorTypes.WARNING;
-          EventBus.$emit('error', this.error);
+          EventBus.$emit('newMessage', {message: 'Bitte gib eine gültige E-Mail-Adresse ein.', type: messageTypes.WARNING});
           this.loading = false;
           return;
         }
 
         if (this.confirmPassword !== this.$user.getPassword()) {
-          this.error.message = 'Die eingegebenen Passwörter stimmen nicht überein.';
-          this.error.type = errorTypes.WARNING;
-          EventBus.$emit('error', this.error);
+          EventBus.$emit('newMessage', {message: 'Die eingegebenen Passwörter stimmen nicht überein.', type: messageTypes.WARNING});
           this.loading = false;
           return;
         }
@@ -73,27 +68,22 @@
             router.push('/');
 
             setTimeout(function () {
-              let error = new Error();
-              error.message = 'Dein Account wurde erfolgreich registriert';
-              error.type = errorTypes.SUCCESS;
-              EventBus.$emit('error', error);
+              EventBus.$emit('newMessage', {message: 'Dein Account wurde erfolgreich registriert', type: messageTypes.WARNING});
             }, 1000);
           },
           onError: error => {
             switch (error.statusCode) {
               case 0:
               case 615:
-                this.error.message = 'Oops! Scheint als hättest du keine Internetverbindung.';
-                this.error.type = errorTypes.WARNING;
+                EventBus.$emit('newMessage', {message: 'Oops! Scheint als hättest du keine Internetverbindung.', type: messageTypes.WARNING});
                 break;
               case 830:
-                this.error.message = 'Es existiert schon ein Account mit dieser E-Mail-Adresse.';
-                this.error.type = errorTypes.WARNING;
+                EventBus.$emit('newMessage', {message: 'Es existiert schon ein Account mit dieser E-Mail-Adresse.', type: messageTypes.WARNING});
                 break;
               default:
                 console.log(error);
             }
-            EventBus.$emit('error', this.error);
+            EventBus.$emit('newMessage', this.error);
             this.loading = false;
           }
         });
