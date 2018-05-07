@@ -2,7 +2,7 @@
   <body>
     <main class="l_main" v-bind:class="{'l_main--w-nav' :isMain()}">
       <div class="flash-messages-container">
-        <transition name="slide-fade">
+        <transition name="t_slide-fade">
           <div v-for="(flashMessage, index) in flashMessages" class="flash-message"
                v-bind:class="['flash-message--' + flashMessage.type,  'u_icon--' + flashMessage.type]"
                v-on:click="unset(index)">
@@ -112,18 +112,5 @@
   .flash-message--error {
     border-color: var(--error);
     color: var(--error);
-  }
-
-  .slide-fade-enter-active {
-    transition: all .5s ease;
-  }
-
-  .slide-fade-leave-active {
-    transition: all .6s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  }
-
-  .slide-fade-enter, .slide-fade-leave-to {
-    transform: translateY(-40px);
-    opacity: 0;
   }
 </style>

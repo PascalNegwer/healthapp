@@ -1,5 +1,5 @@
 <template>
-  <transition name="no-mode-translate">
+  <transition name="t_no-mode-translate">
     <div class="l_flex l_wrapper">
 
       <div class="loader" v-bind:class="{'loader--active': loading}">
