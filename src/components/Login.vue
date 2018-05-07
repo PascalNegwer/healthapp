@@ -43,6 +43,7 @@
     },
     beforeMount: function () {
       this.loading = false;
+      this.$user = new Apiomat.FrontendUser();
     },
     methods: {
       login() {

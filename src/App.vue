@@ -45,7 +45,6 @@
         cookie.expireNow('sessionToken');
         localStorage.clear();
         router.push('/login');
-        self.$user = new Apiomat.FrontendUser();
       });
 
       EventBus.$on('newMessage', function (message) {

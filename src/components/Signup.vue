@@ -45,6 +45,7 @@
     },
     beforeMount: function () {
       this.loading = false;
+      this.$user = new Apiomat.FrontendUser();
     },
     methods: {
       save() {
@@ -83,6 +84,7 @@
                 EventBus.$emit('newMessage', {message: 'Es existiert schon ein Account mit dieser E-Mail-Adresse.', type: messageTypes.WARNING});
                 break;
               default:
+                EventBus.$emit('newMessage', {message: 'Oops! Etwas ist schief gegangen', type: messageTypes.ERROR});
                 console.log(error);
             }
             EventBus.$emit('newMessage', this.error);
