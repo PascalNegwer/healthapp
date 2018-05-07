@@ -52,7 +52,7 @@
         self.flashMessages.push(message);
 
         setTimeout(function () {
-          let index = self.flashMessages.indexOf(error);
+          let index = self.flashMessages.indexOf(message);
           self.unset(index);
         }.bind(self), 2000)
       });
