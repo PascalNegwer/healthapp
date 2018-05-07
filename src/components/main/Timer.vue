@@ -12,8 +12,7 @@
         </p>
       </div>
       <div class="timer__count-wrapper">
-        <h2  v-if="paused" class="timer__label">Aktuelle Pausenzeit</h2>
-        <h2  v-else class="timer__label">Aktuelle Arbeitszeit</h2>
+        <h2 class="timer__label">Aktuelle <transition name="turn" mode="out-in"><span key="pause" v-if="paused">Pausenzeit</span><span key="work" v-else>Arbeitszeit</span></transition></h2>
         <p class="timer__count timer__count--small">
           <span class="timer__hours">00</span>
           :
@@ -146,6 +145,9 @@
     font-weight: 300;
     color: var(--white-50);
     margin-bottom: .8rem;
+  }
+  .timer__label span {
+    display: inline-block;
   }
   .timer__count {
     font-family: 'Comfortaa', sans-serif;
