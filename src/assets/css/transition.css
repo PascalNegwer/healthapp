@@ -6,10 +6,10 @@
   transition: transform .3s ease-in-out;
 }
 .t_no-mode-translate-enter {
-  transform: translateX(120%);
+  transform: translateX(100%);
 }
 .t_no-mode-translate-leave-active {
-  transform: translateX(-120%);
+  transform: translateX(-100%);
 }
 
 .t_turn-enter-active, .t_turn-leave-active {

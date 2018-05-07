@@ -113,7 +113,7 @@
   .nav--visible {
     visibility: visible;
     opacity: 1;
-    transition: opacity .15s ease-in-out, visibility;
+    transition: opacity .15s ease-in-out; 
   }
   .nav__item {
     width: 25%;
