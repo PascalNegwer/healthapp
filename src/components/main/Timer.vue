@@ -364,6 +364,10 @@
     margin-bottom: .6rem;
   }
 
+  .timer__label span {
+    display: inline-block;
+  }
+
   .timer__count {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
