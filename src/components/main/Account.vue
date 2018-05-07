@@ -14,104 +14,125 @@
       </form>
     </section>
     <span class="l_divider"></span>
-      <section class="l_section">
-          <h2 class="headline">Passwort ändern</h2>
-          <form class="l_flex" v-on:submit.prevent="changePassword">
-              <p class="label">Altes Passwort</p>
-              <input class="inp" placeholder="Altes Passwort" v-model="$user.data.password" type="password" required>
-              <p class="label">Neues Passwort</p>
-              <input class="inp" placeholder="Neues Passwort" v-model="newPassword" type="password" required>
-              <p class="label">Neues Passwort wiederholen</p>
-              <input class="inp" placeholder="Passwort wiederholen" type="password" v-model="confirmPassword" required>
-              <button class="btn" type="submit">Passwort ändern</button>
-          </form>
-      </section>
+    <section class="l_section">
+      <h2 class="headline">Passwort ändern</h2>
+      <form class="l_flex" v-on:submit.prevent="changePassword">
+        <p class="label">Altes Passwort</p>
+        <input class="inp" placeholder="Altes Passwort" v-model="$user.data.password" type="password" required>
+        <p class="label">Neues Passwort</p>
+        <input class="inp" placeholder="Neues Passwort" v-model="newPassword" type="password" required>
+        <p class="label">Neues Passwort wiederholen</p>
+        <input class="inp" placeholder="Passwort wiederholen" type="password" v-model="confirmPassword" required>
+        <button class="btn" type="submit">Passwort ändern</button>
+      </form>
+    </section>
   </div>
 </template>
 
 <script>
-    import * as messageTypes from '../../classes/MessageTypes'
-    import validate from '../../utils/validate.js'
+  import * as messageTypes from '../../classes/MessageTypes'
+  import validate from '../../utils/validate.js'
 
-    export default {
-        beforeCreate: function () {
-            document.documentElement.className = 'u_gradient-background--mixed';
-        },
-        name: 'account',
-        props: [],
-        data() {
-            return {
-                confirmPassword: '',
-                newPassword: '',
-            }
-        },
-        methods: {
-            save: function () {
+  export default {
+    beforeCreate: function () {
+      document.documentElement.className = 'u_gradient-background--mixed';
+    },
+    name: 'account',
+    props: [],
+    data() {
+      return {
+        confirmPassword: '',
+        newPassword: '',
+      }
+    },
+    methods: {
+      save: function () {
 
 
-                this.$user.save({
-                    onOk: result => {
-                        EventBus.$emit('newMessage', {
-                            message: 'Deine Accountdaten wurden erfolgreich geändert', type: messageTypes.SUCCESS
-                        });
-                    },
-                    onError: error => {
-                        switch (error.statusCode) {
-                            case 0:
-                            case 615:
-                                EventBus.$emit('newMessage', {
-                                    message: 'Oops! Scheint als hättest du keine Internetverbindung.',
-                                    type: messageTypes.WARNING
-                                });
-                                break;
-                            default:
-                                console.log(error);
-                                EventBus.$emit('newMessage', {
-                                    message: 'Oops! Unbekannter Fehler.', type: messageTypes.ERROR
-                                });
-                        }
-                    },
-                });
-            },
-            changePassword: function () {
-               if (this.confirmPassword !== this.newPassword) {
-                    EventBus.$emit('newMessage', {message: 'Die eingegebenen Passwörter stimmen nicht überein.', type: messageTypes.WARNING});
-                    return;
-                }
-
-                Apiomat.Datastore.configureWithCredentials(this.$user);
-                this.$user.changePassword(this.newPassword,{
-
-                    onOk: result => {
-                        console.log('b');
-
-                        EventBus.$emit('newMessage', {
-                            message: 'Dein Passwort wurde geändert', type: messageTypes.SUCCESS
-                        });
-                    },
-                    onError: error => {
-                        console.log(error);
-                        EventBus.$emit('newMessage', {message: 'Oh... da ist etwas falsch gelaufen.', type: messageTypes.WARNING});
-                    }
+        this.$user.save({
+          onOk: result => {
+            EventBus.$emit('newMessage', {
+              message: 'Deine Accountdaten wurden erfolgreich geändert', type: messageTypes.SUCCESS
             });
+          },
+          onError: error => {
+            switch (error.statusCode) {
+              case 0:
+              case 615:
+                EventBus.$emit('newMessage', {
+                  message: 'Oops! Scheint als hättest du keine Internetverbindung.',
+                  type: messageTypes.WARNING
+                });
+                break;
+              default:
+                console.log(error);
+                EventBus.$emit('newMessage', {
+                  message: 'Oops! Unbekannter Fehler.', type: messageTypes.ERROR
+                });
             }
+          },
+        });
+      },
+      changePassword: function () {
+        if (this.confirmPassword !== this.newPassword) {
+          EventBus.$emit('newMessage', {
+            message: 'Die eingegebenen Passwörter stimmen nicht überein.',
+            type: messageTypes.WARNING
+          });
+          return;
         }
+
+        console.log(this.$user.getPassword());
+        Apiomat.Datastore.configureWithCredentials(this.$user);
+
+        this.$user.changePassword(this.newPassword, {
+
+          onOk: result => {
+            console.log('b');
+            //this.user.setPassword(newPassword);
+            //Apiomat.Datastore.configureWithCredentials(this.$user);
+
+            EventBus.$emit('newMessage', {
+              message: 'Dein Passwort wurde geändert', type: messageTypes.SUCCESS
+            });
+          },
+          onError: error => {
+            switch (error.statusCode) {
+              case 840:
+                console.log(error);
+                EventBus.$emit('newMessage', {
+                  message: 'Dein altes Passwort ist inkorrekt.',
+                  type: messageTypes.WARNING
+                });
+                break;
+              default:
+                console.log(error);
+                EventBus.$emit('newMessage', {
+                  message: 'Oh... da ist etwas schief gelaufen.',
+                  type: messageTypes.WARNING
+                });
+            }
+          }
+        });
+      }
     }
+  }
 </script>
 
 
 <style scoped>
-    .btn {
-        margin-top: 2.4rem;
-        margin-left: auto;
-    }
+  .btn {
+    margin-top: 2.4rem;
+    margin-left: auto;
+  }
 
-    .inp {
-        margin: 1rem 0 2rem 0;
-    }
-    .label {
-      font-weight: 300;
-      color: var(--lightgrey);
-      font-size: 1.4rem;
-    }
+  .inp {
+    margin: 1rem 0 2rem 0;
+  }
+
+  .label {
+    font-weight: 300;
+    color: var(--lightgrey);
+    font-size: 1.4rem;
+  }
 </style>
