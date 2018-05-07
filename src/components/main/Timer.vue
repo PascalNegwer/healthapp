@@ -12,7 +12,7 @@
         </p>
       </div>
       <div class="timer__count-wrapper">
-        <h2 class="timer__label">Aktuelle Arbeits-/Pausenzeit</h2>
+        <h2 class="timer__label">Aktuelle <transition name="t_turn" mode="out-in"><span key="pause" v-if="paused">Pausenzeit</span><span key="work" v-else>Arbeitszeit</span></transition></h2>
         <p class="timer__count timer__count--small">
           <span class="timer__hours">00</span>
           :
@@ -33,10 +33,10 @@
       </div>
     </section>
 
-    <transition name="turn" mode="out-in">
+    <transition name="t_turn" mode="out-in">
 
       <section v-if="running" key="double" class="timer__button-container">
-        <transition name="turn" mode="out-in">
+        <transition name="t_turn" mode="out-in">
           <div v-if="paused" key="resume" class="timer__button-wrapper timer__button-wrapper--small">
             <div class="timer__button btn btn--18 btn--round" v-on:click="resume()">
               <p>Weiter</p>
@@ -84,6 +84,7 @@
       },
       stop() {
         this.running = false;
+        this.paused = false;
       },
       pause() {
         this.paused = true;
@@ -144,6 +145,9 @@
     font-weight: 300;
     color: var(--white-50);
     margin-bottom: .8rem;
+  }
+  .timer__label span {
+    display: inline-block;
   }
   .timer__count {
     font-family: 'Comfortaa', sans-serif;

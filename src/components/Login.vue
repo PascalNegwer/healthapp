@@ -1,5 +1,5 @@
 <template>
-  <transition name="no-mode-translate">
+  <transition name="t_no-mode-translate">
     <div class="l_flex l_wrapper">
 
       <div class="loader" v-bind:class="{'loader--active': loading}">
@@ -17,7 +17,9 @@
           <button class="btn btn--18 u_center" type="submit">Login</button>
         </form>
 
-        <router-link to="/signup" class="link u_center l_flex l_grow">Noch kein Account?</router-link>
+        <div class="link-container l_flex l_grow">
+          <router-link to="/signup" class="link u_center">Noch kein Account?</router-link>
+        </div>
       </div>
     </div>
   </transition>
@@ -100,7 +102,10 @@
   .link {
     font-size: 1.8rem;
     line-height: 2;
-    transition: color .15s ease-in-out;
+    transition: opacity .15s ease-in-out;
+  }
+
+  .link-container {
     justify-content: flex-end;
   }
 
