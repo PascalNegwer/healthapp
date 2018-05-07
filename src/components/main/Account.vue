@@ -18,9 +18,9 @@
           <h2 class="headline">Passwort ändern</h2>
           <form class="l_flex" v-on:submit.prevent="changePassword">
               <p class="label">Altes Passwort</p>
-              <input class="inp" placeholder="Altes Passwort" type="password" required>
+              <input class="inp" placeholder="Altes Passwort" v-model="$user.data.password" type="password" required>
               <p class="label">Neues Passwort</p>
-              <input class="inp" placeholder="Neues Passwort" type="password" required>
+              <input class="inp" placeholder="Neues Passwort" v-model="newPassword" type="password" required>
               <p class="label">Neues Passwort wiederholen</p>
               <input class="inp" placeholder="Passwort wiederholen" type="password" v-model="confirmPassword" required>
               <button class="btn" type="submit">Passwort ändern</button>
@@ -71,24 +71,32 @@
             },
             changePassword: function () {
 
-                EventBus.$emit('newMessage', {
-                    message: 'Dein Passwort wurde geändert', type: messageTypes.SUCCESS
-                });
+                Apiomat.Datastore.configureWithCredentials(this.$user);
+                this.$user.setPassword({
 
-                EventBus.$emit('newMessage', {
-                    message: 'Dein altes Passwort ist nicht korrekt',
-                    type: messageTypes.WARNING
-                });
+                    onOk: result => {
 
-                EventBus.$emit('newMessage', {
-                    message: 'Deine Passwort-Wiederholung ist nicht identisch',
-                    type: messageTypes.WARNING
-                });
+                        EventBus.$emit('newMessage', {
+                            message: 'Dein Passwort wurde geändert', type: messageTypes.SUCCESS
+                        });
+                    },
+                    onError: error => {
 
+                        if (!validate.password(this.$user.getPassword())) {
+                            EventBus.$emit('newMessage', {message: 'Dein altes Passwort ist nicht korrekt', type: messageTypes.WARNING});
+                            return;
+                        }
+
+                        if (this.confirmPassword !== this.newPassword()) {
+                            EventBus.$emit('newMessage', {message: 'Die eingegebenen Passwörter stimmen nicht überein.', type: messageTypes.WARNING});
+                        }
+                    }
+            });
             }
         }
     }
 </script>
+
 
 <style scoped>
     .btn {
