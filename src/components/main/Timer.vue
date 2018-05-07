@@ -144,21 +144,25 @@
     font-size: 1.8rem;
     font-weight: 300;
     color: var(--white-50);
-    margin-bottom: .8rem;
-  }
-  .timer__label span {
-    display: inline-block;
+    margin-bottom: .6rem;
   }
   .timer__count {
-    font-family: 'Comfortaa', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    font-size: 5.2rem;
+    font-size: 4.6rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-bottom: 3.2rem;
+    margin-bottom: 2.6rem;
   }
   .timer__count--small {
+    font-size: 3.2rem;
+  }
+  .timer__count span {
+    font-family: 'Cutive Mono', monospace;
+    font-size: 5.2rem;
+  }
+  .timer__count--small span {
     font-size: 3.6rem;
   }
 </style>
