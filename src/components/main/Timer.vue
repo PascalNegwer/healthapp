@@ -4,31 +4,35 @@
       <div class="timer__count-wrapper">
         <h2 class="timer__label">Gesamte Arbeitszeit</h2>
         <p class="timer__count">
-          <span class="timer__hours">00</span>
+          <span class="timer__hours">{{overallWorkTime.utc().format('HH')}}</span>
           :
-          <span class="timer__minutes">00</span>
+          <span class="timer__minutes">{{overallWorkTime.utc().format('mm')}}</span>
           :
-          <span class="timer__seconds">00</span>
+          <span class="timer__seconds">{{overallWorkTime.utc().format('ss')}}</span>
         </p>
       </div>
       <div class="timer__count-wrapper">
-        <h2 class="timer__label">Aktuelle <transition name="t_turn" mode="out-in"><span key="pause" v-if="paused">Pausenzeit</span><span key="work" v-else>Arbeitszeit</span></transition></h2>
+        <h2 class="timer__label">Aktuelle
+          <transition name="t_turn" mode="out-in"><span key="pause" v-if="paused">Pausenzeit</span><span key="work"
+                                                                                                         v-else>Arbeitszeit</span>
+          </transition>
+        </h2>
         <p class="timer__count timer__count--small">
-          <span class="timer__hours">00</span>
+          <span class="timer__hours">{{currentTime.utc().format('HH')}}</span>
           :
-          <span class="timer__minutes">00</span>
+          <span class="timer__minutes">{{currentTime.utc().format('mm')}}</span>
           :
-          <span class="timer__seconds">00</span>
+          <span class="timer__seconds">{{currentTime.utc().format('ss')}}</span>
         </p>
       </div>
       <div class="timer__count-wrapper">
         <h2 class="timer__label">Gesamte Pausenzeit</h2>
         <p class="timer__count timer__count--small">
-          <span class="timer__hours">00</span>
+          <span class="timer__hours">{{overallPauseTime.utc().format('HH')}}</span>
           :
-          <span class="timer__minutes">00</span>
+          <span class="timer__minutes">{{overallPauseTime.utc().format('mm')}}</span>
           :
-          <span class="timer__seconds">00</span>
+          <span class="timer__seconds">{{overallPauseTime.utc().format('ss')}}</span>
         </p>
       </div>
     </section>
@@ -56,7 +60,7 @@
       </section>
 
       <section v-else key="single" class="timer__button-container">
-        <div class="timer__button-wrapper" >
+        <div class="timer__button-wrapper">
           <div class="timer__button btn btn--18 btn--round" v-on:click="start()">
             <p>Start</p>
           </div>
@@ -68,40 +72,245 @@
 </template>
 
 <script>
+  import * as messageTypes from '../../classes/MessageTypes'
+
+  const PERIOD_TYPE_PAUSE = 'pause';
+  const PERIOD_TYPE_WORK = 'work';
+
+  let createDay = function (self) {
+    self.day.save({
+      onOk: result => {
+        self.$user.postDays(self.day, {
+          onOk: days => {
+            self.$user.loadDays('createdAt >= date(' + (new Date()).setHours(0, 0, 0, 0) + ')', {}, true);
+          },
+          onError: error => {
+            EventBus.$emit('newMessage', {
+              message: 'Oops! Scheint als hättest du keine Internetverbindung.',
+              type: messageTypes.ERROR
+            });
+            console.log(error);
+          }
+        }, true)
+      },
+      onError: error => {
+        EventBus.$emit('newMessage', {
+          message: 'Oops! Scheint als hättest du keine Internetverbindung.',
+          type: messageTypes.ERROR
+        });
+        console.log(error);
+      }
+    });
+  };
 
   export default {
     name: 'timer',
-    props: [],
     data() {
       return {
         running: false,
         paused: false,
+        day: new Apiomat.Day(),
+        currentPeriod: undefined,
+        overallWorkTime: moment(0),
+        overallPauseTime: moment(0),
+        currentTime: moment(0)
       }
+    },
+    beforeMount: function () {
+      this.$user.loadDays('createdAt >= date(' + (new Date()).setHours(0, 0, 0, 0) + ')', {
+        onOk: days => {
+          if (days.length === 0) {
+            createDay(this);
+          } else {
+            this.day = days[0];
+            this.day.loadPeriods('order by createdAt DESC', {
+              onOk: periods => {
+                if (periods.length !== 0) {
+                  this.updateTimers();
+                  this.currentPeriod = periods[0];
+                }
+              },
+              onError: error => {
+                console.log(error);
+              }
+            }, true);
+          }
+        },
+        onError: error => {
+          createDay(this);
+        }
+      }, true);
+      this.timerLoop();
     },
     methods: {
       start() {
+        if (!navigator.onLine) {
+          EventBus.$emit('newMessage', {
+            message: 'Oops! Scheint als hättest du keine Internetverbindung.',
+            type: messageTypes.ERROR
+          });
+          return;
+        }
+        this.currentPeriod = new Apiomat.Period();
+        this.currentPeriod.setStart(new Date());
+        this.currentPeriod.setPeriodType(PERIOD_TYPE_WORK);
+        this.currentPeriod.save({
+              onOk: result => {
+                this.day.postPeriods(this.currentPeriod, {
+                  onOk: result => {
+                    this.running = true;
+                  },
+                  onError: error => {
+                    console.log(error);
+                  }
+                })
+              },
+              onError: error => {
+                console.log(error);
+              }
+            }
+        );
         this.running = true;
       },
       stop() {
+        if (!navigator.onLine) {
+          EventBus.$emit('newMessage', {
+            message: 'Oops! Scheint als hättest du keine Internetverbindung.',
+            type: messageTypes.ERROR
+          });
+          return;
+        }
+        this.currentPeriod.setEnd(new Date());
+        this.currentPeriod.save({
+          onOk: result => {
+          },
+          onError: error => {
+            console.log(error);
+          }
+        });
+        this.currentTime = moment(0);
         this.running = false;
-        this.paused = false;
       },
       pause() {
-        this.paused = true;
+        if (!navigator.onLine) {
+          EventBus.$emit('newMessage', {
+            message: 'Oops! Scheint als hättest du keine Internetverbindung.',
+            type: messageTypes.ERROR
+          });
+          return;
+        }
+        this.currentPeriod.setEnd(new Date());
+        this.currentPeriod.save({
+          onOk: result => {
+          },
+          onError: error => {
+            console.log(error);
+          }
+        });
+        this.currentPeriod = new Apiomat.Period();
+        this.currentPeriod.setStart(new Date());
+        this.currentPeriod.setPeriodType(PERIOD_TYPE_PAUSE);
+        this.currentPeriod.save({
+              onOk: result => {
+                this.day.postPeriods(this.currentPeriod, {
+                  onOk: result => {
+                    this.running = true;
+                  },
+                  onError: error => {
+                    console.log(error);
+                  }
+                })
+              },
+              onError: error => {
+                console.log(error);
+              }
+            }
+        );
       },
       resume() {
-        this.paused = false;
+        if (!navigator.onLine) {
+          EventBus.$emit('newMessage', {
+            message: 'Oops! Scheint als hättest du keine Internetverbindung.',
+            type: messageTypes.ERROR
+          });
+          return;
+        }
+        this.currentPeriod.setEnd(new Date());
+        this.currentPeriod.save({
+          onOk: result => {
+          },
+          onError: error => {
+            console.log(error);
+          }
+        });
+        this.currentPeriod = new Apiomat.Period();
+        this.currentPeriod.setStart(new Date());
+        this.currentPeriod.setPeriodType(PERIOD_TYPE_WORK);
+        this.currentPeriod.save({
+              onOk: result => {
+                this.day.postPeriods(this.currentPeriod, {
+                  onOk: result => {
+                    this.running = true;
+                  },
+                  onError: error => {
+                    console.log(error);
+                  }
+                })
+              },
+              onError: error => {
+                console.log(error);
+              }
+            }
+        );
       },
-      saveData() {
-
+      timerLoop: function () {
+        if (this.running) {
+          this.updateTimers();
+        }
+        setTimeout(function () {
+            this.timerLoop();
+        }.bind(this), 1000);
       },
-      queue() {
+      updateTimers: function () {
+        let overallWorkTimestamp = 0;
+        let overallPauseTimestamp = 0;
+        let currentTimestamp = 0;
 
-      },
-      startCounting(counter) {
+        this.day.loadPeriods('order by createdAt DESC', {
+          onOk: periods => {
+            for (let i = 0; i < periods.length; i++) {
+              let period = periods[i];
+              switch (period.getPeriodType()) {
+                case PERIOD_TYPE_PAUSE:
+                  if (period.getEnd()) {
+                    overallPauseTimestamp += period.getEnd() - period.getStart();
+                  } else {
+                    this.paused = true;
+                    this.running = true;
+                    currentTimestamp = (new Date()) - period.getStart();
+                    overallPauseTimestamp += (new Date()) - period.getStart();
+                  }
+                  break;
+                case PERIOD_TYPE_WORK:
+                  if (period.getEnd()) {
+                    overallWorkTimestamp += period.getEnd() - period.getStart();
+                  } else {
+                    this.paused = false;
+                    this.running = true;
+                    currentTimestamp = (new Date()) - period.getStart();
+                    overallWorkTimestamp += (new Date()) - period.getStart();
+                  }
+                  break;
+              }
 
+              this.overallWorkTime = moment(overallWorkTimestamp);
+              this.overallPauseTime = moment(overallPauseTimestamp);
+              this.currentTime = moment(currentTimestamp);
+            }
+          }
+        }, true);
       }
-    }
+    },
   }
 </script>
 
@@ -110,45 +319,51 @@
     position: relative;
     flex-grow: 1;
   }
+
   .timer__button-container {
     display: flex;
     justify-content: center;
     margin-top: auto;
   }
+
   .timer__button-wrapper {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
   }
+
   .timer__button-wrapper--small {
     width: 40%;
     display: block;
     margin-top: 5%;
     margin-bottom: 5%;
   }
+
   .timer__button {
     background: var(--white-25);
   }
+
   .timer__button:active {
     background: var(--primary-color);
   }
+
   .timer__count-container {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+
   .timer__count-wrapper {
     text-align: center;
   }
+
   .timer__label {
     font-size: 1.8rem;
     font-weight: 300;
     color: var(--white-50);
     margin-bottom: .6rem;
   }
-  .timer__label span {
-    display: inline-block;
-  }
+
   .timer__count {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
@@ -158,6 +373,7 @@
     justify-content: center;
     margin-bottom: 2.6rem;
   }
+
   .timer__count--small {
     font-size: 3.2rem;
   }

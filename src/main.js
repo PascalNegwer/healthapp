@@ -9,6 +9,11 @@ Vue.use(VeeValidate);
 window.EventBus = new Vue();
 Vue.prototype.$user = new Apiomat.FrontendUser();
 
+Apiomat.Datastore.setCachingStrategy(Apiomat.AOMCacheStrategy.NETWORK_ELSE_CACHE);
+Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.FrontendUser, true);
+Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Day, true);
+Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Period, true);
+
 new Vue({
   router,
   render: h => h(App),

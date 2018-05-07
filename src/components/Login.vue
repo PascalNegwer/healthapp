@@ -29,7 +29,7 @@
   import router from '../utils/router.js'
   import validate from '../utils/validate.js'
   import cookie from '../utils/cookie.js'
-  import * as messageTypes from './../classes/MessageTypes';
+  import * as messageTypes from './../classes/MessageTypes'
 
   export default {
     beforeCreate: function () {
