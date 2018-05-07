@@ -149,7 +149,7 @@
   .timer__count {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    font-size: 4.6rem;
+    font-size: 4.4rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
