@@ -157,6 +157,10 @@
     transition: color .3s ease-in-out;
   }
 
+  .nav__item--dropdown .nav__icon:before, .nav__item--dropdown .nav__text {
+    transition-duration: 0s;
+  }
+
   .u_gradient-background--default .nav__icon, .u_gradient-background--mixed .nav__icon {
     color: var(--lightgrey);
   }
