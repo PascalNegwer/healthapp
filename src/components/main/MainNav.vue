@@ -146,7 +146,7 @@
     color: #5f5f5f;
   }
   .nav__icon:before {
-    transition: color .15s ease-in-out;
+    transition: color .3s ease-in-out;
   }
   .nav__text {
     font-size: 1.2rem;
@@ -154,7 +154,7 @@
     text-transform: uppercase;
     text-align: center;
     padding-bottom: 2rem;
-    transition: color .15s ease-in-out;
+    transition: color .3s ease-in-out;
   }
 
   .u_gradient-background--default .nav__icon, .u_gradient-background--mixed .nav__icon {
