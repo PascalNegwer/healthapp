@@ -16,13 +16,13 @@
     <span class="l_divider"></span>
       <section class="l_section">
           <h2 class="headline">Passwort ändern</h2>
-          <form class="l_flex" v-on:submit.prevent="savePassword">
+          <form class="l_flex" v-on:submit.prevent="changePassword">
               <p class="label">Altes Passwort</p>
               <input class="inp" placeholder="Altes Passwort" type="password" required>
               <p class="label">Neues Passwort</p>
               <input class="inp" placeholder="Neues Passwort" type="password" required>
               <p class="label">Neues Passwort wiederholen</p>
-              <input class="inp" placeholder="Passwort wiederholen" type="password" required>
+              <input class="inp" placeholder="Passwort wiederholen" type="password" v-model="confirmPassword" required>
               <button class="btn" type="submit">Passwort ändern</button>
           </form>
       </section>
@@ -69,7 +69,21 @@
                     },
                 });
             },
-            savePassword: function () {
+            changePassword: function () {
+
+                EventBus.$emit('newMessage', {
+                    message: 'Dein Passwort wurde geändert', type: messageTypes.SUCCESS
+                });
+
+                EventBus.$emit('newMessage', {
+                    message: 'Dein altes Passwort ist nicht korrekt',
+                    type: messageTypes.WARNING
+                });
+
+                EventBus.$emit('newMessage', {
+                    message: 'Deine Passwort-Wiederholung ist nicht identisch',
+                    type: messageTypes.WARNING
+                });
 
             }
         }
