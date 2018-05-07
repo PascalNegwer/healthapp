@@ -31,6 +31,7 @@
 
 <script>
     import * as messageTypes from '../../classes/MessageTypes'
+    import validate from '../../utils/validate.js'
 
     export default {
         beforeCreate: function () {
@@ -39,7 +40,10 @@
         name: 'account',
         props: [],
         data() {
-            return {}
+            return {
+                confirmPassword: '',
+                newPassword: '',
+            }
         },
         methods: {
             save: function () {
@@ -70,26 +74,24 @@
                 });
             },
             changePassword: function () {
+               if (this.confirmPassword !== this.newPassword) {
+                    EventBus.$emit('newMessage', {message: 'Die eingegebenen Passwörter stimmen nicht überein.', type: messageTypes.WARNING});
+                    return;
+                }
 
                 Apiomat.Datastore.configureWithCredentials(this.$user);
-                this.$user.setPassword({
+                this.$user.changePassword(this.newPassword,{
 
                     onOk: result => {
+                        console.log('b');
 
                         EventBus.$emit('newMessage', {
                             message: 'Dein Passwort wurde geändert', type: messageTypes.SUCCESS
                         });
                     },
                     onError: error => {
-
-                        if (!validate.password(this.$user.getPassword())) {
-                            EventBus.$emit('newMessage', {message: 'Dein altes Passwort ist nicht korrekt', type: messageTypes.WARNING});
-                            return;
-                        }
-
-                        if (this.confirmPassword !== this.newPassword()) {
-                            EventBus.$emit('newMessage', {message: 'Die eingegebenen Passwörter stimmen nicht überein.', type: messageTypes.WARNING});
-                        }
+                        console.log(error);
+                        EventBus.$emit('newMessage', {message: 'Oh... da ist etwas falsch gelaufen.', type: messageTypes.WARNING});
                     }
             });
             }
