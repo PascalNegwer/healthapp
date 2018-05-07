@@ -66,7 +66,6 @@
   export default {
     updated: function() {
       this.bg = document.documentElement.className;
-      console.log(this.bg);
     },
     name: "mainNav",
     components: {
