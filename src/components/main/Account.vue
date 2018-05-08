@@ -31,7 +31,6 @@
 
 <script>
   import * as messageTypes from '../../classes/MessageTypes'
-  import validate from '../../utils/validate.js'
 
   export default {
     beforeCreate: function () {
@@ -47,70 +46,49 @@
     },
     methods: {
       save: function () {
-
-
         this.$user.save({
           onOk: result => {
-            EventBus.$emit('newMessage', {
-              message: 'Deine Accountdaten wurden erfolgreich geändert', type: messageTypes.SUCCESS
-            });
+            EventBus.$emit('newMessage', {message: 'Deine Accountdaten wurden erfolgreich geändert', type: messageTypes.SUCCESS});
           },
           onError: error => {
             switch (error.statusCode) {
               case 0:
               case 615:
-                EventBus.$emit('newMessage', {
-                  message: 'Oops! Scheint als hättest du keine Internetverbindung.',
-                  type: messageTypes.WARNING
-                });
+                EventBus.$emit('newMessage', {message: 'Oops! Scheint als hättest du keine Internetverbindung.', type: messageTypes.WARNING});
                 break;
               default:
                 console.log(error);
-                EventBus.$emit('newMessage', {
-                  message: 'Oops! Unbekannter Fehler.', type: messageTypes.ERROR
-                });
+                EventBus.$emit('newMessage', {message: 'Oops! Unbekannter Fehler.', type: messageTypes.ERROR});
             }
           },
         });
       },
       changePassword: function () {
+        if (!navigator.onLine) {
+          EventBus.$emit('newMessage', {message: 'Oops! Scheint als hättest du keine Internetverbindung.', type: messageTypes.ERROR});
+          return;
+        }
         if (this.confirmPassword !== this.newPassword) {
-          EventBus.$emit('newMessage', {
-            message: 'Die eingegebenen Passwörter stimmen nicht überein.',
-            type: messageTypes.WARNING
-          });
+          EventBus.$emit('newMessage', {message: 'Die eingegebenen Passwörter stimmen nicht überein.', type: messageTypes.WARNING});
           return;
         }
 
-        console.log(this.$user.getPassword());
         Apiomat.Datastore.configureWithCredentials(this.$user);
 
         this.$user.changePassword(this.newPassword, {
 
           onOk: result => {
-            console.log('b');
-            //this.user.setPassword(newPassword);
-            //Apiomat.Datastore.configureWithCredentials(this.$user);
-
-            EventBus.$emit('newMessage', {
-              message: 'Dein Passwort wurde geändert', type: messageTypes.SUCCESS
-            });
+            EventBus.$emit('newMessage', {message: 'Dein Passwort wurde geändert', type: messageTypes.SUCCESS});
           },
           onError: error => {
             switch (error.statusCode) {
               case 840:
                 console.log(error);
-                EventBus.$emit('newMessage', {
-                  message: 'Dein altes Passwort ist inkorrekt.',
-                  type: messageTypes.WARNING
-                });
+                EventBus.$emit('newMessage', {message: 'Dein altes Passwort ist inkorrekt.', type: messageTypes.WARNING});
                 break;
               default:
                 console.log(error);
-                EventBus.$emit('newMessage', {
-                  message: 'Oh... da ist etwas schief gelaufen.',
-                  type: messageTypes.WARNING
-                });
+                EventBus.$emit('newMessage', {message: 'Oops! Unbekannter Fehler.', type: messageTypes.ERROR});
             }
           }
         });
