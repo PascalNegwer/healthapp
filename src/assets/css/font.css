@@ -23,6 +23,30 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.u_icon--arm:before {
+  content: "\e912";
+}
+.u_icon--head:before {
+  content: "\e913";
+}
+.u_icon--human:before {
+  content: "\e914";
+}
+.u_icon--leg:before {
+  content: "\e915";
+}
+.u_icon--spine:before {
+  content: "\e916";
+}
+.u_icon--chair:before {
+  content: "\e917";
+}
+.u_icon--eye:before {
+  content: "\e918";
+}
+.u_icon--gym:before {
+  content: "\e919";
+}
 .u_icon--add:before {
   content: "\e900";
 }
@@ -38,7 +62,7 @@
 .u_icon--edit:before {
   content: "\e904";
 }
-.u_icon--error:before {
+.u_icon--forbidden:before {
   content: "\e905";
 }
 .u_icon--home:before {
