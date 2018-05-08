@@ -77,3 +77,20 @@ html:after{
 .logo {
   opacity: .5;
 }
+
+@media screen and (min-device-width: 175vh) {
+  html {
+    transform: rotate(90deg);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    overflow-x: hidden;
+    position: absolute;
+    top: 0;
+    left: 100%;
+  }
+  [class*='u_gradient-background']:before {
+    width: 100vh;
+    height: 100vw;
+  }
+}
