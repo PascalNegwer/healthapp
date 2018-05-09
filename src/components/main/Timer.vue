@@ -13,8 +13,7 @@
       </div>
       <div class="timer__count-wrapper">
         <h2 class="timer__label">Aktuelle
-          <transition name="t_turn" mode="out-in"><span key="pause" v-if="paused">Pausenzeit</span><span key="work"
-                                                                                                         v-else>Arbeitszeit</span>
+          <transition name="t_turn" mode="out-in"><span key="pause" v-if="paused">Pausenzeit</span><span key="work" v-else>Arbeitszeit</span>
           </transition>
         </h2>
         <p class="timer__count timer__count--small">

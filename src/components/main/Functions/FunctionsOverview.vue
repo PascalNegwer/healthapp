@@ -27,7 +27,23 @@
       return {
       }
     },
-    methods: {}
+    methods: {
+      setIconHeight: function() {
+        let tab = document.getElementsByClassName('navtab');
+
+        let height = tab[0].offsetHeight;
+        let maxHeight = 75;
+        let iconHeight = height - 62;
+        iconHeight = (iconHeight > maxHeight) ? maxHeight : iconHeight;
+
+        for (let i = 0; i < tab.length; i++) {
+          tab[i].style.fontSize = iconHeight + 'px'; 
+        }
+      }
+    },
+    mounted: function() {
+      this.setIconHeight();
+    }
   }
 </script>
 
@@ -56,7 +72,7 @@
   }
 
   .navtab:before {
-    font-size: 10vh;
+    font-size: inherit;
     text-align: center;
   }
 
