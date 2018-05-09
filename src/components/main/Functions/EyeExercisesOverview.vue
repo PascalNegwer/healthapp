@@ -49,6 +49,7 @@
     padding-right: 14%;
     align-items: center;
     transition: opacity .15s ease-in-out;
+    line-height: 3;
   }
   .eyelink-style:active, .eyelink-style:active:before {
     opacity: .5;
