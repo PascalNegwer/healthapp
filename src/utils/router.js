@@ -6,13 +6,17 @@ import Signup from '../components/Signup.vue'
 import MainWrapper from '../components/MainWrapper.vue'
 import Home from '../components/main/Home.vue'
 import Dashboard from '../components/main/Dashboard.vue'
-import Functions from '../components/main/Functions.vue'
 import Account from '../components/main/Account.vue'
 import Help from '../components/main/Help.vue'
 import Lawstuff from '../components/main/Lawstuff.vue'
-import Workout from '../components/main/Workout.vue'
-import Augenuebungen from '../components/main/Augenuebungen.vue'
-import Ergonomie from '../components/main/Ergonomie.vue'
+
+/********************************* Functions *********************************/
+import FunctionsWrapper from '../components/main/Functions/FunctionsWrapper.vue'
+import FunctionsOverview from '../components/main/Functions/FunctionsOverview.vue'
+import EyeExercisesOverview from '../components/main/Functions/EyeExercisesOverview.vue'
+import EyeExercise from '../components/main/Functions/EyeExercise.vue'
+import WorkoutOverview from '../components/main/Functions/WorkoutOverview.vue'
+import Ergonomics from '../components/main/Functions/Ergonomics.vue'
 
 Vue.use(Router);
 
@@ -49,9 +53,41 @@ const router = new Router({
         },
         {
           path: '/functions',
-          name: 'functions',
-          component: Functions,
+          component: FunctionsWrapper,
           beforeEnter: loggedInOnly,
+          children: [
+            {
+              path: '/',
+              name: 'functions',
+              component: FunctionsOverview,
+              beforeEnter: loggedInOnly,
+            },
+            {
+              path: 'eye-exercises',
+              name: 'eye-exercises',
+              component: EyeExercisesOverview,
+              beforeEnter: loggedInOnly,
+            },
+            {
+              path: 'eye-exercises/:id',
+              name: 'eye-exercise',
+              component: EyeExercise,
+              beforeEnter: loggedInOnly,
+              props: true
+            },
+            {
+              path: 'workouts',
+              name: 'workouts',
+              component: WorkoutOverview,
+              beforeEnter: loggedInOnly,
+            },
+            {
+              path: 'ergonomics',
+              name: 'ergonomics',
+              component: Ergonomics,
+              beforeEnter: loggedInOnly,
+            }
+          ]
         },
         {
           path: '/account',
@@ -71,24 +107,6 @@ const router = new Router({
           component: Lawstuff,
           beforeEnter: loggedInOnly,
         },
-        {
-          path: '/workout',
-          name: 'workout',
-          component: Workout,
-          beforeEnter: loggedInOnly,
-        },
-        {
-          path: '/augenuebungen',
-          name: 'augenuebungen',
-          component: Augenuebungen,
-          beforeEnter: loggedInOnly,
-        },
-        {
-          path: '/ergonomie',
-          name: 'ergonomie',
-          component: Ergonomie,
-          beforeEnter: loggedInOnly,
-        }
       ]
     },
     {path: '*', redirect: '/'}

@@ -1,22 +1,24 @@
 <template>
-    <div class="l_wrapper l_flex">
-      <nav class="l_flex navtab-container">
-        <router-link class="navtab u_icon--gym" to="/workout">
-          <p class="navtab__label">Workout</p>
-        </router-link>
-        <router-link class="navtab u_icon--eye" to="/augenuebungen">
-          <p class="navtab__label">Augenübungen</p>
-        </router-link>
-        <router-link class="navtab u_icon--chair" to="/ergonomie">
-          <p class="navtab__label">Ergonomie</p>
-        </router-link>
-      </nav>
-    </div>
+  <div class="l_wrapper l_flex">
+    <nav class="l_flex navtab-container">
+      <router-link class="navtab u_icon--gym" :to="{ name: 'workouts'}">
+        <p class="navtab__label">Workout</p>
+      </router-link>
+      <router-link class="navtab u_icon--eye" :to="{ name: 'eye-exercises'}">
+        <p class="navtab__label">Augenübungen</p>
+      </router-link>
+      <router-link class="navtab u_icon--chair" :to="{ name: 'ergonomics'}">
+        <p class="navtab__label">Ergonomie</p>
+      </router-link>
+    </nav>
+  </div>
 </template>
 
 <script>
+  import * as messageTypes from '../../../classes/MessageTypes';
+
   export default {
-    beforeCreate: function() {
+    beforeCreate: function () {
       document.documentElement.className = 'u_gradient-background--purple';
     },
     name: 'functions',
@@ -25,12 +27,12 @@
       return {
       }
     },
-    methods: {
-    }
+    methods: {}
   }
 </script>
 
 <style scoped>
+
   .navtab-container {
     justify-content: space-between;
     height: 100%;

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Augenübungen</h1>
+        <h1>Workout</h1>
     </div>
 </template>
 
@@ -9,7 +9,7 @@
     beforeCreate: function() {
       document.documentElement.className = 'u_gradient-background--purple';
     },
-    name: 'augenuebungen',
+    name: 'workouts',
     props: [],
     data() {
       return {

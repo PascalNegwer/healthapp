@@ -9,7 +9,7 @@
     beforeCreate: function() {
       document.documentElement.className = 'u_gradient-background--purple';
     },
-    name: 'ergonomie',
+    name: 'ergonomics',
     props: [],
     data() {
       return {
