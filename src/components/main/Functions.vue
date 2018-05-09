@@ -34,12 +34,12 @@
   .navtab-container {
     justify-content: space-between;
     height: 100%;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
   .navtab {
-    background: var(--white-50);
+    background: var(--white-25);
     flex-grow: 1;
     border-radius: .8rem;
     max-height: 28%;
@@ -47,7 +47,7 @@
     display: flex;
     flex-direction: column;
     padding: 2rem;
-    justify-content: space-between;
+    justify-content: center;
   }
   .navtab:active {
     background: var(--white);
@@ -56,7 +56,6 @@
   .navtab:before {
     font-size: 10vh;
     text-align: center;
-    max-height: 60px;
   }
 
   .navtab__label {
