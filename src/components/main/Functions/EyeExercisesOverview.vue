@@ -26,7 +26,7 @@
       }
     },
     beforeMount: function () {
-      this.eyeExercises = Apiomat.EyeExercise.getEyeExercisesAndRefHref(undefined, {
+      Apiomat.EyeExercise.getEyeExercises(undefined, {
         onOk: eyeExercises => {
           this.eyeExercises = eyeExercises;
         },

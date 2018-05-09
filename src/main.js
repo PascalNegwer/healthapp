@@ -9,10 +9,13 @@ Vue.use(VeeValidate);
 window.EventBus = new Vue();
 Vue.prototype.$user = new Apiomat.FrontendUser();
 
-Apiomat.Datastore.setCachingStrategy(Apiomat.AOMCacheStrategy.NETWORK_ELSE_CACHE);
 Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.FrontendUser, true);
 Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Day, true);
 Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Period, true);
+Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.EyeExercise, true);
+Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Workout, true);
+Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.WorkoutTypes, true);
+Apiomat.Datastore.setCachingStrategy(Apiomat.AOMCacheStrategy.NETWORK_ELSE_CACHE);
 
 new Vue({
   router,
