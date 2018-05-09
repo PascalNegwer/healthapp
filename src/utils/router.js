@@ -10,6 +10,9 @@ import Functions from '../components/main/Functions.vue'
 import Account from '../components/main/Account.vue'
 import Help from '../components/main/Help.vue'
 import Lawstuff from '../components/main/Lawstuff.vue'
+import Workout from '../components/main/Workout.vue'
+import Augenuebungen from '../components/main/Augenuebungen.vue'
+import Ergonomie from '../components/main/Ergonomie.vue'
 
 Vue.use(Router);
 
@@ -68,6 +71,24 @@ const router = new Router({
           component: Lawstuff,
           beforeEnter: loggedInOnly,
         },
+        {
+          path: '/workout',
+          name: 'workout',
+          component: Workout,
+          beforeEnter: loggedInOnly,
+        },
+        {
+          path: '/augenuebungen',
+          name: 'augenuebungen',
+          component: Augenuebungen,
+          beforeEnter: loggedInOnly,
+        },
+        {
+          path: '/ergonomie',
+          name: 'ergonomie',
+          component: Ergonomie,
+          beforeEnter: loggedInOnly,
+        }
       ]
     },
     {path: '*', redirect: '/'}

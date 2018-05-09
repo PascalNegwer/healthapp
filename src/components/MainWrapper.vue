@@ -11,10 +11,13 @@
   import Account from './main/Account.vue';
   import Help from './main/Help.vue';
   import Lawstuff from './main/Lawstuff.vue';
+  import Workout from './main/Workout.vue';
+  import Augenuebungen from './main/Augenuebungen.vue';
+  import Ergonomie from './main/Ergonomie.vue';
 
   export default {
     name: 'mainWrapper',
-    components: {Home, Dashboard, Functions, Account, Help, Lawstuff},
+    components: {Home, Dashboard, Functions, Account, Help, Lawstuff, Workout, Augenuebungen, Ergonomie},
     data() {
       return {}
     },

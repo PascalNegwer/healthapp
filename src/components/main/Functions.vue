@@ -1,6 +1,16 @@
 <template>
-    <div class="l_wrapper l_wrapper--small">
-        <h1>functions</h1>
+    <div class="l_wrapper l_flex">
+      <nav class="l_flex navtab-container">
+        <router-link class="navtab u_icon--gym" to="/workout">
+          <p class="navtab__label">Workout</p>
+        </router-link>
+        <router-link class="navtab u_icon--eye" to="/augenuebungen">
+          <p class="navtab__label">Augenübungen</p>
+        </router-link>
+        <router-link class="navtab u_icon--chair" to="/ergonomie">
+          <p class="navtab__label">Ergonomie</p>
+        </router-link>
+      </nav>
     </div>
 </template>
 
@@ -20,5 +30,42 @@
   }
 </script>
 
-<style>
+<style scoped>
+  .navtab-container {
+    justify-content: space-between;
+    height: 100%;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .navtab {
+    background: var(--white-50);
+    flex-grow: 1;
+    border-radius: .8rem;
+    max-height: 28%;
+    transition: background .15s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    justify-content: space-between;
+  }
+  .navtab:active {
+    background: var(--white);
+  }
+
+  .navtab:before {
+    font-size: 10vh;
+    text-align: center;
+    max-height: 60px;
+  }
+
+  .navtab__label {
+    color: var(--white);
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    font-weight: 300;
+    font-family: 'Comfortaa', sans-serif;
+    text-align: center;
+    margin-top: .8rem;
+  }
 </style>
