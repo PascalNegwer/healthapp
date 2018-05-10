@@ -134,12 +134,10 @@
   }
 
   .alert__btn--ok {
-    border-color: var(--success);
     background-color: var(--success-50);
   }
 
   .alert__btn--chancel {
-    border-color: var(--error);
     background-color: var(--error-50);
   }
 
