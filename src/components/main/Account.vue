@@ -107,13 +107,12 @@
           EventBus.$emit('newMessage', {message: 'Oops! Scheint als hättest du keine Internetverbindung.', type: messageTypes.ERROR});
           return;
         }
-        //Apiomat.Datastore.configureWithCredentials(this.$user);
 
-        Apiomat.FrontendUser.deleteAllFromStorage('id=id('+this.$user.getId+')', {
+        this.$user.deleteModel ({
           onOk: result => {
             console.log(result);
             console.log('gelöscht');
-            //router.push('/login');
+            router.push('/login');
           },
           onError: error => {
             switch (error.statusCode) {
