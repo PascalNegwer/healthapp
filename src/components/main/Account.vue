@@ -111,6 +111,7 @@
 
         Apiomat.FrontendUser.deleteAllFromStorage('id=id('+this.$user.getId+')', {
           onOk: result => {
+            console.log(result);
             console.log('gelöscht');
             //router.push('/login');
           },
