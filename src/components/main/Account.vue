@@ -26,6 +26,13 @@
         <button class="btn" type="submit">Passwort ändern</button>
       </form>
     </section>
+    <span class="l_divider"></span>
+    <section class="l_section">
+      <h2 class="headline">Account Löschen</h2>
+      <form class="l_flex" v-on:submit.prevent="deleteAllFromStorage">
+        <button class="btn" type="submit">Account löschen</button>
+      </form>
+    </section>
   </div>
 </template>
 
@@ -92,7 +99,31 @@
             }
           }
         });
-      }
+      },
+
+      deleteAllFromStorage: function () {
+
+        if (!navigator.onLine) {
+          EventBus.$emit('newMessage', {message: 'Oops! Scheint als hättest du keine Internetverbindung.', type: messageTypes.ERROR});
+          return;
+        }
+
+        Apiomat.
+
+        this.$user.deleteAllFromStorage( , {
+          onOk: result => {
+
+          },
+          onError: error => {
+            switch (error.statusCode) {
+              default:
+                console.log(error);
+                EventBus.$emit('newMessage', {message: 'Oops! Unbekannter Fehler.', type: messageTypes.ERROR});
+            }
+          }
+        });
+
+      },
     }
   }
 </script>
