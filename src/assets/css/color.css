@@ -14,9 +14,12 @@
   --white-90: rgba(255,255,255,.9);
   --white-50: rgba(255,255,255,.5);
   --white-25: rgba(255,255,255,.25);
-  --success: #1aa41f;
-  --warning: #a48f00;
-  --error: #a4180d;
+  --success: rgb(26, 164, 31);
+  --success-50: rgba(26, 164, 31, 0.6);
+  --warning: rgb(164, 143, 0);
+  --warning-50: rgba(164, 143, 0, 0.5);
+  --error: rgb(164, 24, 13);
+  --error-50: rgba(164, 24, 13, 0.6);
 }
 
 .u_color--blue {
