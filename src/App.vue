@@ -10,9 +10,25 @@
           </div>
         </transition>
       </div>
+      <transition name="t_fade">
+        <div v-if="alert" class="alert-container">
+          <div class="alert">
+            <h2 class="alert__headline">{{ alert.headline }}</h2>
+            <p class="alert__text">{{ alert.text }}</p>
+            <button v-on:click="alert.onOk(); resetState()" class="btn btn--18 u_center alert__btn alert__btn--ok">
+              Ja
+            </button>
+            <button v-on:click="resetState()" class="btn btn--18 u_center alert__btn alert__btn--chancel">
+              Abbrechen
+            </button>
+          </div>
+        </div>
+      </transition>
       <router-view></router-view>
     </main>
-    <main-nav v-if="isMain()"></main-nav>
+    <transition name="t_fade">
+      <main-nav v-if="isMain() && !hideNav"></main-nav>
+    </transition>
   </body>
 </template>
 
@@ -26,7 +42,9 @@
     components: {MainNav},
     data() {
       return {
-        flashMessages: []
+        flashMessages: [],
+        alert: undefined,
+        hideNav: false,
       }
     },
     methods: {
@@ -35,6 +53,10 @@
       },
       isMain() {
         return (this.$route.name !== 'signup' && this.$route.name !== 'login');
+      },
+      resetState() {
+        this.alert = undefined;
+        this.hideNav = false
       }
     },
     mounted: function () {
@@ -59,11 +81,68 @@
       EventBus.$on('clearFlashMessages', function () {
         self.flashMessages = [];
       });
+
+      EventBus.$on('alert', function (alert) {
+        self.hideNav = true;
+        self.alert = alert;
+      });
     }
   }
 </script>
 
 <style scoped>
+  .alert-container {
+    background: var(--white-25);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1100;
+    width: 100%;
+    height: 98%;
+    padding: 8rem 2rem;
+    position: fixed;
+  }
+
+  .alert {
+    background: var(--white-90);
+    border: var(--white) 1px solid;
+    #font-family: 'Comfortaa', sans-serif;
+    color: var(--darkgrey);
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    height: 100%;
+  }
+
+  .alert * {
+    margin-bottom: 20px;
+  }
+
+  .alert__headline {
+    font-size: 2.5rem;
+    font-weight: 500;
+  }
+
+  .alert__text {
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  .alert__btn {
+    width: 90%;
+  }
+
+  .alert__btn--ok {
+    border-color: var(--success);
+    background-color: var(--success);
+  }
+
+  .alert__btn--chancel {
+    border-color: var(--error);
+    background-color: var(--error);
+  }
+
   .flash-messages-container {
     top: 4rem;
     left: 50%;
