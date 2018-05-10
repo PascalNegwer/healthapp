@@ -28,7 +28,6 @@
     </section>
     <span class="l_divider"></span>
     <section class="l_section">
-      <h2 class="headline">Account Löschen</h2>
       <form class="l_flex" v-on:submit.prevent="deleteAllFromStorage">
         <button class="btn" type="submit">Account löschen</button>
       </form>
@@ -38,6 +37,7 @@
 
 <script>
   import * as messageTypes from '../../classes/MessageTypes'
+  import router from '../../utils/router.js'
 
   export default {
     beforeCreate: function () {
@@ -107,12 +107,12 @@
           EventBus.$emit('newMessage', {message: 'Oops! Scheint als hättest du keine Internetverbindung.', type: messageTypes.ERROR});
           return;
         }
+        //Apiomat.Datastore.configureWithCredentials(this.$user);
 
-        Apiomat.
-
-        this.$user.deleteAllFromStorage( , {
+        Apiomat.FrontendUser.deleteAllFromStorage('id=id('+this.$user.getId+')', {
           onOk: result => {
-
+            console.log('gelöscht');
+            //router.push('/login');
           },
           onError: error => {
             switch (error.statusCode) {
@@ -124,6 +124,7 @@
         });
 
       },
+
     }
   }
 </script>
