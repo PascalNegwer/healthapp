@@ -3,9 +3,9 @@
     <p v-on:click="goBack()" class="btn btn--12 back-button">zurück</p>
     <div v-if="loading">Loading</div>
     <section v-else class="exercise l_flex">
-      <div class="exercise__gif" :style="{ backgroundImage:  'url(' + eyeExercise.getImageURL() + ')'}">
+      <div class="exercise__gif" :style="{ backgroundImage:  'url(' + eyeExercises.getImageURL() + ')'}">
       </div>
-      <p class="exercise__description">{{ eyeExercise.getDescription() }}</p>
+      <p class="exercise__description">{{ eyeExercises.getDescription() }}</p>
     </section>
   </div>
 </template>
@@ -22,7 +22,7 @@
     data() {
       return {
         loading: true,
-        eyeExercise: undefined,
+        eyeExercises: undefined,
       }
     },
     methods: {
@@ -31,14 +31,16 @@
       },
     },
     beforeMount: function() {
-      for (let i = 0; i < window.$eyeExercises.length(); i++) {
-        if (window.$eyeExercises[i].getID() === this.id) {
-          this.eyeExercise = window.$eyeExercises[i];
+      Apiomat.EyeExercise.getEyeExercises('id == id(' + this.id + ')', {
+        onOk: eyeExercises => {
+          this.eyeExercises = eyeExercises[0];
           this.loading = false;
-          return
+        },
+        onError: error => {
+          console.log(error);
+          EventBus.$emit('newMessage', {message: 'Oops! Etwas ist schief gegangen.', type: messageTypes.ERROR});
         }
-      }
-      this.loading = false;
+      }, true);
     }
   }
 </script>

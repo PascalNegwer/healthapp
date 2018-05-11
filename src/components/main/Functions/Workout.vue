@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>Workout</h1>
-    <img v-if="workout" :src="workout.getImage1URL()"/>
   </div>
 </template>
 
@@ -18,12 +17,16 @@
     },
     methods: {},
     beforeMount: function () {
-      for (let i = 0; i < window.$workouts.length; i++) {
-        if (window.$workouts[i].getID() === this.id) {
-          this.workout = window.$workouts[i];
-          return;
+      Apiomat.Workout.getWorkouts('id == id(' + this.id + ')', {
+        onOk: workouts => {
+          this.workout = workouts[0];
+          this.loading = false;
+        },
+        onError: error => {
+          console.log(error);
+          EventBus.$emit('newMessage', {message: 'Oops! Etwas ist schief gegangen.', type: messageTypes.ERROR});
         }
-      }
+      }, true);
     },
   }
 </script>
