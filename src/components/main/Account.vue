@@ -102,19 +102,17 @@
       },
 
       deleteUser () {
-        //console.log('test'); <--- der funktioniert noch
+        if (!navigator.onLine) {
+          EventBus.$emit('newMessage', {
+            message: 'Oops! Scheint als hättest du keine Internetverbindung.',
+            type: messageTypes.ERROR
+          });
+          return;
+        }
         EventBus.$emit('alert', {
           headline: 'Account löschen?',
           text: 'Möchtest du deinen Account wirklich löschen?',
           onOk: function () {
-            //console.log('test'); <--- der nicht mehr
-            if (!navigator.onLine) {
-              EventBus.$emit('newMessage', {
-                message: 'Oops! Scheint als hättest du keine Internetverbindung.',
-                type: messageTypes.ERROR
-              });
-              return;
-            }
 
             this.$user.deleteModel({
               onOk: result => {
@@ -130,7 +128,7 @@
                 }
               }
             });
-          },
+          }.bind(this),
           onError: error => {
             console.log(error);
             EventBus.$emit('newMessage', {message: 'Oops! Sehr unbekannter Fehler.', type: messageTypes.ERROR});
