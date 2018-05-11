@@ -8,6 +8,8 @@ Vue.use(VeeValidate);
 
 window.EventBus = new Vue();
 Vue.prototype.$user = new Apiomat.FrontendUser();
+window.$workouts = [];
+window.$eyeExercises = [];
 
 Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.FrontendUser, true);
 Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Day, true);
