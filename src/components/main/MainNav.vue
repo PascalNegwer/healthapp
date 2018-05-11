@@ -99,6 +99,10 @@
     justify-content: space-between;
     flex-wrap: nowrap;
     z-index: 1000;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
   .nav--dropdown {
     position: absolute;

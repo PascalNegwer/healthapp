@@ -19,6 +19,10 @@
   color: var(--primary-color);
   border-color: var(--primary-color);
   background: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .btn:focus {
   outline: none;
