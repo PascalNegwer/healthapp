@@ -19,7 +19,7 @@ export default (function () {
     let date = new Date();
     date.setTime(date.getTime() + expires);
     document.cookie = name + '=' + value + ';'
-      + 'expires='+ date.toUTCString() + ';'
+      + 'max-age=432000;'
       + 'path=/;';
   }
 

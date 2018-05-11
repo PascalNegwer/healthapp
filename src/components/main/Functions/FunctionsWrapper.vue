@@ -1,5 +1,5 @@
 <template>
-  <div class="l_wrapper l_wrapper--small">
+  <div class="functions-wrapper">
     <transition name="t_no-mode-translate">
       <router-view></router-view>
     </transition>
@@ -9,7 +9,6 @@
 <script>
   import * as messageTypes from '../../../classes/MessageTypes';
   import EyeExercisesOverview from './EyeExercisesOverview.vue';
-
 
   export default {
     components: {EyeExercisesOverview},
@@ -26,5 +25,8 @@
   }
 </script>
 
-<style>
+<style scoped>
+  .functions-wrapper {
+    height: 100%;
+  }
 </style>
