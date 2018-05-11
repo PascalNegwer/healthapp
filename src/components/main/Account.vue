@@ -28,7 +28,7 @@
     </section>
     <span class="l_divider"></span>
     <section class="l_section">
-      <form class="l_flex" v-on:submit.prevent="deleteAllFromStorage">
+      <form class="l_flex" v-on:submit.prevent="deleteUser">
         <button class="btn" type="submit">Account löschen</button>
       </form>
     </section>
@@ -101,30 +101,42 @@
         });
       },
 
-      deleteAllFromStorage: function () {
+      deleteUser () {
+        //console.log('test'); <--- der funktioniert noch
+        EventBus.$emit('alert', {
+          headline: 'Account löschen?',
+          text: 'Möchtest du deinen Account wirklich löschen?',
+          onOk: function () {
+            //console.log('test'); <--- der nicht mehr
+            if (!navigator.onLine) {
+              EventBus.$emit('newMessage', {
+                message: 'Oops! Scheint als hättest du keine Internetverbindung.',
+                type: messageTypes.ERROR
+              });
+              return;
+            }
 
-        if (!navigator.onLine) {
-          EventBus.$emit('newMessage', {message: 'Oops! Scheint als hättest du keine Internetverbindung.', type: messageTypes.ERROR});
-          return;
-        }
-
-        this.$user.deleteModel ({
-          onOk: result => {
-            console.log(result);
-            console.log('gelöscht');
-            router.push('/login');
+            this.$user.deleteModel({
+              onOk: result => {
+                console.log(result);
+                console.log('gelöscht');
+                router.push('/login');
+              },
+              onError: error => {
+                switch (error.statusCode) {
+                  default:
+                    console.log(error);
+                    EventBus.$emit('newMessage', {message: 'Oops! Unbekannter Fehler.', type: messageTypes.ERROR});
+                }
+              }
+            });
           },
           onError: error => {
-            switch (error.statusCode) {
-              default:
-                console.log(error);
-                EventBus.$emit('newMessage', {message: 'Oops! Unbekannter Fehler.', type: messageTypes.ERROR});
-            }
+            console.log(error);
+            EventBus.$emit('newMessage', {message: 'Oops! Sehr unbekannter Fehler.', type: messageTypes.ERROR});
           }
         });
-
       },
-
     }
   }
 </script>
