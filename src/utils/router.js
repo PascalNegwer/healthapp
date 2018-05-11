@@ -16,6 +16,8 @@ import FunctionsOverview from '../components/main/Functions/FunctionsOverview.vu
 import EyeExercisesOverview from '../components/main/Functions/EyeExercisesOverview.vue'
 import EyeExercise from '../components/main/Functions/EyeExercise.vue'
 import WorkoutOverview from '../components/main/Functions/WorkoutOverview.vue'
+import WorkoutType from '../components/main/Functions/WorkoutType.vue'
+import Workout from '../components/main/Functions/Workout.vue'
 import Ergonomics from '../components/main/Functions/Ergonomics.vue'
 
 Vue.use(Router);
@@ -80,6 +82,20 @@ const router = new Router({
               name: 'workouts',
               component: WorkoutOverview,
               beforeEnter: loggedInOnly,
+            },
+            {
+              path: 'workouts/:type',
+              name: 'workout-type',
+              component: WorkoutType,
+              beforeEnter: loggedInOnly,
+              props: true
+            },
+            {
+              path: 'workouts/:type/:id',
+              name: 'workout',
+              component: Workout,
+              beforeEnter: loggedInOnly,
+              props: true
             },
             {
               path: 'ergonomics',

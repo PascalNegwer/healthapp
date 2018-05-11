@@ -31,12 +31,10 @@
       },
     },
     beforeMount: function() {
-      console.log(this.id);
-      this.eyeExercises = Apiomat.EyeExercise.getEyeExercises('id == id(' + this.id + ')', {
+      Apiomat.EyeExercise.getEyeExercises('id == id(' + this.id + ')', {
         onOk: eyeExercises => {
           this.eyeExercises = eyeExercises[0];
           this.loading = false;
-          console.log(this.eyeExercises);
         },
         onError: error => {
           console.log(error);
