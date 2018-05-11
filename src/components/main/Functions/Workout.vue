@@ -92,12 +92,12 @@
   }
   .back-button {
     margin-right: auto;
-    margin-bottom: 2rem;
   }
   .slider {
     margin-left: -1rem;
     margin-right: -1rem;
     position: relative;
+    overflow: hidden;
   }
   .slider__wrapper {
     width: 200%;

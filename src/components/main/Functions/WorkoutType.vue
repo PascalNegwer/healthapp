@@ -77,6 +77,7 @@
   }
   .back-button {
     margin-right: auto;
+    margin-left: auto;
     margin-top: auto;
   }
 </style>
