@@ -26,11 +26,18 @@
         <button class="btn" type="submit">Passwort ändern</button>
       </form>
     </section>
+    <span class="l_divider"></span>
+    <section class="l_section">
+      <form class="l_flex" v-on:submit.prevent="deleteUser">
+        <button class="btn" type="submit">Account löschen</button>
+      </form>
+    </section>
   </div>
 </template>
 
 <script>
   import * as messageTypes from '../../classes/MessageTypes'
+  import router from '../../utils/router.js'
 
   export default {
     beforeCreate: function () {
@@ -92,7 +99,42 @@
             }
           }
         });
-      }
+      },
+
+      deleteUser () {
+        if (!navigator.onLine) {
+          EventBus.$emit('newMessage', {
+            message: 'Oops! Scheint als hättest du keine Internetverbindung.',
+            type: messageTypes.ERROR
+          });
+          return;
+        }
+        EventBus.$emit('alert', {
+          headline: 'Account löschen?',
+          text: 'Möchtest du deinen Account wirklich löschen?',
+          onOk: function () {
+
+            this.$user.deleteModel({
+              onOk: result => {
+                console.log(result);
+                console.log('gelöscht');
+                router.push('/login');
+              },
+              onError: error => {
+                switch (error.statusCode) {
+                  default:
+                    console.log(error);
+                    EventBus.$emit('newMessage', {message: 'Oops! Unbekannter Fehler.', type: messageTypes.ERROR});
+                }
+              }
+            });
+          }.bind(this),
+          onError: error => {
+            console.log(error);
+            EventBus.$emit('newMessage', {message: 'Oops! Sehr unbekannter Fehler.', type: messageTypes.ERROR});
+          }
+        });
+      },
     }
   }
 </script>
