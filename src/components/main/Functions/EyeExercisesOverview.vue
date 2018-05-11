@@ -3,7 +3,7 @@
     <h1 class="headline headline--main">Augenübungen</h1>
     <ul>
       <li class="list-item" v-for="eyeExercise in eyeExercises">
-        <router-link v-bind:eyeExercise="eyeExercise" class="eyelink-style u_icon--down l_flex l_flex--horizontal" :to="{ name: 'eye-exercise', params: { id: eyeExercise.data.id }}">
+        <router-link v-bind:eyeExercise="eyeExercise" class="link u_icon--down l_flex l_flex--horizontal" :to="{ name: 'eye-exercise', params: { id: eyeExercise.data.id }}">
           {{ eyeExercise.getTitle() }}
         </router-link>
       </li>
@@ -42,7 +42,7 @@
 
 
 <style scoped>
-  .eyelink-style {
+  .link {
     font-family: Comfortaa, sans-serif;
     font-size: 1.6rem;
     justify-content: space-between;
@@ -51,10 +51,10 @@
     transition: opacity .15s ease-in-out;
     line-height: 3;
   }
-  .eyelink-style:active, .eyelink-style:active:before {
+  .link:active, .link:active:before {
     opacity: .5;
   }
-  .eyelink-style:before {
+  .link:before {
     transition: opacity .15s ease-in-out;
     order: 1;
     transform: rotate(-90deg);
