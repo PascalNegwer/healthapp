@@ -1,7 +1,20 @@
 <template>
+  <div>
+    <div v-for="eyeExercise in eyeExercises">
+      <img :src="eyeExercise.getImageURL(100)" style="display: none"/>
+    </div>
+    <div v-for="workout in workouts">
+      <img :src="workout.getImage1URL(100)" style="display: none"/>
+      <img :src="workout.getImage2URL(100)" style="display: none"/>
+      <img :src="workout.getImage3URL(100)" style="display: none"/>
+      <img :src="workout.getImage4URL(100)" style="display: none"/>
+      <img :src="workout.getImage5URL(100)" style="display: none"/>
+    </div>
   <transition name="t_no-mode-translate">
-    <router-view></router-view>
+      <router-view>
+      </router-view>
   </transition>
+  </div>
 </template>
 
 <script>
@@ -16,7 +29,10 @@
     name: 'mainWrapper',
     components: {Home, Dashboard, FunctionsWrapper, Account, Help, Lawstuff},
     data() {
-      return {}
+      return {
+        eyeExercises: [],
+        workouts: [],
+      }
     },
     methods: {},
     beforeMount: function () {
@@ -24,13 +40,8 @@
         onOk: workouts => {
           for (let i = 0; i < workouts.length; i++) {
             let workout = workouts[i];
-            workout.loadWorkoutType({}, true);
-            workout.loadImage1(undefined, undefined, undefined, undefined, undefined,undefined, true);
-            workout.loadImage2(undefined, undefined, undefined, undefined, undefined,undefined, true);
-            workout.loadImage3(undefined, undefined, undefined, undefined, undefined,undefined, true);
-            workout.loadImage4(undefined, undefined, undefined, undefined, undefined,undefined, true);
-            workout.loadImage5(undefined, undefined, undefined, undefined, undefined,undefined, true);
             window.$workouts.push(workout);
+            this.workouts.push(workout);
           }
         }
       }, true);
@@ -38,8 +49,8 @@
         onOk: eyeExercises => {
           for (let i = 0; i < eyeExercises.length; i++) {
             let eyeExercise = eyeExercises[i];
-            eyeExercise.loadImage(undefined, undefined, undefined, undefined, undefined,undefined, true);
             window.$eyeExercises.push(eyeExercise);
+            this.eyeExercises.push(eyeExercise);
           }
         }
       }, true);

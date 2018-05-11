@@ -3,7 +3,7 @@
     <p v-on:click="goBack()" class="btn btn--12 back-button">zurück</p>
     <div v-if="loading">Loading</div>
     <section v-else class="exercise l_flex">
-      <div class="exercise__gif" :style="{ backgroundImage:  'url(' + eyeExercise.getImageURL() + ')'}">
+      <div class="exercise__gif" :style="{ backgroundImage:  'url(' + eyeExercise.getImageURL(100) + ')'}">
       </div>
       <p class="exercise__description">{{ eyeExercise.getDescription() }}</p>
     </section>
@@ -31,7 +31,7 @@
       },
     },
     beforeMount: function() {
-      for (let i = 0; i < window.$eyeExercises.length(); i++) {
+      for (let i = 0; i < window.$eyeExercises.length; i++) {
         if (window.$eyeExercises[i].getID() === this.id) {
           this.eyeExercise = window.$eyeExercises[i];
           this.loading = false;

@@ -16,7 +16,6 @@ Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Day, true);
 Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Period, true);
 Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.EyeExercise, true);
 Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Workout, true);
-Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.WorkoutTypes, true);
 Apiomat.Datastore.setCachingStrategy(Apiomat.AOMCacheStrategy.NETWORK_ELSE_CACHE);
 
 new Vue({

@@ -26,7 +26,7 @@
     beforeMount: function () {
       let workoutsByType = [];
       for (let i = 0; i < window.$workouts.length; i++) {
-        if (window.$workouts[i].getWorkoutType().getCode() === this.type) {
+        if (window.$workouts[i].getWorkoutType() === this.type) {
           workoutsByType.push(window.$workouts[i]);
         }
       }

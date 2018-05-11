@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Workout</h1>
-    <img v-if="workout" :src="workout.getImage1URL()"/>
+    <img v-if="workout" :src="workout.getImage1URL(100)"/>
   </div>
 </template>
 
