@@ -1,6 +1,7 @@
 <template>
   <transition name="t_no-mode-translate">
-    <router-view></router-view>
+      <router-view>
+      </router-view>
   </transition>
 </template>
 
@@ -16,9 +17,32 @@
     name: 'mainWrapper',
     components: {Home, Dashboard, FunctionsWrapper, Account, Help, Lawstuff},
     data() {
-      return {}
+      return {
+        eyeExercises: [],
+        workouts: [],
+      }
     },
-    methods: {}
+    methods: {},
+    beforeMount: function () {
+      Apiomat.Workout.getWorkouts(undefined, {
+        onOk: workouts => {
+          for (let i = 0; i < workouts.length; i++) {
+            let workout = workouts[i];
+            window.$workouts.push(workout);
+            this.workouts.push(workout);
+          }
+        }
+      }, true);
+      Apiomat.EyeExercise.getEyeExercises(undefined, {
+        onOk: eyeExercises => {
+          for (let i = 0; i < eyeExercises.length; i++) {
+            let eyeExercise = eyeExercises[i];
+            window.$eyeExercises.push(eyeExercise);
+            this.eyeExercises.push(eyeExercise);
+          }
+        }
+      }, true);
+    },
   }
 </script>
 

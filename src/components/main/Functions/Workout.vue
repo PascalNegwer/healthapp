@@ -13,7 +13,7 @@
         <span class="slider__control slider__control--left u_icon--up" v-on:click="slidePrev()"></span>
         <span class="slider__control slider__control--right u_icon--down" v-on:click="slideNext()"></span>
       </div>
-      <p class="exercise__description">{{ workout.getDescription() }}</p>
+      <p class="exercise__description" v-html="workout.getDescription()"></p>
     </section>
   </div>
 </template>

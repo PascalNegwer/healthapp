@@ -1,11 +1,10 @@
 <template>
   <div class="l_wrapper l_wrapper--small l_flex">
     <p v-on:click="goBack()" class="btn btn--12 back-button">zurück</p>
-    <div v-if="loading">Loading</div>
-    <section v-else class="exercise l_flex">
-      <div class="exercise__gif" :style="{ backgroundImage:  'url(' + eyeExercises.getImageURL() + ')'}">
+    <section v-if="eyeExercise" class="exercise l_flex">
+      <div class="exercise__gif" :style="{ backgroundImage:  'url(' + eyeExercise.getImageURL() + ')'}">
       </div>
-      <p class="exercise__description">{{ eyeExercises.getDescription() }}</p>
+      <p class="exercise__description">{{ eyeExercise.getDescription() }}</p>
     </section>
   </div>
 </template>
@@ -21,8 +20,7 @@
     props: ['id'],
     data() {
       return {
-        loading: true,
-        eyeExercises: undefined,
+        eyeExercise: undefined,
       }
     },
     methods: {
@@ -31,16 +29,11 @@
       },
     },
     beforeMount: function() {
-      Apiomat.EyeExercise.getEyeExercises('id == id(' + this.id + ')', {
-        onOk: eyeExercises => {
-          this.eyeExercises = eyeExercises[0];
-          this.loading = false;
-        },
-        onError: error => {
-          console.log(error);
-          EventBus.$emit('newMessage', {message: 'Oops! Etwas ist schief gegangen.', type: messageTypes.ERROR});
+      for (let i = 0; i < window.$eyeExercises.length; i++) {
+        if (window.$eyeExercises[i].getID() === this.id) {
+          this.eyeExercise = window.$eyeExercises[i];
         }
-      }, true);
+      }
     }
   }
 </script>

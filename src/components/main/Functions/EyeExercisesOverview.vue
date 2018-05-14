@@ -22,7 +22,7 @@
     props: [],
     data() {
       return {
-        eyeExercises: undefined,
+        eyeExercises: [],
       }
     },
     beforeMount: function () {

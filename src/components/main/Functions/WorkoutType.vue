@@ -30,25 +30,31 @@
       },
     },
     beforeMount: function () {
-      Apiomat.Workout.getWorkouts(undefined, {
-        onOk: workouts => {
-          for (let i = 0; i < workouts.length; i++) {
-            let workout = workouts[i];
-            workout.loadWorkoutType({
-              onOk: workoutType => {
-                if (workoutType.getCode() === this.type) {
-                  this.workouts.push(workout);
-                  this.workoutType = workoutType.getName();
-                }
-              }
-            });
-          }
-        },
-        onError: error => {
-          console.log(error);
-          EventBus.$emit('newMessage', {message: 'Oops! Etwas ist schief gegangen.', type: messageTypes.ERROR});
+      let workoutsByType = [];
+      for (let i = 0; i < window.$workouts.length; i++) {
+        if (window.$workouts[i].getWorkoutType() === this.type) {
+          workoutsByType.push(window.$workouts[i]);
         }
-      }, true);
+      }
+      this.workouts = workoutsByType;
+
+      switch (this.type) {
+        case 'neck':
+          this.workoutType = 'Nacken';
+          break;
+        case 'head':
+          this.workoutType = 'Kopf';
+          break;
+        case 'legs':
+          this.workoutType = 'Beine';
+          break;
+        case 'arms':
+          this.workoutType = 'Arme';
+          break;
+        case 'back':
+          this.workoutType = 'Rücken';
+          break;
+      }
     },
   }
 </script>
