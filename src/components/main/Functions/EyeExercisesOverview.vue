@@ -26,15 +26,7 @@
       }
     },
     beforeMount: function () {
-      Apiomat.EyeExercise.getEyeExercises(undefined, {
-        onOk: eyeExercises => {
-          this.eyeExercises = eyeExercises;
-        },
-        onError: error => {
-          console.log(error);
-          EventBus.$emit('newMessage', {message: 'Oops! Etwas ist schief gegangen.', type: messageTypes.ERROR});
-        }
-      }, true);
+      this.eyeExercises = window.$eyeExercises;
     },
     methods: {}
   }

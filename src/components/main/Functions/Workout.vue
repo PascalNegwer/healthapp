@@ -8,7 +8,7 @@
           <img class="slider__image" v-for="index in images" :src="workout['getImage' + index + 'URL']()" :style="{width : 100 / images + '%'}">
         </div>
         <div class="slider__index">
-          <span v-for="index in images" class="slider__bullet" :class="{'slider__bullet--active': index == activeIndex}"></span>
+          <span v-for="index in images" class="slider__bullet" :class="{'slider__bullet--active': index === activeIndex}"></span>
         </div>
         <span class="slider__control slider__control--left u_icon--up" v-on:click="slidePrev()"></span>
         <span class="slider__control slider__control--right u_icon--down" v-on:click="slideNext()"></span>
@@ -50,14 +50,14 @@
         window.history.back();
       },
       slideNext: function() {
-        if(this.activeIndex != this.images) {
+        if(this.activeIndex !== this.images) {
           let value = 100 / this.images;
           this.transform = parseInt(this.transform) + value;
           this.activeIndex++;
         }
       },
       slidePrev: function() {
-        if(this.activeIndex != 1) {
+        if(this.activeIndex !== 1) {
           let value = 100 / this.images;
           this.transform = parseInt(this.transform) - value;
           this.activeIndex--;
@@ -65,17 +65,13 @@
       }
     },
     beforeMount: function () {
-      Apiomat.Workout.getWorkouts('id == id(' + this.id + ')', {
-        onOk: workouts => {
-          this.workout = workouts[0];
+      for (let i = 0; i < window.$workouts.length; i++) {
+        if (window.$workouts[i].getID() === this.id) {
+          this.workout = window.$workouts[i];
           this.loading = false;
           prepareSlider(this);
-        },
-        onError: error => {
-          console.log(error);
-          EventBus.$emit('newMessage', {message: 'Oops! Etwas ist schief gegangen.', type: messageTypes.ERROR});
         }
-      }, true);
+      }
     },
   }
 </script>
@@ -133,7 +129,6 @@
     height: 100%;
     width: 20%;
     top: 0;
-    display: block;
     display: flex;
     justify-content: center;
     align-items: center;
