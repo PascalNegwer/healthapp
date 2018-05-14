@@ -1,20 +1,8 @@
 <template>
-  <div>
-    <div v-for="eyeExercise in eyeExercises">
-      <img :src="eyeExercise.getImageURL(100)" style="display: none"/>
-    </div>
-    <div v-for="workout in workouts">
-      <img :src="workout.getImage1URL(100)" style="display: none"/>
-      <img :src="workout.getImage2URL(100)" style="display: none"/>
-      <img :src="workout.getImage3URL(100)" style="display: none"/>
-      <img :src="workout.getImage4URL(100)" style="display: none"/>
-      <img :src="workout.getImage5URL(100)" style="display: none"/>
-    </div>
   <transition name="t_no-mode-translate">
       <router-view>
       </router-view>
   </transition>
-  </div>
 </template>
 
 <script>

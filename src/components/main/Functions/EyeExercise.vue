@@ -3,7 +3,7 @@
     <p v-on:click="goBack()" class="btn btn--12 back-button">zurück</p>
     <div v-if="loading">Loading</div>
     <section v-else class="exercise l_flex">
-      <div class="exercise__gif" :style="{ backgroundImage:  'url(' + eyeExercise.getImageURL(100) + ')'}">
+      <div class="exercise__gif" :style="{ backgroundImage:  'url(' + eyeExercise.getImageURL() + ')'}">
       </div>
       <p class="exercise__description">{{ eyeExercise.getDescription() }}</p>
     </section>
