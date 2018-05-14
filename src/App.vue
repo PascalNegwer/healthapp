@@ -1,34 +1,34 @@
 <template>
   <body>
-  <main class="l_main" v-bind:class="{'l_main--w-nav' :isMain()}">
-    <div class="flash-messages-container">
-      <transition name="t_slide-fade">
-        <div v-for="(flashMessage, index) in flashMessages" class="flash-message"
-             v-bind:class="['flash-message--' + flashMessage.type,  'u_icon--' + flashMessage.type]"
-             v-on:click="unset(index)">
-          <p class="flash-message__text">{{ flashMessage.message }}</p>
+    <main class="l_main" v-bind:class="{'l_main--w-nav' :isMain()}">
+      <div class="flash-messages-container">
+        <transition name="t_slide-fade">
+          <div v-for="(flashMessage, index) in flashMessages" class="flash-message"
+               v-bind:class="['flash-message--' + flashMessage.type,  'u_icon--' + flashMessage.type]"
+               v-on:click="unset(index)">
+            <p class="flash-message__text">{{ flashMessage.message }}</p>
+          </div>
+        </transition>
+      </div>
+      <transition name="t_fade">
+        <div v-if="alert" class="alert-container">
+          <div class="alert">
+            <h2 class="alert__headline">{{ alert.headline }}</h2>
+            <p class="alert__text">{{ alert.text }}</p>
+            <button v-on:click="alert.onOk(); resetState()" class="btn u_center alert__btn alert__btn--ok">
+              Ja
+            </button>
+            <button v-on:click="resetState()" class="btn u_center alert__btn alert__btn--chancel">
+              Abbrechen
+            </button>
+          </div>
         </div>
       </transition>
-    </div>
+      <router-view></router-view>
+    </main>
     <transition name="t_fade">
-      <div v-if="alert" class="alert-container">
-        <div class="alert">
-          <h2 class="alert__headline">{{ alert.headline }}</h2>
-          <p class="alert__text">{{ alert.text }}</p>
-          <button v-on:click="alert.onOk(); resetState()" class="btn u_center alert__btn alert__btn--ok">
-            Ja
-          </button>
-          <button v-on:click="resetState()" class="btn u_center alert__btn alert__btn--chancel">
-            Abbrechen
-          </button>
-        </div>
-      </div>
+      <main-nav v-if="isMain() && !hideNav"></main-nav>
     </transition>
-    <router-view></router-view>
-  </main>
-  <transition name="t_fade">
-    <main-nav v-if="isMain() && !hideNav"></main-nav>
-  </transition>
   </body>
 </template>
 
@@ -60,6 +60,7 @@
       }
     },
     mounted: function () {
+
       let self = this;
 
       EventBus.$on('loggedOut', function () {
