@@ -14,7 +14,9 @@
         <span class="slider__control slider__control--right u_icon--down" v-on:click="slideNext()"></span>
       </div>
       <div class="exercise__description">
-        <p>{{ workout.getDescription() }}</p>
+        <p v-html="workout.getDescription()"></p>
+        <h3 class="exercise__subhead">Dauer:</h3>
+        <p v-html="workout.getDuration()"></p>
       </div>
     </section>
   </div>
@@ -87,7 +89,7 @@
     line-height: 1.2;
     margin-top: 2rem;
   }
-  .exercise__description span {
+  .exercise__subhead {
     display: block;
     margin-top: 1rem;
     margin-bottom: .5rem;
