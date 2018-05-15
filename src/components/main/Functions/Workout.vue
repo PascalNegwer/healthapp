@@ -145,6 +145,7 @@
   .slider__image {
     width: 100%;
     height: auto;
+    min-height: calc(69vw - 4rem);
   }
   .slider__index {
     position: absolute;
