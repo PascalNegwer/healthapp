@@ -1,6 +1,6 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.1.0/workbox-sw.js');
 
-let revision = (new Date()).toTimeString();
+let revision = '0.0.4';//(new Date()).toTimeString();
 let filesToCache = [
   {
     'url': '/test/assets/css/main.css',
@@ -47,46 +47,6 @@ let filesToCache = [
     'revision': revision,
   },
   {
-    'url': '/test/0.main.js',
-    'revision': revision,
-  },
-  {
-    'url': '/test/1.main.js',
-    'revision': revision,
-  },
-  {
-    'url': '/test/2.main.js',
-    'revision': revision,
-  },
-  {
-    'url': '/test/3.main.js',
-    'revision': revision,
-  },
-  {
-    'url': '/test/4.main.js',
-    'revision': revision,
-  },
-  {
-    'url': '/test/5.main.js',
-    'revision': revision,
-  },
-  {
-    'url': '/test/6.main.js',
-    'revision': revision,
-  },
-  {
-    'url': '/test/7.main.js',
-    'revision': revision,
-  },
-  {
-    'url': '/test/8.main.js',
-    'revision': revision,
-  },
-  {
-    'url': '/test/9.main.js',
-    'revision': revision,
-  },
-  {
     'url': '/test/apiomat.js',
     'revision': revision,
   },
@@ -104,9 +64,8 @@ let filesToCache = [
   },
 ];
 
-workbox.setConfig({
-   debug: true
-});
+workbox.setConfig({debug: false});
+
 workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
 
 workbox.precaching.precacheAndRoute(filesToCache);

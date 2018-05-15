@@ -4,7 +4,7 @@ import App from './App.vue'
 import router from './utils/router.js'
 
 Vue.use(VeeValidate);
-//Vue.config.productionTip = false;
+Vue.config.productionTip = false;
 
 window.EventBus = new Vue();
 window.$workouts = [];

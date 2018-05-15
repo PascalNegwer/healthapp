@@ -26,7 +26,15 @@
       }
     },
     beforeMount: function () {
-      this.eyeExercises = window.$eyeExercises;
+      if (window.$eyeExercises.length > 0) {
+        this.eyeExercises = window.$eyeExercises;
+      } else {
+        let self = this;
+        EventBus.$on('eyeExercisesLoaded', function () {
+          self.eyeExercises = window.$eyeExercises;
+        });
+      }
+
     },
     methods: {}
   }

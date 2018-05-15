@@ -31,6 +31,7 @@
             window.$workouts.push(workout);
             this.workouts.push(workout);
           }
+          EventBus.$emit('workoutsLoaded');
         }
       }, true);
       Apiomat.EyeExercise.getEyeExercises(undefined, {
@@ -40,6 +41,7 @@
             window.$eyeExercises.push(eyeExercise);
             this.eyeExercises.push(eyeExercise);
           }
+          EventBus.$emit('eyeExercisesLoaded');
         }
       }, true);
     },

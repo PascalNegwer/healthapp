@@ -19,6 +19,26 @@
 <script>
   import * as messageTypes from '../../../classes/MessageTypes';
 
+  let setEyeExercise = function(self) {
+    for (let i = 0; i < window.$eyeExercises.length; i++) {
+      if (window.$eyeExercises[i].getID() === self.id) {
+        self.loading = true;
+        self.eyeExercise = window.$eyeExercises[i];
+        self.eyeExercise.loadImage(undefined, undefined, undefined, undefined, undefined, {
+          onOk: result => {
+            self.online = true;
+            setTimeout(() => {
+              self.loading = false;
+            }, 500);
+          }, onError: error => {
+            self.online = false;
+            self.loading = false;
+          }
+        }, true);
+      }
+    }
+  };
+
   export default {
     beforeCreate: function () {
       document.documentElement.className = 'u_gradient-background--purple';
@@ -38,22 +58,14 @@
       },
     },
     beforeMount: function() {
-      for (let i = 0; i < window.$eyeExercises.length; i++) {
-        if (window.$eyeExercises[i].getID() === this.id) {
-          this.loading = true;
-          this.eyeExercise = window.$eyeExercises[i];
-          this.eyeExercise.loadImage(undefined, undefined, undefined, undefined, undefined, {
-            onOk: result => {
-              this.online = true;
-              setTimeout(function () {
-                this.loading = false;
-              }.bind(this), 500);
-            }, onError: error => {
-              this.online = false;
-              this.loading = false;
-            }
-          }, true);
-        }
+
+      if (window.$eyeExercises.length > 0) {
+        setEyeExercise(this);
+      } else {
+        let self = this;
+        EventBus.$on('eyeExercisesLoaded', function () {
+          setEyeExercise(self);
+        });
       }
 
       window.addEventListener('online', () => {

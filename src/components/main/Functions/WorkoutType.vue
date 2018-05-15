@@ -13,6 +13,16 @@
 </template>
 
 <script>
+  let setWorkouts = function(self) {
+    let workoutsByType = [];
+    for (let i = 0; i < window.$workouts.length; i++) {
+      if (window.$workouts[i].getWorkoutType() === self.type) {
+        workoutsByType.push(window.$workouts[i]);
+      }
+    }
+    self.workouts = workoutsByType;
+  };
+
   export default {
     beforeCreate: function () {
       document.documentElement.className = 'u_gradient-background--purple';
@@ -30,13 +40,14 @@
       },
     },
     beforeMount: function () {
-      let workoutsByType = [];
-      for (let i = 0; i < window.$workouts.length; i++) {
-        if (window.$workouts[i].getWorkoutType() === this.type) {
-          workoutsByType.push(window.$workouts[i]);
-        }
+      if (window.$workouts.length > 0) {
+        setWorkouts(this);
+      } else {
+        let self = this;
+        EventBus.$on('workoutsLoaded', function () {
+          setWorkouts(self);
+        });
       }
-      this.workouts = workoutsByType;
 
       switch (this.type) {
         case 'neck':

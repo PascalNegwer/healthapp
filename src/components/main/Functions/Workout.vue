@@ -44,6 +44,27 @@
     }
   };
 
+  let setWorkout = function(self) {
+    for (let i = 0; i < window.$workouts.length; i++) {
+      if (window.$workouts[i].getID() === self.id) {
+        self.loading = true;
+        self.workout = window.$workouts[i];
+        self.workout.loadImage1(1, 1, undefined, undefined, undefined, {
+          onOk: result => {
+            self.online = true;
+            setTimeout(function () {
+              self.loading = false;
+            }.bind(this), 500);
+          }, onError: error => {
+            self.online = false;
+            self.loading = false;
+          }
+        }, true);
+        prepareSlider(self);
+      }
+    }
+  };
+
   export default {
     beforeCreate: function () {
       document.documentElement.className = 'u_gradient-background--purple';
@@ -79,23 +100,13 @@
       }
     },
     beforeMount: function () {
-      for (let i = 0; i < window.$workouts.length; i++) {
-        if (window.$workouts[i].getID() === this.id) {
-          this.loading = true;
-          this.workout = window.$workouts[i];
-          this.workout.loadImage1(1, 1, undefined, undefined, 'jpg', {
-            onOk: result => {
-              this.online = true;
-              setTimeout(function () {
-                this.loading = false;
-              }.bind(this), 500);
-            }, onError: error => {
-              this.online = false;
-              this.loading = false;
-            }
-          }, true);
-          prepareSlider(this);
-        }
+      if (window.$workouts.length > 0) {
+        setWorkout(this);
+      } else {
+        let self = this;
+        EventBus.$on('workoutsLoaded', function () {
+          setWorkout(self);
+        });
       }
 
       window.addEventListener('online', () => {
