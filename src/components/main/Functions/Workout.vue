@@ -2,21 +2,28 @@
   <div class="l_wrapper l_wrapper--small l_flex">
     <p v-on:click="goBack()" class="btn btn--12 back-button">zurück</p>
     <section v-if="workout" class="exercise">
-      <div class="slider" v-if="online">
-        <div class="slider__wrapper" :style="{ width : 100 * images + '%', transform: 'translateX(-' + transform + '%)'}">
-          <img class="slider__image" v-for="index in images" :src="workout['getImage' + index + 'URL']()" :style="{width : 100 / images + '%'}">
-        </div>
-        <div class="slider__index">
-          <span v-for="index in images" class="slider__bullet" :class="{'slider__bullet--active': index === activeIndex}"></span>
-        </div>
-        <span class="slider__control slider__control--left u_icon--up" v-on:click="slidePrev()"></span>
-        <span class="slider__control slider__control--right u_icon--down" v-on:click="slideNext()"></span>
+      <div class="loader" v-bind:class="{'loader--active': loading}">
+        <svg class="circular" viewBox="25 25 50 50">
+          <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+        </svg>
       </div>
-      <div class="slider" v-else>
-        <div class="slider__wrapper">
-          <img class="slider__image" src="assets/img/offline.jpg">
+      <transition mode="out-in">
+        <div class="slider" v-if="online" v-bind:class="{'content--hidden': loading}" key="online">
+          <div class="slider__wrapper" :style="{ width : 100 * images + '%', transform: 'translateX(-' + transform + '%)'}">
+            <img class="slider__image" v-for="index in images" :src="workout['getImage' + index + 'URL']()" :style="{width : 100 / images + '%'}">
+          </div>
+          <div class="slider__index">
+            <span v-for="index in images" class="slider__bullet" :class="{'slider__bullet--active': index === activeIndex}"></span>
+          </div>
+          <span class="slider__control slider__control--left u_icon--up" v-on:click="slidePrev()"></span>
+          <span class="slider__control slider__control--right u_icon--down" v-on:click="slideNext()"></span>
         </div>
-      </div>
+        <div class="slider" v-else v-bind:class="{'content--hidden': loading}" key="offline">
+          <div class="slider__wrapper">
+            <img class="slider__image" src="assets/img/offline.jpg">
+          </div>
+        </div>
+      </transition>
       <div class="exercise__description">
         <p v-html="workout.getDescription()"></p>
         <h3 class="exercise__subhead">Dauer:</h3>
@@ -49,6 +56,7 @@
         activeIndex: 1,
         transform: '0',
         online: false,
+        loading: false,
       }
     },
     methods: {
@@ -73,12 +81,17 @@
     beforeMount: function () {
       for (let i = 0; i < window.$workouts.length; i++) {
         if (window.$workouts[i].getID() === this.id) {
+          this.loading = true;
           this.workout = window.$workouts[i];
           this.workout.loadImage1(1, 1, undefined, undefined, 'jpg', {
             onOk: result => {
               this.online = true;
+              setTimeout(function () {
+                this.loading = false;
+              }.bind(this), 500);
             }, onError: error => {
               this.online = false
+              this.loading = false;
             }
           }, true);
           prepareSlider(this);
@@ -87,6 +100,10 @@
 
       window.addEventListener('online', () => {
         this.online = true;
+        this.loading = true;
+        setTimeout(function () {
+          this.loading = false;
+        }.bind(this), 500);
       });
     },
   }
@@ -95,6 +112,7 @@
 <style scoped>
   .exercise {
    margin-top: 2rem;
+   position: relative;
   }
   .exercise__description {
     font-size: 1.4rem;
@@ -115,6 +133,7 @@
     margin-right: -1rem;
     position: relative;
     overflow: hidden;
+    transition: opacity .15s ease-in-out;
   }
   .slider__wrapper {
     width: 100%;
@@ -168,5 +187,22 @@
   }
   .slider__control--right {
     right: 0;
+  }
+
+  .loader {
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .15s ease-in-out;
+  }
+  .loader--active {
+    visibility: visible;
+    opacity: 1;
+  }
+  .content--hidden {
+    opacity: 0;
+    visibility: hidden;
   }
 </style>
