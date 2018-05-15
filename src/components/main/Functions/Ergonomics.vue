@@ -48,7 +48,7 @@
   }
   .setup__info {
     display: inline-block;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     line-height: 2;
     color: var(--white);
     margin: 0 auto;
@@ -56,7 +56,7 @@
   }
   .setup__info:before {
     padding-right: 1rem;
-    font-size: 2rem;
+    font-size: 1.8rem;
     line-height: 1.5;
     float: left;
   }
