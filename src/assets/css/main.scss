@@ -72,7 +72,7 @@ html[class*="u_gradient-background"]:before {
 /* Background Image Preloading */
 html:after{
   position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
-  content: url(../img/bg_default.png) url(../img/bg_mixed.png) url(../img/bg_orange.png) url(../img/bg_purple.png) url(../img/bg_blue.png);
+  content: url(../img/bg_default.png) url(../img/bg_mixed.png) url(../img/bg_orange.png) url(../img/bg_purple.png) url(../img/bg_blue.png) url(../img/offline.jpg);
 }
 
 .logo {

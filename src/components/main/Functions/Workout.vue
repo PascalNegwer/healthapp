@@ -4,6 +4,11 @@
     <div v-if="loading">Loading</div>
     <section v-else class="exercise">
       <div class="slider">
+        <div class="slider__wrapper">
+          <img class="slider__image" src="/assets/img/offline.jpg">
+        </div>
+      </div>
+      <div class="slider">
         <div class="slider__wrapper" :style="{ width : 100 * images + '%', transform: 'translateX(-' + transform + '%)'}">
           <img class="slider__image" v-for="index in images" :src="workout['getImage' + index + 'URL']()" :style="{width : 100 / images + '%'}">
         </div>
@@ -105,14 +110,14 @@
     overflow: hidden;
   }
   .slider__wrapper {
-    width: 200%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     transition: transform .3s ease-in-out;
   }
   .slider__image {
-    width: 50%;
+    width: 100%;
     height: auto;
   }
   .slider__index {
