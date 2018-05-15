@@ -13,7 +13,9 @@
         <span class="slider__control slider__control--left u_icon--up" v-on:click="slidePrev()"></span>
         <span class="slider__control slider__control--right u_icon--down" v-on:click="slideNext()"></span>
       </div>
-      <p class="exercise__description" v-html="workout.getDescription()"></p>
+      <div class="exercise__description">
+        <p>{{ workout.getDescription() }}</p>
+      </div>
     </section>
   </div>
 </template>
@@ -82,9 +84,14 @@
   }
   .exercise__description {
     font-size: 1.4rem;
-    text-align: center;
     line-height: 1.2;
     margin-top: 2rem;
+  }
+  .exercise__description span {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+    font-weight: 400;
   }
   .back-button {
     margin-right: auto;
