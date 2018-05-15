@@ -90,7 +90,7 @@
                 this.loading = false;
               }.bind(this), 500);
             }, onError: error => {
-              this.online = false
+              this.online = false;
               this.loading = false;
             }
           }, true);
@@ -190,7 +190,7 @@
   }
 
   .loader {
-    top: 25%;
+    top: 20%;
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;

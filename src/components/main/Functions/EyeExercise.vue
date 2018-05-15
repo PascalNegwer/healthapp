@@ -98,7 +98,7 @@
     margin-bottom: 2rem;
   }
   .loader {
-    top: 25%;
+    top: 33%;
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
