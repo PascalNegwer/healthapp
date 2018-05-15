@@ -2,7 +2,9 @@
   <div class="l_wrapper l_wrapper--small l_flex">
     <p v-on:click="goBack()" class="btn btn--12 back-button">zurück</p>
     <section v-if="eyeExercise" class="exercise l_flex">
-      <div class="exercise__gif" :style="{ backgroundImage:  'url(' + eyeExercise.getImageURL() + ')'}">
+      <div v-if="online" class="exercise__gif" :style="{ backgroundImage:  'url(' + eyeExercise.getImageURL() + ')'}">
+      </div>
+      <div v-else class="exercise__gif" style="background-image:  url('assets/img/offline.jpg')">
       </div>
       <p class="exercise__description">{{ eyeExercise.getDescription() }}</p>
     </section>
@@ -21,6 +23,7 @@
     data() {
       return {
         eyeExercise: undefined,
+        online: false,
       }
     },
     methods: {
@@ -32,8 +35,19 @@
       for (let i = 0; i < window.$eyeExercises.length; i++) {
         if (window.$eyeExercises[i].getID() === this.id) {
           this.eyeExercise = window.$eyeExercises[i];
+          this.eyeExercise.loadImage(undefined, undefined, undefined, undefined, undefined, {
+            onOk: result => {
+              this.online = true;
+            }, onError: error => {
+              this.online = false
+            }
+          }, true);
         }
       }
+
+      window.addEventListener('online', () => {
+        this.online = true;
+      });
     }
   }
 </script>

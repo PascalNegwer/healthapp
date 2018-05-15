@@ -31,6 +31,10 @@ let filesToCache = [
     'revision': revision,
   },
   {
+    'url': '/test/assets/img/offline.jpg',
+    'revision': revision,
+  },
+  {
     'url': '/test/assets/fonts/wrkFit.svg',
     'revision': revision,
   },
@@ -110,4 +114,9 @@ workbox.precaching.precacheAndRoute(filesToCache);
 workbox.routing.registerRoute(
   new RegExp('https://storage.googleapis.com/*'),
   workbox.strategies.staleWhileRevalidate()
+);
+
+workbox.routing.registerRoute(
+    new RegExp('https://fonts.gstatic.com/*'),
+    workbox.strategies.staleWhileRevalidate()
 );

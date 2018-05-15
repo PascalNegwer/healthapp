@@ -1,14 +1,8 @@
 <template>
   <div class="l_wrapper l_wrapper--small l_flex">
     <p v-on:click="goBack()" class="btn btn--12 back-button">zurück</p>
-    <div v-if="loading">Loading</div>
-    <section v-else class="exercise">
-      <div class="slider">
-        <div class="slider__wrapper">
-          <img class="slider__image" src="/assets/img/offline.jpg">
-        </div>
-      </div>
-      <div class="slider">
+    <section v-if="workout" class="exercise">
+      <div class="slider" v-if="online">
         <div class="slider__wrapper" :style="{ width : 100 * images + '%', transform: 'translateX(-' + transform + '%)'}">
           <img class="slider__image" v-for="index in images" :src="workout['getImage' + index + 'URL']()" :style="{width : 100 / images + '%'}">
         </div>
@@ -17,6 +11,11 @@
         </div>
         <span class="slider__control slider__control--left u_icon--up" v-on:click="slidePrev()"></span>
         <span class="slider__control slider__control--right u_icon--down" v-on:click="slideNext()"></span>
+      </div>
+      <div class="slider" v-else>
+        <div class="slider__wrapper">
+          <img class="slider__image" src="assets/img/offline.jpg">
+        </div>
       </div>
       <div class="exercise__description">
         <p v-html="workout.getDescription()"></p>
@@ -28,12 +27,10 @@
 </template>
 
 <script>
-
   let prepareSlider = function(self) {
     for (let i = 1; i < 6; i++) {
       if (self.workout.data.hasOwnProperty('image' + i + 'URL')) {
         self.images = i;
-        console.log(self.workout.data['image' + i + 'URL']);
       } else {
         break;
       }
@@ -48,10 +45,10 @@
     data() {
       return {
         workout: undefined,
-        loading: true,
         images: 0,
         activeIndex: 1,
         transform: '0',
+        online: false,
       }
     },
     methods: {
@@ -77,10 +74,20 @@
       for (let i = 0; i < window.$workouts.length; i++) {
         if (window.$workouts[i].getID() === this.id) {
           this.workout = window.$workouts[i];
-          this.loading = false;
+          this.workout.loadImage1(1, 1, undefined, undefined, 'jpg', {
+            onOk: result => {
+              this.online = true;
+            }, onError: error => {
+              this.online = false
+            }
+          }, true);
           prepareSlider(this);
         }
       }
+
+      window.addEventListener('online', () => {
+        this.online = true;
+      });
     },
   }
 </script>
