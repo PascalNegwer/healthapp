@@ -1,6 +1,6 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.1.0/workbox-sw.js');
 
-let revision = '1.0';//(new Date()).toTimeString();
+let revision = '1.0.1';//(new Date()).toTimeString();
 let filesToCache = [
   {
     'url': '/test/assets/css/main.css',
@@ -68,9 +68,9 @@ let filesToCache = [
   },
 ];
 
-workbox.setConfig({debug: false});
+//workbox.setConfig({debug: false});
 
-workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
+//workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
 
 workbox.precaching.precacheAndRoute(filesToCache);
 
