@@ -1,6 +1,6 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.1.0/workbox-sw.js');
 
-let revision = '0.0.4';//(new Date()).toTimeString();
+let revision = /*'0.0.4';*/(new Date()).toTimeString();
 let filesToCache = [
   {
     'url': '/test/assets/css/main.css',
@@ -32,6 +32,10 @@ let filesToCache = [
   },
   {
     'url': '/test/assets/img/offline.jpg',
+    'revision': revision,
+  },
+  {
+    'url': '/test/assets/img/setup.png',
     'revision': revision,
   },
   {

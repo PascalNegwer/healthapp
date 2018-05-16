@@ -3,17 +3,26 @@
     <h1 class="headline headline--main">Arbeitsplatz einrichten</h1>
     <div class="setup l_flex">
       <div class="setup__wrapper">
-        <img class="setup__image"src="assets/img/setup.png">
-        <span class="setup__clickarea setup__clickarea--a"></span>
-        <span class="setup__clickarea setup__clickarea--b"></span>
-        <span class="setup__clickarea setup__clickarea--c"></span>
-        <span class="setup__clickarea setup__clickarea--d"></span>
-        <span class="setup__clickarea setup__clickarea--e"></span>
-        <span class="setup__clickarea setup__clickarea--f"></span>
-        <span class="setup__clickarea setup__clickarea--g"></span>
-        <span class="setup__clickarea setup__clickarea--h"></span>
-        <span class="setup__clickarea setup__clickarea--i"></span>
-        <span class="setup__clickarea setup__clickarea--j"></span>
+        <div class="overlay l_flex" :class="{'overlay--visible': overlayVisible}">
+          <div class="overlay__head u_icon--info l_flex l_flex--horizontal">
+            <h3 class="overlay__headline">{{ title[key] }}</h3>
+            <span class="overlay__close-button u_icon--close" v-on:click="hideOverlay()"></span>
+          </div>
+          <div class="overlay__content">
+            <p class="overlay__text">{{ description[key] }}</p>
+          </div>
+        </div>
+        <img class="setup__image" src="assets/img/setup.png">
+        <span class="setup__clickarea setup__clickarea--a" v-on:click="showOverlay('a')"></span>
+        <span class="setup__clickarea setup__clickarea--b" v-on:click="showOverlay('b')"></span>
+        <span class="setup__clickarea setup__clickarea--c" v-on:click="showOverlay('c')"></span>
+        <span class="setup__clickarea setup__clickarea--d" v-on:click="showOverlay('d')"></span>
+        <span class="setup__clickarea setup__clickarea--e" v-on:click="showOverlay('e')"></span>
+        <span class="setup__clickarea setup__clickarea--f" v-on:click="showOverlay('f')"></span>
+        <span class="setup__clickarea setup__clickarea--g" v-on:click="showOverlay('g')"></span>
+        <span class="setup__clickarea setup__clickarea--h" v-on:click="showOverlay('h')"></span>
+        <span class="setup__clickarea setup__clickarea--i" v-on:click="showOverlay('i')"></span>
+        <span class="setup__clickarea setup__clickarea--j" v-on:click="showOverlay('j')"></span>
       </div>
       <p class="setup__info u_icon--info">Tippe für weitere Informationen</p>
     </div>
@@ -29,9 +38,42 @@
     props: [],
     data() {
       return {
+        description: {
+          a: 'Grüne Farbe in der Umgebung kann Ihre Kreativität anregen.',
+          b: 'Lebendige Pflanzen können die Produktivität in der Arbeitsatmosphäre steigern.',
+          c: 'Viel Tageslicht im Büro verbessert Ihren Schlaf und erhöht Ihre Aktivität und Lebensqualität.',
+          d: 'Musik kann Ihre Stimmung heben und Ihnen zu entspannter Konzentration verhelfen. Allerdings kann sie Ihre Leistung bei geistig anspruchsvollen Aufgaben auch verringern.',
+          e: 'Der Monitor/Laptop sollte sich auf Augenhöhe befinden (wenn nötig, stellen Sie den Laptop auf eine Unterlage).',
+          f: 'Hände, Handgelenk und Unterarme sollten eine gerade Linie bilden und parallel zum Boden liegen.',
+          g: 'Wenn Sie an Ihre Liebsten denken, werden Stress und negative Gedanken reduziert.',
+          h: 'Studien haben belegt, dass ein unordentlicher Schreibtisch das kreative Denken anregt.',
+          i: 'Nutzen Sie einen alternativen Stuhl oder einen Stehtisch, um Schmerzen durch langes Sitzen zu vermeiden.',
+          j: 'Die Füße mit der gesamten Sohle auf dem Boden ruhen lassen (nutzen Sie eine Fußablage, wenn Sie den Boden nicht erreichen).',
+        },
+        title: {
+          a: 'Farbe',
+          b: 'Pflanzen',
+          c: 'Licht',
+          d: 'Musik',
+          e: 'Monitor',
+          f: 'Haltung',
+          g: 'Schreibtisch',
+          h: 'Schreibtisch',
+          i: 'Stuhl',
+          j: 'Haltung',
+        },
+        key: undefined,
+        overlayVisible: false,
       }
     },
     methods: {
+      showOverlay: function (key) {
+        this.key = key;
+        this.overlayVisible = true;
+      },
+      hideOverlay: function() {
+        this.overlayVisible = false;
+      }
     }
   }
 </script>
@@ -108,5 +150,60 @@
   .setup__clickarea--j {
     left: 44%;
     top: 86%;
+  }
+
+  .overlay {
+    position: absolute;
+    width: 90%;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--white-90);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .15s ease-in-out, visibility 0s .15s;
+    z-index: 2000;
+    border: 1px solid var(--purple);
+    padding: 1rem;
+  }
+  .overlay--visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .15s ease-in-out;
+  }
+  .overlay__head {
+    padding: .5rem .5rem 1.5rem .5rem;
+    align-items: center;
+    border-bottom: 1px solid var(--grey);
+  }
+  .overlay__head:before {
+    color: var(--purple);
+    margin-right: 2rem;
+    font-size: 3.2rem;
+  }
+  .overlay__headline {
+    font-size: 2.6rem;
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 300;
+    color: var(--grey);
+    line-height: 1;
+    display: block;
+    padding-top: .4rem;
+  }
+  .overlay__close-button {
+    display: block;
+    margin-left: auto;
+    color: var(--grey);
+  }
+  .overlay__close-button:before {
+    font-size: 3.2rem;
+  }
+  .overlay__content {
+    padding: 1rem;
+  }
+  .overlay__text {
+    color: var(--grey);
+    font-size: 1.6rem;
+    line-height: 1.5;
   }
 </style>
