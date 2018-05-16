@@ -23,81 +23,84 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.u_icon--arm:before {
-  content: "\e912";
-}
-.u_icon--head:before {
-  content: "\e913";
-}
-.u_icon--human:before {
-  content: "\e914";
-}
-.u_icon--leg:before {
-  content: "\e915";
-}
-.u_icon--spine:before {
-  content: "\e916";
-}
-.u_icon--chair:before {
-  content: "\e917";
-}
-.u_icon--eye:before {
-  content: "\e918";
-}
-.u_icon--gym:before {
-  content: "\e919";
-}
 .u_icon--add:before {
   content: "\e900";
 }
-.u_icon--close:before {
+.u_icon--arm:before {
   content: "\e901";
 }
-.u_icon--dashboard:before {
+.u_icon--chair:before {
   content: "\e902";
 }
-.u_icon--down:before {
+.u_icon--close:before {
   content: "\e903";
 }
-.u_icon--edit:before {
+.u_icon--dashboard:before {
   content: "\e904";
 }
-.u_icon--forbidden:before {
+.u_icon--down:before {
   content: "\e905";
 }
-.u_icon--home:before {
+.u_icon--edit:before {
   content: "\e906";
 }
-.u_icon--info:before {
+.u_icon--error:before {
   content: "\e907";
 }
-.u_icon--list:before {
+.u_icon--eye:before {
   content: "\e908";
 }
-.u_icon--logo:before {
+.u_icon--gym:before {
   content: "\e909";
 }
-.u_icon--logout:before {
+.u_icon--head:before {
   content: "\e90a";
 }
-.u_icon--menu:before {
+.u_icon--help:before {
   content: "\e90b";
 }
-.u_icon--settings:before {
+.u_icon--home:before {
   content: "\e90c";
 }
-.u_icon--success:before {
+.u_icon--human:before {
   content: "\e90d";
 }
-.u_icon--text:before {
+.u_icon--info:before {
   content: "\e90e";
 }
-.u_icon--up:before {
+.u_icon--leg:before {
   content: "\e90f";
 }
-.u_icon--user:before {
+.u_icon--list:before {
   content: "\e910";
 }
-.u_icon--warning:before {
+.u_icon--logo:before {
   content: "\e911";
+}
+.u_icon--logout:before {
+  content: "\e912";
+}
+.u_icon--menu:before {
+  content: "\e913";
+}
+.u_icon--settings:before {
+  content: "\e914";
+}
+.u_icon--spine:before {
+  content: "\e915";
+}
+.u_icon--success:before {
+  content: "\e916";
+}
+.u_icon--text:before {
+  content: "\e917";
+}
+.u_icon--up:before {
+  content: "\e918";
+}
+.u_icon--user:before {
+  content: "\e919";
+}
+.u_icon--warning:before {
+  content: "\e91a";
 }

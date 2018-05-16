@@ -182,7 +182,7 @@
     font-size: 3.2rem;
   }
   .overlay__headline {
-    font-size: 2.6rem;
+    font-size: 2rem;
     font-family: 'Comfortaa', sans-serif;
     font-weight: 300;
     color: var(--grey);
