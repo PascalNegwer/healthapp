@@ -87,14 +87,14 @@
       slideNext: function() {
         if(this.activeIndex !== this.images) {
           let value = 100 / this.images;
-          this.transform = parseInt(this.transform) + value;
+          this.transform = parseFloat(this.transform) + value;
           this.activeIndex++;
         }
       },
       slidePrev: function() {
         if(this.activeIndex !== 1) {
           let value = 100 / this.images;
-          this.transform = parseInt(this.transform) - value;
+          this.transform = parseFloat(this.transform) - value;
           this.activeIndex--;
         }
       }
