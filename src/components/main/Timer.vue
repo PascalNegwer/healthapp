@@ -110,7 +110,7 @@
         running: false,
         paused: false,
         day: new Apiomat.Day(),
-        periods: undefined,
+        periods: [],
         currentPeriod: undefined,
         overallWorkTime: moment(0),
         overallPauseTime: moment(0),
@@ -126,7 +126,7 @@
             if (periods.length !== 0) {
               this.currentPeriod = periods[0];
               this.periods = periods;
-              this.running = true;
+              this.updateTimers();
             }
           },
           onError: error => {
@@ -294,38 +294,38 @@
         let overallPauseTimestamp = 0;
         let currentTimestamp = 0;
 
-          for (let i = 0; i < this.periods.length; i++) {
-            let period = this.periods[i];
-            let date = new Date();
-            date.setMilliseconds(0);
+        for (let i = 0; i < this.periods.length; i++) {
+          let period = this.periods[i];
+          let date = new Date();
+          date.setMilliseconds(0);
 
-            switch (period.getPeriodType()) {
-              case PERIOD_TYPE_PAUSE:
-                if (period.getEnd()) {
-                  overallPauseTimestamp += period.getEnd() - period.getStart();
-                } else {
-                  this.paused = true;
-                  this.running = true;
-                  currentTimestamp = date - period.getStart();
-                  overallPauseTimestamp += date - period.getStart();
-                }
-                break;
-              case PERIOD_TYPE_WORK:
-                if (period.getEnd()) {
-                  overallWorkTimestamp += period.getEnd() - period.getStart();
-                } else {
-                  this.paused = false;
-                  this.running = true;
-                  currentTimestamp = date - period.getStart();
-                  overallWorkTimestamp += date - period.getStart();
-                }
-                break;
-            }
-
-            this.overallWorkTime = moment(overallWorkTimestamp);
-            this.overallPauseTime = moment(overallPauseTimestamp);
-            this.currentTime = moment(currentTimestamp);
+          switch (period.getPeriodType()) {
+            case PERIOD_TYPE_PAUSE:
+              if (period.getEnd()) {
+                overallPauseTimestamp += period.getEnd() - period.getStart();
+              } else {
+                this.paused = true;
+                this.running = true;
+                currentTimestamp = date - period.getStart();
+                overallPauseTimestamp += date - period.getStart();
+              }
+              break;
+            case PERIOD_TYPE_WORK:
+              if (period.getEnd()) {
+                overallWorkTimestamp += period.getEnd() - period.getStart();
+              } else {
+                this.paused = false;
+                this.running = true;
+                currentTimestamp = date - period.getStart();
+                overallWorkTimestamp += date - period.getStart();
+              }
+              break;
           }
+
+          this.overallWorkTime = moment(overallWorkTimestamp);
+          this.overallPauseTime = moment(overallPauseTimestamp);
+          this.currentTime = moment(currentTimestamp);
+        }
       }
     },
   }
