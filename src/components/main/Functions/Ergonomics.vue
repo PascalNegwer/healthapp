@@ -105,7 +105,7 @@
   .setup__clickarea {
     display: block;
     position: absolute;
-    background: red;
+    background: transparent;
     width: 12vw;
     height: 12vw;
     border-radius: 50%;
