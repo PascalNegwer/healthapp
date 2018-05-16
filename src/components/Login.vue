@@ -72,6 +72,7 @@
                 EventBus.$emit('newMessage', {message: 'Die eingegebene E-Mail-Adresse oder das Kennwort ist inkorrekt.', type: messageTypes.WARNING});
                 break;
               default:
+                EventBus.$emit('newMessage', {message: 'Oops! Etwas ist schief gegangen', type: messageTypes.ERROR});
                 console.log(error);
             }
             this.loading = false;

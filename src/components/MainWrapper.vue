@@ -24,7 +24,7 @@
     },
     methods: {},
     beforeMount: function () {
-      Apiomat.Workout.getWorkouts(undefined, {
+      Apiomat.Workout.getWorkouts('order by title ASC', {
         onOk: workouts => {
           for (let i = 0; i < workouts.length; i++) {
             let workout = workouts[i];
@@ -34,7 +34,7 @@
           EventBus.$emit('workoutsLoaded');
         }
       }, true);
-      Apiomat.EyeExercise.getEyeExercises(undefined, {
+      Apiomat.EyeExercise.getEyeExercises('order by title ASC', {
         onOk: eyeExercises => {
           for (let i = 0; i < eyeExercises.length; i++) {
             let eyeExercise = eyeExercises[i];

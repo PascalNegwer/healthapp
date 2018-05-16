@@ -81,6 +81,7 @@
       onOk: result => {
         self.$user.postDays(self.day, {
           onOk: days => {
+            EventBus.$emit('daysLoaded');
             self.$user.loadDays('createdAt >= date(' + (new Date()).setHours(0, 0, 0, 0) + ')', {}, true);
           },
           onError: error => {
@@ -109,6 +110,7 @@
         running: false,
         paused: false,
         day: new Apiomat.Day(),
+        periods: undefined,
         currentPeriod: undefined,
         overallWorkTime: moment(0),
         overallPauseTime: moment(0),
@@ -116,23 +118,30 @@
       }
     },
     beforeMount: function () {
+      let self = this;
+
+      EventBus.$on('daysLoaded', () => {
+        this.day.loadPeriods('order by createdAt DESC', {
+          onOk: periods => {
+            if (periods.length !== 0) {
+              this.currentPeriod = periods[0];
+              this.periods = periods;
+              this.running = true;
+            }
+          },
+          onError: error => {
+            console.log(error);
+          }
+        }, true);
+      });
+
       this.$user.loadDays('createdAt >= date(' + (new Date()).setHours(0, 0, 0, 0) + ')', {
         onOk: days => {
           if (days.length === 0) {
             createDay(this);
           } else {
             this.day = days[0];
-            this.day.loadPeriods('order by createdAt DESC', {
-              onOk: periods => {
-                if (periods.length !== 0) {
-                  this.updateTimers();
-                  this.currentPeriod = periods[0];
-                }
-              },
-              onError: error => {
-                console.log(error);
-              }
-            }, true);
+            EventBus.$emit('daysLoaded');
           }
         },
         onError: error => {
@@ -151,7 +160,10 @@
           return;
         }
         this.currentPeriod = new Apiomat.Period();
-        this.currentPeriod.setStart(new Date());
+        this.periods.push(this.currentPeriod);
+        let date = new Date();
+        date.setMilliseconds(0);
+        this.currentPeriod.setStart(date);
         this.currentPeriod.setPeriodType(PERIOD_TYPE_WORK);
         this.currentPeriod.save({
               onOk: result => {
@@ -179,7 +191,9 @@
           });
           return;
         }
-        this.currentPeriod.setEnd(new Date());
+        let date = new Date();
+        date.setMilliseconds(0);
+        this.currentPeriod.setEnd(date);
         this.currentPeriod.save({
           onOk: result => {
           },
@@ -198,7 +212,9 @@
           });
           return;
         }
-        this.currentPeriod.setEnd(new Date());
+        let date = new Date();
+        date.setMilliseconds(0);
+        this.currentPeriod.setEnd(date);
         this.currentPeriod.save({
           onOk: result => {
           },
@@ -207,7 +223,8 @@
           }
         });
         this.currentPeriod = new Apiomat.Period();
-        this.currentPeriod.setStart(new Date());
+        this.periods.push(this.currentPeriod);
+        this.currentPeriod.setStart(date);
         this.currentPeriod.setPeriodType(PERIOD_TYPE_PAUSE);
         this.currentPeriod.save({
               onOk: result => {
@@ -234,7 +251,9 @@
           });
           return;
         }
-        this.currentPeriod.setEnd(new Date());
+        let date = new Date();
+        date.setMilliseconds(0);
+        this.currentPeriod.setEnd(date);
         this.currentPeriod.save({
           onOk: result => {
           },
@@ -243,24 +262,24 @@
           }
         });
         this.currentPeriod = new Apiomat.Period();
-        this.currentPeriod.setStart(new Date());
+        this.periods.push(this.currentPeriod);
+        this.currentPeriod.setStart(date);
         this.currentPeriod.setPeriodType(PERIOD_TYPE_WORK);
         this.currentPeriod.save({
+          onOk: result => {
+            this.day.postPeriods(this.currentPeriod, {
               onOk: result => {
-                this.day.postPeriods(this.currentPeriod, {
-                  onOk: result => {
-                    this.running = true;
-                  },
-                  onError: error => {
-                    console.log(error);
-                  }
-                })
+                this.running = true;
               },
               onError: error => {
                 console.log(error);
               }
-            }
-        );
+            })
+          },
+          onError: error => {
+            console.log(error);
+          }
+        });
       },
       timerLoop: function () {
         if (this.running) {
@@ -275,39 +294,38 @@
         let overallPauseTimestamp = 0;
         let currentTimestamp = 0;
 
-        this.day.loadPeriods('order by createdAt DESC', {
-          onOk: periods => {
-            for (let i = 0; i < periods.length; i++) {
-              let period = periods[i];
-              switch (period.getPeriodType()) {
-                case PERIOD_TYPE_PAUSE:
-                  if (period.getEnd()) {
-                    overallPauseTimestamp += period.getEnd() - period.getStart();
-                  } else {
-                    this.paused = true;
-                    this.running = true;
-                    currentTimestamp = (new Date()) - period.getStart();
-                    overallPauseTimestamp += (new Date()) - period.getStart();
-                  }
-                  break;
-                case PERIOD_TYPE_WORK:
-                  if (period.getEnd()) {
-                    overallWorkTimestamp += period.getEnd() - period.getStart();
-                  } else {
-                    this.paused = false;
-                    this.running = true;
-                    currentTimestamp = (new Date()) - period.getStart();
-                    overallWorkTimestamp += (new Date()) - period.getStart();
-                  }
-                  break;
-              }
+          for (let i = 0; i < this.periods.length; i++) {
+            let period = this.periods[i];
+            let date = new Date();
+            date.setMilliseconds(0);
 
-              this.overallWorkTime = moment(overallWorkTimestamp);
-              this.overallPauseTime = moment(overallPauseTimestamp);
-              this.currentTime = moment(currentTimestamp);
+            switch (period.getPeriodType()) {
+              case PERIOD_TYPE_PAUSE:
+                if (period.getEnd()) {
+                  overallPauseTimestamp += period.getEnd() - period.getStart();
+                } else {
+                  this.paused = true;
+                  this.running = true;
+                  currentTimestamp = date - period.getStart();
+                  overallPauseTimestamp += date - period.getStart();
+                }
+                break;
+              case PERIOD_TYPE_WORK:
+                if (period.getEnd()) {
+                  overallWorkTimestamp += period.getEnd() - period.getStart();
+                } else {
+                  this.paused = false;
+                  this.running = true;
+                  currentTimestamp = date - period.getStart();
+                  overallWorkTimestamp += date - period.getStart();
+                }
+                break;
             }
+
+            this.overallWorkTime = moment(overallWorkTimestamp);
+            this.overallPauseTime = moment(overallPauseTimestamp);
+            this.currentTime = moment(currentTimestamp);
           }
-        }, true);
       }
     },
   }

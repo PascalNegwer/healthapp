@@ -87,7 +87,6 @@
                 EventBus.$emit('newMessage', {message: 'Oops! Etwas ist schief gegangen', type: messageTypes.ERROR});
                 console.log(error);
             }
-            EventBus.$emit('newMessage', this.error);
             this.loading = false;
           }
         });
