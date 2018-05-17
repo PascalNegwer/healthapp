@@ -1,3 +1,6 @@
+# WICHTIG
+Die Entwicklung hat hauptsächlich in dem Branch "testing" stattgefunden.
+
 # Installation
 ```
 git clone https://github.com/PascalNegwer/healthapp.git
