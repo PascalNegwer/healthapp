@@ -39,16 +39,16 @@
     data() {
       return {
         description: {
-          a: 'Grüne Farbe in der Umgebung kann Ihre Kreativität anregen.',
+          a: 'Grüne Farbe in der Umgebung kann die Kreativität anregen.',
           b: 'Lebendige Pflanzen können die Produktivität in der Arbeitsatmosphäre steigern.',
-          c: 'Viel Tageslicht im Büro verbessert Ihren Schlaf und erhöht Ihre Aktivität und Lebensqualität.',
-          d: 'Musik kann Ihre Stimmung heben und Ihnen zu entspannter Konzentration verhelfen. Allerdings kann sie Ihre Leistung bei geistig anspruchsvollen Aufgaben auch verringern.',
-          e: 'Der Monitor/Laptop sollte sich auf Augenhöhe befinden (wenn nötig, stellen Sie den Laptop auf eine Unterlage).',
+          c: 'Viel Tageslicht im Büro verbessert den Schlaf und erhöht die Aktivität und Lebensqualität.',
+          d: 'Musik kann die Stimmung heben und zu entspannter Konzentration verhelfen. Allerdings kann sie ebenfalls die Leistung bei geistig anspruchsvollen Aufgaben verringern.',
+          e: 'Der Monitor/Laptop sollte sich auf Augenhöhe befinden (wenn nötig, kann der Laptop auf eine Unterlage gestellt werden).',
           f: 'Hände, Handgelenk und Unterarme sollten eine gerade Linie bilden und parallel zum Boden liegen.',
-          g: 'Wenn Sie an Ihre Liebsten denken, werden Stress und negative Gedanken reduziert.',
+          g: 'Wenn man an seine Liebsten denkt, werden Stress und negative Gedanken reduziert. Dazu können Bilder am Arbeitsplatz aufgestellt werden',
           h: 'Studien haben belegt, dass ein unordentlicher Schreibtisch das kreative Denken anregt.',
-          i: 'Nutzen Sie einen alternativen Stuhl oder einen Stehtisch, um Schmerzen durch langes Sitzen zu vermeiden.',
-          j: 'Die Füße mit der gesamten Sohle auf dem Boden ruhen lassen (nutzen Sie eine Fußablage, wenn Sie den Boden nicht erreichen).',
+          i: 'Einen alternativer Stuhl oder einen Stehtisch können Schmerzen durch langes Sitzen vermeiden.',
+          j: 'Die Füße mit der gesamten Sohle auf dem Boden ruhen lassen (Es kann eine Fußablage genutzt werden, wenn der Boden nicht erreicht werden kann).',
         },
         title: {
           a: 'Farbe',
