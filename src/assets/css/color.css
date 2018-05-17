@@ -1,8 +1,8 @@
 :root {
   --blue: #118899;
   --darkblue: #08444c;
-  --purble: #8d126c;
-  --darkpurble: #460936;
+  --purple: #8d126c;
+  --darkpurple: #460936;
   --orange: #dd5f12;
   --darkorange: #6e2f09;
   --white: #fff;
@@ -11,11 +11,15 @@
   --grey: #5f5f5f;
   --darkgrey: #2f2f2f;
   /* Transparent */
+  --white-90: rgba(255,255,255,.9);
   --white-50: rgba(255,255,255,.5);
   --white-25: rgba(255,255,255,.25);
-  --success: #1aa41f;
-  --warning: #a48f00;
-  --error: #a4180d;
+  --success: rgb(26, 164, 31);
+  --success-50: rgba(26, 164, 31, 0.6);
+  --warning: rgb(164, 143, 0);
+  --warning-50: rgba(164, 143, 0, 0.5);
+  --error: rgb(164, 24, 13);
+  --error-50: rgba(164, 24, 13, 0.6);
 }
 
 .u_color--blue {
@@ -107,11 +111,4 @@
 }
 .u_bg--white-25 {
   background: var(--white-25);
-}
-
-[class*='--lightgrey'] {
-  --primary-color: var(--lightgrey);
-}
-[class*='_lightgrey'] {
-  --secondary-color: var(--lightgrey);
 }

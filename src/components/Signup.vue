@@ -1,5 +1,5 @@
 <template>
-  <transition name="no-mode-translate">
+  <transition name="t_no-mode-translate">
     <div class="l_flex l_wrapper">
 
       <div class="loader" v-bind:class="{'loader--active': loading}">
@@ -8,18 +8,20 @@
         </svg>
       </div>
 
-      <img src="assets/img/logo.svg" class="logo u_center">
+      <img src="assets/img/logo.svg" class="logo u_center l_grow">
 
-      <div class="l_flex content" v-bind:class="{'content--hidden': loading}">
-        <form class="l_flex" v-on:submit.prevent="save">
-          <input class="inp inp--18" v-model="user.data.userName" type="email" placeholder="E-Mail-Adresse" required>
-          <input class="inp inp--18" v-model="user.data.password" type="password" placeholder="Passwort" required>
+      <div class="l_flex content l_grow" v-bind:class="{'content--hidden': loading}">
+        <form class="l_flex l_grow" v-on:submit.prevent="save">
+          <input class="inp inp--18" v-model="$user.data.userName" type="email" placeholder="E-Mail-Adresse" required>
+          <input class="inp inp--18" v-model="$user.data.password" type="password" placeholder="Passwort" required>
           <input class="inp inp--18" v-model="confirmPassword" type="password" placeholder="Passwort wiederholen"
                  required>
           <button class="btn btn--18 u_center" type="submit">Registrieren</button>
         </form>
 
-        <router-link to="/login" class="link u_center">Schon registriert?</router-link>
+        <div class="link-container l_flex l_grow">
+          <router-link to="/login" class="link u_center">Schon registriert?</router-link>
+        </div>
       </div>
     </div>
   </transition>
@@ -28,73 +30,63 @@
 <script>
   import router from '../utils/router.js'
   import validate from '../utils/validate.js'
-  import * as errorTypes from './../classes/ErrorTypes';
+  import * as messageTypes from './../classes/MessageTypes'
 
   export default {
     beforeCreate: function () {
       document.documentElement.className = 'u_gradient-background--mixed';
     },
     name: 'signup',
-    props: ['user'],
     data() {
       return {
         confirmPassword: '',
-        error: new Error(),
         loading: false
       }
     },
     beforeMount: function () {
       this.loading = false;
+      this.$user = new Apiomat.FrontendUser();
     },
     methods: {
       save() {
         this.loading = true;
         EventBus.$emit('clearFlashMessages');
 
-        if (!validate.email(this.user.getUserName())) {
-          this.error.message = 'Bitte gib eine gültige E-Mail-Adresse ein.';
-          this.error.type = errorTypes.WARNING;
-          EventBus.$emit('error', this.error);
+        if (!validate.email(this.$user.getUserName())) {
+          EventBus.$emit('newMessage', {message: 'Bitte gib eine gültige E-Mail-Adresse ein.', type: messageTypes.WARNING});
           this.loading = false;
           return;
         }
 
-        if (this.confirmPassword !== this.user.getPassword()) {
-          this.error.message = 'Die eingegebenen Passwörter stimmen nicht überein.';
-          this.error.type = errorTypes.WARNING;
-          EventBus.$emit('error', this.error);
+        if (this.confirmPassword !== this.$user.getPassword()) {
+          EventBus.$emit('newMessage', {message: 'Die eingegebenen Passwörter stimmen nicht überein.', type: messageTypes.WARNING});
           this.loading = false;
           return;
         }
 
-        Apiomat.Datastore.configureWithCredentials(this.user);
+        Apiomat.Datastore.configureWithCredentials(this.$user);
 
-        this.user.save({
+        this.$user.save({
           onOk: result => {
             router.push('/');
 
             setTimeout(function () {
-              let error = new Error();
-              error.message = 'Dein Account wurde erfolgreich registriert';
-              error.type = errorTypes.SUCCESS;
-              EventBus.$emit('error', error);
+              EventBus.$emit('newMessage', {message: 'Dein Account wurde erfolgreich registriert', type: messageTypes.WARNING});
             }, 1000);
           },
           onError: error => {
             switch (error.statusCode) {
               case 0:
               case 615:
-                this.error.message = 'Oops! Scheint als hättest du keine Internetverbindung.';
-                this.error.type = errorTypes.WARNING;
+                EventBus.$emit('newMessage', {message: 'Oops! Scheint als hättest du keine Internetverbindung.', type: messageTypes.WARNING});
                 break;
               case 830:
-                this.error.message = 'Es existiert schon ein Account mit dieser E-Mail-Adresse.';
-                this.error.type = errorTypes.WARNING;
+                EventBus.$emit('newMessage', {message: 'Es existiert schon ein Account mit dieser E-Mail-Adresse.', type: messageTypes.WARNING});
                 break;
               default:
+                EventBus.$emit('newMessage', {message: 'Oops! Etwas ist schief gegangen', type: messageTypes.ERROR});
                 console.log(error);
             }
-            EventBus.$emit('error', this.error);
             this.loading = false;
           }
         });
@@ -106,13 +98,11 @@
 <style scoped>
   .logo {
     width: 40%;
-    margin-bottom: 8vh;
   }
 
   .btn {
     min-width: 65%;
-    margin-top: 8vh;
-    margin-bottom: 8vh;
+    margin-top: auto;
   }
 
   .inp {
@@ -126,7 +116,11 @@
   .link {
     font-size: 1.8rem;
     line-height: 2;
-    transition: color .15s ease-in-out;
+    transition: opacity .15s ease-in-out;
+  }
+
+  .link-container {
+    justify-content: flex-end;
   }
 
   .link:active {
@@ -134,6 +128,7 @@
   }
 
   .content {
+    justify-content: center;
     opacity: 1;
     transition: opacity .15s ease-in-out, visibility .15s ease-in-out .15s;
   }

@@ -1,23 +1,26 @@
 .l_main {
-  padding: 4rem 2rem;
-  min-height: 100%;
+  margin: 2rem 2rem;
+  height: calc(100% - 4rem);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  position: relative;
-  overflow-x: hidden;
+  position: fixed;
+  width: calc(100% - 4rem);
+  overflow: hidden;
+  z-index: 1;
 }
-.l_main--scroll {
-  min-height: auto;
-  height: calc(100% - 9.4rem);
-  padding-bottom: 0;
-  margin-bottom: 9.4rem;
-  overflow-y: scroll;
+.l_main--w-nav {
+  height: calc(100% - 11.7rem);
+  margin: 2rem 2rem 9.7rem 2rem;
 }
 
 .l_wrapper {
+  flex-grow: 1;
   padding-left: 4rem;
   padding-right: 4rem;
+  padding-top: 2rem;
+  height: 100%;
+  overflow-y: auto;
 }
 .l_wrapper--medium {
   padding-left: 2rem;
@@ -28,7 +31,6 @@
   padding-right: 1rem;
 }
 
-
 .l_flex {
   display: flex;
   flex-direction: column;
@@ -36,4 +38,21 @@
 
 .l_flex--horizontal {
   flex-direction: row;
+}
+
+.l_grow {
+  flex-grow: 1;
+}
+
+.l_section {
+  margin-top: 4rem;
+}
+
+.l_divider {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--white-50);
+  margin-top: 4rem;
+  margin-bottom: 4rem;
 }

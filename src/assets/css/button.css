@@ -19,6 +19,10 @@
   color: var(--primary-color);
   border-color: var(--primary-color);
   background: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .btn:focus {
   outline: none;
@@ -42,4 +46,21 @@
 }
 .btn--20 {
   font-size: 2rem;
+}
+
+.btn--round {
+  width: 100%;
+  border-radius: 50%;
+  padding-top: 0;
+  padding-bottom: calc(100% - 4px);
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.btn--round > *:first-child {
+  position: absolute;
+  display: flex;
+  height: 100%;
+  align-items: center;
 }

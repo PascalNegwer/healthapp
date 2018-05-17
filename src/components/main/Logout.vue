@@ -8,10 +8,15 @@
 <script>
   export default {
     name: "logout",
-    props: ['user'],
     methods: {
       logout() {
-        EventBus.$emit('loggedOut');
+        EventBus.$emit('alert', {
+          headline:'Ausloggen?',
+          text:'Möchtest du dich wirklich ausloggen?',
+          onOk: function () {
+            EventBus.$emit('loggedOut');
+          }
+        });
       }
     }
   }

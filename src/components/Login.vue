@@ -1,5 +1,5 @@
 <template>
-  <transition name="no-mode-translate">
+  <transition name="t_no-mode-translate">
     <div class="l_flex l_wrapper">
 
       <div class="loader" v-bind:class="{'loader--active': loading}">
@@ -8,16 +8,18 @@
         </svg>
       </div>
 
-      <img src="assets/img/logo.svg" class="logo u_center">
+      <img src="assets/img/logo.svg" class="logo u_center l_grow">
 
-      <div class="l_flex content" v-bind:class="{'content--hidden': loading}">
-        <form class="l_flex" v-on:submit.prevent="login">
-          <input class="inp inp--18" v-model="user.data.userName" type="email" placeholder="E-Mail-Adresse" required>
-          <input class="inp inp--18" v-model="user.data.password" type="password" placeholder="Passwort" required>
+      <div class="l_flex content l_grow" v-bind:class="{'content--hidden': loading}">
+        <form class="l_flex l_grow" v-on:submit.prevent="login">
+          <input class="inp inp--18" v-model="$user.data.userName" type="email" placeholder="E-Mail-Adresse" required>
+          <input class="inp inp--18" v-model="$user.data.password" type="password" placeholder="Passwort" required>
           <button class="btn btn--18 u_center" type="submit">Login</button>
         </form>
 
-        <router-link to="/signup" class="link u_center">Noch kein Account?</router-link>
+        <div class="link-container l_flex l_grow">
+          <router-link to="/signup" class="link u_center">Noch kein Account?</router-link>
+        </div>
       </div>
     </div>
   </transition>
@@ -27,57 +29,52 @@
   import router from '../utils/router.js'
   import validate from '../utils/validate.js'
   import cookie from '../utils/cookie.js'
-  import * as errorTypes from './../classes/ErrorTypes';
+  import * as messageTypes from './../classes/MessageTypes'
 
   export default {
     beforeCreate: function () {
       document.documentElement.className = 'u_gradient-background--mixed';
     },
     name: 'login',
-    props: ['user'],
     data() {
       return {
         loading: false,
-        error: new Error(),
       }
     },
     beforeMount: function () {
       this.loading = false;
+      this.$user = new Apiomat.FrontendUser();
     },
     methods: {
       login() {
         this.loading = true;
         EventBus.$emit('clearFlashMessages');
 
-        if (!validate.email(this.user.getUserName())) {
-          this.error.message = 'Bitte gib eine gültige E-Mail-Adresse ein.';
-          this.error.type = errorTypes.WARNING;
-          EventBus.$emit('error', this.error);
+        if (!validate.email(this.$user.getUserName())) {
+          EventBus.$emit('newMessage', {message: 'Bitte gib eine gültige E-Mail-Adresse ein.', type: messageTypes.WARNING});
           this.loading = false;
           return;
         }
 
         cookie.expireNow('sessionToken');
-        Apiomat.Datastore.configureWithCredentials(this.user);
+        Apiomat.Datastore.configureWithCredentials(this.$user);
 
-        this.user.loadMe({
+        this.$user.loadMe({
           onOk: result => {
             router.push('/');
           },
           onError: error => {
             switch (error.statusCode) {
               case 615:
-                this.error.message = 'Oops! Scheint als hättest du keine Internetverbindung.';
-                this.error.type = errorTypes.WARNING;
+                EventBus.$emit('newMessage', {message: 'Oops! Scheint als hättest du keine Internetverbindung.', type: messageTypes.WARNING});
                 break;
               case 840:
-                this.error.message = 'Die eingegebene E-Mail-Adresse oder das Kennwort ist inkorrekt.';
-                this.error.type = errorTypes.WARNING;
+                EventBus.$emit('newMessage', {message: 'Die eingegebene E-Mail-Adresse oder das Kennwort ist inkorrekt.', type: messageTypes.WARNING});
                 break;
               default:
+                EventBus.$emit('newMessage', {message: 'Oops! Etwas ist schief gegangen', type: messageTypes.ERROR});
                 console.log(error);
             }
-            EventBus.$emit('error', this.error);
             this.loading = false;
           }
         });
@@ -89,13 +86,11 @@
 <style scoped>
   .logo {
     width: 40%;
-    margin-bottom: 8vh;
   }
 
   .btn {
     width: 65%;
-    margin-top: 8vh;
-    margin-bottom: 8vh;
+    margin-top: auto;
   }
 
   .inp {
@@ -109,7 +104,11 @@
   .link {
     font-size: 1.8rem;
     line-height: 2;
-    transition: color .15s ease-in-out;
+    transition: opacity .15s ease-in-out;
+  }
+
+  .link-container {
+    justify-content: flex-end;
   }
 
   .link:active {
@@ -117,6 +116,7 @@
   }
 
   .content {
+    justify-content: center;
     opacity: 1;
     transition: opacity .15s ease-in-out, visibility .15s ease-in-out .15s;
   }

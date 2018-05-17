@@ -1,25 +1,50 @@
 <template>
-  <transition name="no-mode-translate">
-    <router-view v-bind:user="user"></router-view>
+  <transition name="t_no-mode-translate">
+      <router-view>
+      </router-view>
   </transition>
 </template>
 
 <script>
   import Home from './main/Home.vue';
   import Dashboard from './main/Dashboard.vue';
-  import Functions from './main/Functions.vue';
+  import FunctionsWrapper from './main/Functions/FunctionsWrapper.vue';
   import Account from './main/Account.vue';
   import Help from './main/Help.vue';
   import Lawstuff from './main/Lawstuff.vue';
 
   export default {
     name: 'mainWrapper',
-    components: {Home, Dashboard, Functions, Account, Help, Lawstuff},
-    props: ['user'],
+    components: {Home, Dashboard, FunctionsWrapper, Account, Help, Lawstuff},
     data() {
-      return {}
+      return {
+        eyeExercises: [],
+        workouts: [],
+      }
     },
-    methods: {}
+    methods: {},
+    beforeMount: function () {
+      Apiomat.Workout.getWorkouts('order by title ASC', {
+        onOk: workouts => {
+          for (let i = 0; i < workouts.length; i++) {
+            let workout = workouts[i];
+            window.$workouts.push(workout);
+            this.workouts.push(workout);
+          }
+          EventBus.$emit('workoutsLoaded');
+        }
+      }, true);
+      Apiomat.EyeExercise.getEyeExercises('order by title ASC', {
+        onOk: eyeExercises => {
+          for (let i = 0; i < eyeExercises.length; i++) {
+            let eyeExercise = eyeExercises[i];
+            window.$eyeExercises.push(eyeExercise);
+            this.eyeExercises.push(eyeExercise);
+          }
+          EventBus.$emit('eyeExercisesLoaded');
+        }
+      }, true);
+    },
   }
 </script>
 

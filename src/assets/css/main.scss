@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Comfortaa:300,400,700|Roboto:300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Comfortaa:300,400,700|Roboto:300,400,500,700|Cutive+Mono');
+
 
 @import 'reset.css';
 @import 'color.css';
@@ -8,10 +9,12 @@
 @import 'loader.css';
 @import 'font.css';
 @import 'transition.css';
+@import 'format.css';
 @import 'utility.css';
 
 * {
   flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 ::selection {
@@ -49,7 +52,6 @@ body {
   right: 0;
   position: fixed;
   z-index: -10;
-  transition: background .15s ease-in-out;
 }
 .u_gradient-background--mixed:before {
   background-image: url('../img/bg_mixed.png');
@@ -63,13 +65,33 @@ body {
 .u_gradient-background--orange:before {
   background-image: url('../img/bg_orange.png');
 }
+html[class*="u_gradient-background"]:before {
+  transition: background .3s ease-in-out;
+}
 
 /* Background Image Preloading */
 html:after{
   position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
-  content: url(../img/bg_default.png) url(../img/bg_mixed.png) url(../img/bg_orange.png) url(../img/bg_purple.png) url(../img/bg_blue.png);
+  content: url(../img/bg_default.png) url(../img/bg_mixed.png) url(../img/bg_orange.png) url(../img/bg_purple.png) url(../img/bg_blue.png) url(../img/offline.jpg);
 }
 
 .logo {
   opacity: .5;
+}
+
+@media screen and (min-device-width: 175vh) {
+  html {
+    transform: rotate(90deg);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    overflow-x: hidden;
+    position: absolute;
+    top: 0;
+    left: 100%;
+  }
+  [class*='u_gradient-background']:before {
+    width: 100vh;
+    height: 100vw;
+  }
 }

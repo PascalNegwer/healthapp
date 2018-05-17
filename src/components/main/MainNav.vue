@@ -52,7 +52,7 @@
         </span>
 
         <span class="nav__item nav__item--dropdown">
-          <logout v-bind:user="user"></logout>
+          <logout></logout>
         </span>
 
       </nav>
@@ -66,13 +66,11 @@
   export default {
     updated: function() {
       this.bg = document.documentElement.className;
-      console.log(this.bg);
     },
     name: "mainNav",
     components: {
       Logout,
     },
-    props: ['user'],
     data() {
       return {
         open: false,
@@ -100,6 +98,11 @@
     left: 0;
     justify-content: space-between;
     flex-wrap: nowrap;
+    z-index: 1000;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
   .nav--dropdown {
     position: absolute;
@@ -113,7 +116,7 @@
   .nav--visible {
     visibility: visible;
     opacity: 1;
-    transition: opacity .15s ease-in-out, visibility;
+    transition: opacity .15s ease-in-out; 
   }
   .nav__item {
     width: 25%;
@@ -146,7 +149,7 @@
     color: #5f5f5f;
   }
   .nav__icon:before {
-    transition: color .15s ease-in-out;
+    transition: color .3s ease-in-out;
   }
   .nav__text {
     font-size: 1.2rem;
@@ -154,7 +157,11 @@
     text-transform: uppercase;
     text-align: center;
     padding-bottom: 2rem;
-    transition: color .15s ease-in-out;
+    transition: color .3s ease-in-out;
+  }
+
+  .nav__item--dropdown .nav__icon:before, .nav__item--dropdown .nav__text {
+    transition-duration: 0s;
   }
 
   .u_gradient-background--default .nav__icon, .u_gradient-background--mixed .nav__icon {
