@@ -26,6 +26,7 @@
     beforeMount: function () {
       Apiomat.Workout.getWorkouts('order by title ASC', {
         onOk: workouts => {
+          window.$workouts = [];
           for (let i = 0; i < workouts.length; i++) {
             let workout = workouts[i];
             window.$workouts.push(workout);
@@ -36,6 +37,7 @@
       }, true);
       Apiomat.EyeExercise.getEyeExercises('order by title ASC', {
         onOk: eyeExercises => {
+          window.$eyeExercises = [];
           for (let i = 0; i < eyeExercises.length; i++) {
             let eyeExercise = eyeExercises[i];
             window.$eyeExercises.push(eyeExercise);
